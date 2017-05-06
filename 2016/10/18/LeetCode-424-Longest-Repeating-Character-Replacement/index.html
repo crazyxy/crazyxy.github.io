@@ -92,17 +92,17 @@
 
 
 
-<meta name="description" content="SolutionCode12">
+<meta name="description" content="SolutionTwo pointers. For each slide window with length n, if n-maxcnt &amp;lt;= k, the string in the window can be transformed into wanted string. In this case, we move the right pointer to probe larger">
 <meta name="keywords" content="LeetCode">
 <meta property="og:type" content="article">
 <meta property="og:title" content="LeetCode 424 - Longest Repeating Character Replacement">
 <meta property="og:url" content="https://crazyxy.github.io/2016/10/18/LeetCode-424-Longest-Repeating-Character-Replacement/index.html">
 <meta property="og:site_name" content="Crazyxy is Coding">
-<meta property="og:description" content="SolutionCode12">
-<meta property="og:updated_time" content="2017-05-06T13:51:11.000Z">
+<meta property="og:description" content="SolutionTwo pointers. For each slide window with length n, if n-maxcnt &amp;lt;= k, the string in the window can be transformed into wanted string. In this case, we move the right pointer to probe larger">
+<meta property="og:updated_time" content="2017-05-06T16:12:48.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="LeetCode 424 - Longest Repeating Character Replacement">
-<meta name="twitter:description" content="SolutionCode12">
+<meta name="twitter:description" content="SolutionTwo pointers. For each slide window with length n, if n-maxcnt &amp;lt;= k, the string in the window can be transformed into wanted string. In this case, we move the right pointer to probe larger">
 
 
 
@@ -319,7 +319,8 @@
       
 
       
-        <h2 id="Solution"><a href="#Solution" class="headerlink" title="Solution"></a>Solution</h2><h2 id="Code"><a href="#Code" class="headerlink" title="Code"></a>Code</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"></div></pre></td></tr></table></figure>
+        <h2 id="Solution"><a href="#Solution" class="headerlink" title="Solution"></a>Solution</h2><p>Two pointers. For each slide window with length <code>n</code>, if <code>n-maxcnt &lt;= k</code>, the string in the window can be transformed into wanted string. In this case, we move the right pointer to probe larger window size; otherwise, we reduce the window size by moving the left pointer.</p>
+<h2 id="Code"><a href="#Code" class="headerlink" title="Code"></a>Code</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></div><div class="line"><span class="keyword">public</span>:</div><div class="line">    <span class="function"><span class="keyword">int</span> <span class="title">characterReplacement</span><span class="params">(<span class="built_in">string</span> s, <span class="keyword">int</span> k)</span> </span>&#123;</div><div class="line">        <span class="keyword">int</span> n = s.length(), cnt[<span class="number">26</span>] = &#123;<span class="number">0</span>&#125;, i = <span class="number">0</span>, j = <span class="number">0</span>, res = <span class="number">0</span>;</div><div class="line">        <span class="keyword">bool</span> move = <span class="literal">true</span>;</div><div class="line">        </div><div class="line">        <span class="keyword">while</span>(i &lt; n)&#123;</div><div class="line">            <span class="keyword">if</span>(move) cnt[s[i]-<span class="string">'A'</span>] ++;    </div><div class="line">            move = <span class="literal">false</span>;</div><div class="line">            </div><div class="line">            <span class="keyword">int</span> maxcnt = <span class="number">0</span>;</div><div class="line">            <span class="keyword">for</span>(<span class="keyword">int</span> x = <span class="number">0</span>; x &lt; <span class="number">26</span>; x ++) maxcnt = max(maxcnt, cnt[x]);</div><div class="line">            </div><div class="line">            <span class="keyword">if</span>(maxcnt &gt;= i - j + <span class="number">1</span> - k)&#123;</div><div class="line">                res = max(res, i - j + <span class="number">1</span>);</div><div class="line">                i ++;</div><div class="line">                move = <span class="literal">true</span>;</div><div class="line">            &#125;<span class="keyword">else</span>&#123;</div><div class="line">                cnt[s[j++]-<span class="string">'A'</span>]--;</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">return</span> res;</div><div class="line">    &#125;</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
       
     </div>
 
@@ -361,8 +362,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2016/10/13/LeetCode-232-Implement-Queue-using-Stacks/" rel="next" title="LeetCode 232 - Implement Queue using Stacks">
-                <i class="fa fa-chevron-left"></i> LeetCode 232 - Implement Queue using Stacks
+              <a href="/2016/10/17/LeetCode-421-Maximum-XOR-of-Two-Numbers-in-an-Array/" rel="next" title="LeetCode 421 - Maximum XOR of Two Numbers in an Array">
+                <i class="fa fa-chevron-left"></i> LeetCode 421 - Maximum XOR of Two Numbers in an Array
               </a>
             
           </div>
@@ -445,7 +446,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">55</span>
+                <span class="site-state-item-count">72</span>
                 <span class="site-state-item-name">posts</span>
               </a>
             </div>

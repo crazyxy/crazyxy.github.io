@@ -74,7 +74,7 @@
 <link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="Hexo, NexT" />
+  <meta name="keywords" content="LeetCode," />
 
 
 
@@ -92,13 +92,17 @@
 
 
 
+<meta name="description" content="SolutionExtract feature character of each string. For example, z for one. Code123456789101112131415161718192021class Solution &amp;#123;public:    string originalDigits(string s) &amp;#123;        string str[">
+<meta name="keywords" content="LeetCode">
 <meta property="og:type" content="article">
 <meta property="og:title" content="LeetCode 423 - Reconstruct Original Digits from English">
 <meta property="og:url" content="https://crazyxy.github.io/2016/10/18/LeetCode-423-Reconstruct-Original-Digits-from-English/index.html">
 <meta property="og:site_name" content="Crazyxy is Coding">
-<meta property="og:updated_time" content="2017-05-06T13:51:11.000Z">
+<meta property="og:description" content="SolutionExtract feature character of each string. For example, z for one. Code123456789101112131415161718192021class Solution &amp;#123;public:    string originalDigits(string s) &amp;#123;        string str[">
+<meta property="og:updated_time" content="2017-05-06T16:12:48.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="LeetCode 423 - Reconstruct Original Digits from English">
+<meta name="twitter:description" content="SolutionExtract feature character of each string. For example, z for one. Code123456789101112131415161718192021class Solution &amp;#123;public:    string originalDigits(string s) &amp;#123;        string str[">
 
 
 
@@ -315,7 +319,9 @@
       
 
       
-        
+        <h2 id="Solution"><a href="#Solution" class="headerlink" title="Solution"></a>Solution</h2><p>Extract feature character of each string. For example, <code>z</code> for <code>one</code>.</p>
+<h2 id="Code"><a href="#Code" class="headerlink" title="Code"></a>Code</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></div><div class="line"><span class="keyword">public</span>:</div><div class="line">    <span class="function"><span class="built_in">string</span> <span class="title">originalDigits</span><span class="params">(<span class="built_in">string</span> s)</span> </span>&#123;</div><div class="line">        <span class="built_in">string</span> str[] = &#123;<span class="string">"zero"</span>, <span class="string">"one"</span>, <span class="string">"two"</span>, <span class="string">"three"</span>, <span class="string">"four"</span>, <span class="string">"five"</span>, <span class="string">"six"</span>, <span class="string">"seven"</span>, <span class="string">"eight"</span>, <span class="string">"nine"</span>&#125;;</div><div class="line">        <span class="keyword">int</span> cnt[<span class="number">26</span>] = &#123;<span class="number">0</span>&#125;, x[<span class="number">10</span>] = &#123;<span class="number">0</span>&#125;;</div><div class="line">        <span class="keyword">for</span>(<span class="keyword">auto</span> ch : s) cnt[ch-<span class="string">'a'</span>] ++;</div><div class="line">        </div><div class="line">        <span class="built_in">vector</span>&lt;pair&lt;<span class="keyword">int</span>, <span class="keyword">char</span>&gt;&gt; vec &#123;&#123;<span class="number">0</span>, <span class="string">'z'</span>&#125;, &#123;<span class="number">2</span>, <span class="string">'w'</span>&#125;, &#123;<span class="number">4</span>, <span class="string">'u'</span>&#125;, &#123;<span class="number">6</span>, <span class="string">'x'</span>&#125;, &#123;<span class="number">8</span>, <span class="string">'g'</span>&#125;, &#123;<span class="number">1</span>, <span class="string">'o'</span>&#125;, &#123;<span class="number">3</span>, <span class="string">'r'</span>&#125;, &#123;<span class="number">5</span>, <span class="string">'f'</span>&#125;, &#123;<span class="number">7</span>, <span class="string">'v'</span>&#125;, &#123;<span class="number">9</span>, <span class="string">'i'</span>&#125;&#125;;</div><div class="line">        </div><div class="line">        <span class="keyword">for</span>(<span class="keyword">auto</span> p : vec)&#123;</div><div class="line">            x[p.first] += cnt[p.second-<span class="string">'a'</span>];</div><div class="line">            <span class="keyword">for</span>(<span class="keyword">auto</span> ch : str[p.first]) cnt[ch-<span class="string">'a'</span>] -= x[p.first];</div><div class="line">        &#125;</div><div class="line">        </div><div class="line">        <span class="built_in">string</span> res;</div><div class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">10</span>; i ++)&#123;</div><div class="line">            res += <span class="built_in">string</span>(x[i], <span class="string">'0'</span>+i);</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">return</span> res;</div><div class="line">    &#125;</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
+
       
     </div>
 
@@ -341,6 +347,12 @@
     </div>
 
     <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/LeetCode/" rel="tag"># LeetCode</a>
+          
+        </div>
       
 
       
@@ -410,8 +422,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            Overview
+          </li>
+        </ul>
+      
 
-      <section class="site-overview sidebar-panel sidebar-panel-active">
+      <section class="site-overview sidebar-panel">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
           <img class="site-author-image" itemprop="image"
                src="/images/avatar.gif"
@@ -426,7 +447,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">55</span>
+                <span class="site-state-item-count">72</span>
                 <span class="site-state-item-name">posts</span>
               </a>
             </div>
@@ -471,6 +492,22 @@
 
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Solution"><span class="nav-number">1.</span> <span class="nav-text">Solution</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Code"><span class="nav-number">2.</span> <span class="nav-text">Code</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
