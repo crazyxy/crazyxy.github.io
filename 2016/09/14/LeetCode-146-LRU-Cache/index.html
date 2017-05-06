@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>LeetCode 146 - LRU Cache | Crazyxy is Coding</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="Solution实现题。为了方便Cache更新，用双向链表保存当前Cache中{key, value}。为了方便判断当前的key是否在Cache中，用unordered_map保存key和链表节点的映射关系。 Code1234567891011121314151617181920212223242526272829303132333435363738394041424344454647484950">
+<meta name="keywords" content="LeetCode">
+<meta property="og:type" content="article">
+<meta property="og:title" content="LeetCode 146 - LRU Cache">
+<meta property="og:url" content="https://crazyxy.github.io/2016/09/14/LeetCode-146-LRU-Cache/index.html">
+<meta property="og:site_name" content="Crazyxy is Coding">
+<meta property="og:description" content="Solution实现题。为了方便Cache更新，用双向链表保存当前Cache中{key, value}。为了方便判断当前的key是否在Cache中，用unordered_map保存key和链表节点的映射关系。 Code1234567891011121314151617181920212223242526272829303132333435363738394041424344454647484950">
+<meta property="og:updated_time" content="2017-05-06T13:51:11.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="LeetCode 146 - LRU Cache">
+<meta name="twitter:description" content="Solution实现题。为了方便Cache更新，用双向链表保存当前Cache中{key, value}。为了方便判断当前的key是否在Cache中，用unordered_map保存key和链表节点的映射关系。 Code1234567891011121314151617181920212223242526272829303132333435363738394041424344454647484950">
+  
+    <link rel="alternate" href="/atom.xml" title="Crazyxy is Coding" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Crazyxy is Coding</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://crazyxy.github.io"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-LeetCode-146-LRU-Cache" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2016/09/14/LeetCode-146-LRU-Cache/" class="article-date">
+  <time datetime="2016-09-14T10:20:03.000Z" itemprop="datePublished">2016-09-14</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      LeetCode 146 - LRU Cache
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="Solution"><a href="#Solution" class="headerlink" title="Solution"></a>Solution</h2><p>实现题。为了方便Cache更新，用双向链表保存当前Cache中<code>{key, value}</code>。为了方便判断当前的<code>key</code>是否在Cache中，用<code>unordered_map</code>保存<code>key</code>和链表节点的映射关系。</p>
+<h2 id="Code"><a href="#Code" class="headerlink" title="Code"></a>Code</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div><div class="line">95</div><div class="line">96</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">LISTNode</span>&#123;</span></div><div class="line"><span class="keyword">public</span>:</div><div class="line">    <span class="keyword">int</span> key, val;</div><div class="line">    LISTNode *pre, *next;</div><div class="line">    LISTNode(<span class="keyword">int</span> key, <span class="keyword">int</span> val): key(key), val(val), pre(<span class="literal">NULL</span>), next(<span class="literal">NULL</span>)&#123;</div><div class="line">    &#125;</div><div class="line">&#125;;</div><div class="line"></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">List</span>&#123;</span></div><div class="line"><span class="keyword">public</span>:</div><div class="line">    LISTNode *head, *tail;</div><div class="line">    List() : head(<span class="literal">NULL</span>), tail(<span class="literal">NULL</span>)&#123;</div><div class="line">    &#125;</div><div class="line">    </div><div class="line">    <span class="function"><span class="keyword">void</span> <span class="title">insert</span><span class="params">(LISTNode *node)</span></span>&#123;</div><div class="line">        <span class="keyword">if</span>(!head) head = tail = node;</div><div class="line">        <span class="keyword">else</span>&#123;</div><div class="line">            node-&gt;next = head;</div><div class="line">            head-&gt;pre = node;</div><div class="line">            head = node;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">    </div><div class="line">    <span class="function"><span class="keyword">void</span> <span class="title">remove</span><span class="params">()</span></span>&#123;</div><div class="line">        <span class="keyword">if</span>(head == tail)&#123;</div><div class="line">            <span class="keyword">delete</span> head;</div><div class="line">            head = tail = <span class="literal">NULL</span>;</div><div class="line">        &#125;<span class="keyword">else</span>&#123;</div><div class="line">            <span class="keyword">auto</span> t = tail-&gt;pre;</div><div class="line">            <span class="keyword">delete</span> tail;</div><div class="line">            tail = t;</div><div class="line">            <span class="keyword">if</span>(tail) tail-&gt;next = <span class="literal">NULL</span>;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">    </div><div class="line">    <span class="function"><span class="keyword">void</span> <span class="title">erase</span><span class="params">(LISTNode *node)</span></span>&#123;</div><div class="line">        <span class="keyword">if</span>(head == tail)&#123;</div><div class="line">            assert(node == head);</div><div class="line">            head = tail = <span class="literal">NULL</span>;</div><div class="line">            <span class="keyword">return</span>;</div><div class="line">        &#125;</div><div class="line">        </div><div class="line">        <span class="keyword">if</span>(node == head)&#123;</div><div class="line">            head = node-&gt;next;</div><div class="line">            head-&gt;pre = node-&gt;next = <span class="literal">NULL</span>;</div><div class="line">        &#125;<span class="keyword">else</span> <span class="keyword">if</span>(node == tail)&#123;</div><div class="line">            tail = node-&gt;pre;</div><div class="line">            tail-&gt;next = node-&gt;pre = <span class="literal">NULL</span>;</div><div class="line">        &#125;<span class="keyword">else</span>&#123;</div><div class="line">            <span class="keyword">auto</span> u = node-&gt;pre, v = node-&gt;next;</div><div class="line">            u-&gt;next = v;</div><div class="line">            v-&gt;pre = u;</div><div class="line">            node-&gt;pre = node-&gt;next = <span class="literal">NULL</span>;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125;;</div><div class="line"></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">LRUCache</span>&#123;</span></div><div class="line"><span class="keyword">public</span>:</div><div class="line">    <span class="built_in">map</span>&lt;<span class="keyword">int</span>,LISTNode*&gt; m;</div><div class="line">    List <span class="built_in">list</span>;</div><div class="line">    <span class="keyword">int</span> cap, size;</div><div class="line">    LRUCache(<span class="keyword">int</span> capacity) &#123;</div><div class="line">        cap = capacity;</div><div class="line">        size = <span class="number">0</span>;</div><div class="line">    &#125;</div><div class="line">    </div><div class="line">    <span class="function"><span class="keyword">int</span> <span class="title">get</span><span class="params">(<span class="keyword">int</span> key)</span> </span>&#123;</div><div class="line">        <span class="keyword">if</span>(m.find(key) == m.end()) <span class="keyword">return</span> <span class="number">-1</span>;</div><div class="line">        <span class="keyword">int</span> ret = m[key]-&gt;val;</div><div class="line">        <span class="built_in">list</span>.erase(m[key]);</div><div class="line">        <span class="built_in">list</span>.insert(m[key]);</div><div class="line">        <span class="keyword">return</span> ret;</div><div class="line">    &#125;</div><div class="line">    </div><div class="line">    <span class="function"><span class="keyword">void</span> <span class="title">set</span><span class="params">(<span class="keyword">int</span> key, <span class="keyword">int</span> value)</span> </span>&#123;</div><div class="line">        <span class="keyword">if</span>(m.find(key) != m.end())&#123;</div><div class="line">            m[key]-&gt;val = value;</div><div class="line">            <span class="built_in">list</span>.erase(m[key]);</div><div class="line">            <span class="built_in">list</span>.insert(m[key]);</div><div class="line">        &#125;<span class="keyword">else</span>&#123;</div><div class="line">            <span class="keyword">if</span>(size &lt; cap)&#123;</div><div class="line">                size ++;</div><div class="line">            &#125;<span class="keyword">else</span>&#123;</div><div class="line">                <span class="keyword">int</span> x = <span class="built_in">list</span>.tail-&gt;key;</div><div class="line">                m.erase(x);</div><div class="line">                <span class="built_in">list</span>.remove();</div><div class="line">				</div><div class="line">            &#125;</div><div class="line">            </div><div class="line">            LISTNode *node = <span class="keyword">new</span> LISTNode(key, value);</div><div class="line">            m[key] = node;</div><div class="line">            <span class="built_in">list</span>.insert(node);</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://crazyxy.github.io/2016/09/14/LeetCode-146-LRU-Cache/" data-id="cj2dekyul000c92tf4hrlgbru" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/LeetCode/">LeetCode</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2016/09/15/LeetCode-149-Max-Points-on-a-Line/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          LeetCode 149 - Max Points on a Line
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2016/09/14/LeetCode-391-Perfect-Rectangle/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">LeetCode 391 - Perfect Rectangle</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/LeetCode/">LeetCode</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/LeetCode/" style="font-size: 10px;">LeetCode</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/10/">October 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/09/">September 2016</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2016/10/20/LeetCode-223-Rectangle-Area/">LeetCode 223 - Rectangle Area</a>
+          </li>
+        
+          <li>
+            <a href="/2016/10/20/LeetCode-116-Populating-Next-Right-Pointers-in-Each-Node/">LeetCode 116 - Populating Next Right Pointers in Each Node</a>
+          </li>
+        
+          <li>
+            <a href="/2016/10/20/LeetCode-88-Merge-Sorted-Array/">LeetCode 88 - Merge Sorted Array</a>
+          </li>
+        
+          <li>
+            <a href="/2016/10/20/LeetCode-9-Palindrome-Number/">LeetCode 9 - Palindrome Number</a>
+          </li>
+        
+          <li>
+            <a href="/2016/10/20/LeetCode-236-Lowest-Common-Ancestor-of-a-Binary-Tree/">LeetCode 236 - Lowest Common Ancestor of a Binary Tree</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2017 Yan Xue<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+  </div>
+</body>
+</html>

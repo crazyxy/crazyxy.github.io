@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>LeetCode 4 - Median of Two Sorted Arrays | Crazyxy is Coding</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="Solution搜索第K大的数，两个数组同时二分搜索。从数组长度短的数组中取第K/2大，从较长的数组中取K-K/2。如果数组长度len不够则一个取len，另外一个取K-len。如果对应的数x与y相等，则第K大的数就是x。否则根据x与y的大小关系从两个数组相应部分进行递归搜索。 Code123456789101112131415161718192021222324252627282930313233">
+<meta name="keywords" content="LeetCode">
+<meta property="og:type" content="article">
+<meta property="og:title" content="LeetCode 4 - Median of Two Sorted Arrays">
+<meta property="og:url" content="https://crazyxy.github.io/2016/09/12/LeetCode-4-Median-of-Two-Sorted-Arrays/index.html">
+<meta property="og:site_name" content="Crazyxy is Coding">
+<meta property="og:description" content="Solution搜索第K大的数，两个数组同时二分搜索。从数组长度短的数组中取第K/2大，从较长的数组中取K-K/2。如果数组长度len不够则一个取len，另外一个取K-len。如果对应的数x与y相等，则第K大的数就是x。否则根据x与y的大小关系从两个数组相应部分进行递归搜索。 Code123456789101112131415161718192021222324252627282930313233">
+<meta property="og:updated_time" content="2017-05-06T13:51:11.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="LeetCode 4 - Median of Two Sorted Arrays">
+<meta name="twitter:description" content="Solution搜索第K大的数，两个数组同时二分搜索。从数组长度短的数组中取第K/2大，从较长的数组中取K-K/2。如果数组长度len不够则一个取len，另外一个取K-len。如果对应的数x与y相等，则第K大的数就是x。否则根据x与y的大小关系从两个数组相应部分进行递归搜索。 Code123456789101112131415161718192021222324252627282930313233">
+  
+    <link rel="alternate" href="/atom.xml" title="Crazyxy is Coding" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Crazyxy is Coding</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://crazyxy.github.io"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-LeetCode-4-Median-of-Two-Sorted-Arrays" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2016/09/12/LeetCode-4-Median-of-Two-Sorted-Arrays/" class="article-date">
+  <time datetime="2016-09-12T15:11:14.000Z" itemprop="datePublished">2016-09-12</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      LeetCode 4 - Median of Two Sorted Arrays
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="Solution"><a href="#Solution" class="headerlink" title="Solution"></a>Solution</h2><p>搜索第K大的数，两个数组同时二分搜索。从数组长度短的数组中取第K/2大，从较长的数组中取K-K/2。如果数组长度len不够则一个取len，另外一个取K-len。如果对应的数x与y相等，则第K大的数就是x。否则根据x与y的大小关系从两个数组相应部分进行递归搜索。</p>
+<h2 id="Code"><a href="#Code" class="headerlink" title="Code"></a>Code</h2><figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></div><div class="line"><span class="keyword">public</span>:</div><div class="line">    <span class="function"><span class="keyword">int</span> <span class="title">findk</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; nums1, <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; nums2, <span class="keyword">int</span> l1, <span class="keyword">int</span> r1, <span class="keyword">int</span> l2, <span class="keyword">int</span> r2, <span class="keyword">int</span> k)</span></span>&#123;</div><div class="line">        <span class="keyword">if</span>(l1 &gt; r1) <span class="keyword">return</span> nums2[l2+k<span class="number">-1</span>];</div><div class="line">        <span class="keyword">if</span>(l2 &gt; r2) <span class="keyword">return</span> nums1[l1+k<span class="number">-1</span>];</div><div class="line">        </div><div class="line">        <span class="keyword">if</span> (k == <span class="number">1</span>) <span class="keyword">return</span> min(nums1[l1], nums2[l2]);</div><div class="line">        </div><div class="line">        <span class="keyword">int</span> len1 = r1 - l1 + <span class="number">1</span>, len2 = r2 - l2 + <span class="number">1</span>, a, b, x, y;</div><div class="line">        <span class="keyword">if</span>(len1 &lt; len2)&#123;</div><div class="line">            a = k / <span class="number">2</span>;</div><div class="line">            b = k - a;</div><div class="line">            <span class="keyword">if</span>(len1 &lt; a)&#123;</div><div class="line">                a = len1;</div><div class="line">                b = k - a;</div><div class="line">            &#125;</div><div class="line">        &#125;<span class="keyword">else</span>&#123;</div><div class="line">            b = k / <span class="number">2</span>;</div><div class="line">            a = k - b;</div><div class="line">            </div><div class="line">            <span class="keyword">if</span>(len2 &lt; b)&#123;</div><div class="line">                b = len2;</div><div class="line">                a = k - b;</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">        </div><div class="line">        x = nums1[l1+a<span class="number">-1</span>];</div><div class="line">        y = nums2[l2+b<span class="number">-1</span>];</div><div class="line">        <span class="keyword">if</span>(x == y) <span class="keyword">return</span> x;</div><div class="line">        <span class="keyword">else</span> <span class="keyword">if</span>(x &gt; y)&#123;</div><div class="line">            <span class="keyword">return</span> findk(nums1, nums2, l1, l1+a<span class="number">-1</span>, l2+b, r2, k-b);</div><div class="line">        &#125;<span class="keyword">else</span>&#123;</div><div class="line">            <span class="keyword">return</span> findk(nums1, nums2, l1+a, r1, l2, l2+b<span class="number">-1</span>, k-a);</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">    </div><div class="line">    <span class="function"><span class="keyword">double</span> <span class="title">findMedianSortedArrays</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; nums1, <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; nums2)</span> </span>&#123;</div><div class="line">        <span class="keyword">int</span> m = nums1.size(), n = nums2.size();</div><div class="line">        <span class="keyword">if</span>((m+n) % <span class="number">2</span>)&#123;</div><div class="line">            <span class="keyword">return</span> (<span class="keyword">double</span>)findk(nums1, nums2, <span class="number">0</span>, m<span class="number">-1</span>, <span class="number">0</span>, n<span class="number">-1</span>, (m+n)/<span class="number">2</span>+<span class="number">1</span>);</div><div class="line">        &#125;<span class="keyword">else</span>&#123;</div><div class="line">            <span class="keyword">return</span> (findk(nums1, nums2, <span class="number">0</span>, m<span class="number">-1</span>, <span class="number">0</span>, n<span class="number">-1</span>, (m+n)/<span class="number">2</span>) + findk(nums1, nums2, <span class="number">0</span>, m<span class="number">-1</span>, <span class="number">0</span>, n<span class="number">-1</span>, (m+n)/<span class="number">2</span>+<span class="number">1</span>)) * <span class="number">1.0</span> / <span class="number">2</span>;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://crazyxy.github.io/2016/09/12/LeetCode-4-Median-of-Two-Sorted-Arrays/" data-id="cj2dekywt001l92tfughzejiu" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/LeetCode/">LeetCode</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2016/09/13/LeetCode-44-Wildcard-Matching/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          LeetCode 44 - Wildcard Matching
+        
+      </div>
+    </a>
+  
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/LeetCode/">LeetCode</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/LeetCode/" style="font-size: 10px;">LeetCode</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/10/">October 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/09/">September 2016</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2016/10/20/LeetCode-223-Rectangle-Area/">LeetCode 223 - Rectangle Area</a>
+          </li>
+        
+          <li>
+            <a href="/2016/10/20/LeetCode-116-Populating-Next-Right-Pointers-in-Each-Node/">LeetCode 116 - Populating Next Right Pointers in Each Node</a>
+          </li>
+        
+          <li>
+            <a href="/2016/10/20/LeetCode-88-Merge-Sorted-Array/">LeetCode 88 - Merge Sorted Array</a>
+          </li>
+        
+          <li>
+            <a href="/2016/10/20/LeetCode-9-Palindrome-Number/">LeetCode 9 - Palindrome Number</a>
+          </li>
+        
+          <li>
+            <a href="/2016/10/20/LeetCode-236-Lowest-Common-Ancestor-of-a-Binary-Tree/">LeetCode 236 - Lowest Common Ancestor of a Binary Tree</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2017 Yan Xue<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+  </div>
+</body>
+</html>
