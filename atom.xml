@@ -1,0 +1,298 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title>Crazyxy is Coding</title>
+  
+  <link href="/atom.xml" rel="self"/>
+  
+  <link href="https://crazyxy.github.io/"/>
+  <updated>2017-05-06T13:51:11.000Z</updated>
+  <id>https://crazyxy.github.io/</id>
+  
+  <author>
+    <name>Yan Xue</name>
+    
+  </author>
+  
+  <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>LeetCode 223 - Rectangle Area</title>
+    <link href="https://crazyxy.github.io/2016/10/20/LeetCode-223-Rectangle-Area/"/>
+    <id>https://crazyxy.github.io/2016/10/20/LeetCode-223-Rectangle-Area/</id>
+    <published>2016-10-20T09:45:42.000Z</published>
+    <updated>2017-05-06T13:51:11.000Z</updated>
+    
+    <summary type="html">
+    
+    </summary>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>LeetCode 116 - Populating Next Right Pointers in Each Node</title>
+    <link href="https://crazyxy.github.io/2016/10/20/LeetCode-116-Populating-Next-Right-Pointers-in-Each-Node/"/>
+    <id>https://crazyxy.github.io/2016/10/20/LeetCode-116-Populating-Next-Right-Pointers-in-Each-Node/</id>
+    <published>2016-10-20T06:11:03.000Z</published>
+    <updated>2017-05-06T13:51:11.000Z</updated>
+    
+    <summary type="html">
+    
+    </summary>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>LeetCode 88 - Merge Sorted Array</title>
+    <link href="https://crazyxy.github.io/2016/10/20/LeetCode-88-Merge-Sorted-Array/"/>
+    <id>https://crazyxy.github.io/2016/10/20/LeetCode-88-Merge-Sorted-Array/</id>
+    <published>2016-10-20T05:59:59.000Z</published>
+    <updated>2017-05-06T13:51:11.000Z</updated>
+    
+    <summary type="html">
+    
+    </summary>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>LeetCode 9 - Palindrome Number</title>
+    <link href="https://crazyxy.github.io/2016/10/20/LeetCode-9-Palindrome-Number/"/>
+    <id>https://crazyxy.github.io/2016/10/20/LeetCode-9-Palindrome-Number/</id>
+    <published>2016-10-20T05:49:03.000Z</published>
+    <updated>2017-05-06T13:51:11.000Z</updated>
+    
+    <summary type="html">
+    
+    </summary>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>LeetCode 236 - Lowest Common Ancestor of a Binary Tree</title>
+    <link href="https://crazyxy.github.io/2016/10/20/LeetCode-236-Lowest-Common-Ancestor-of-a-Binary-Tree/"/>
+    <id>https://crazyxy.github.io/2016/10/20/LeetCode-236-Lowest-Common-Ancestor-of-a-Binary-Tree/</id>
+    <published>2016-10-20T04:00:36.000Z</published>
+    <updated>2017-05-06T13:51:11.000Z</updated>
+    
+    <summary type="html">
+    
+    </summary>
+    
+    
+  </entry>
+  
+  <entry>
+    <title> LeetCode 235 - Lowest Common Ancestor of a Binary Search Tree</title>
+    <link href="https://crazyxy.github.io/2016/10/20/LeetCode-235-Lowest-Common-Ancestor-of-a-Binary-Search-Tree/"/>
+    <id>https://crazyxy.github.io/2016/10/20/LeetCode-235-Lowest-Common-Ancestor-of-a-Binary-Search-Tree/</id>
+    <published>2016-10-20T03:56:17.000Z</published>
+    <updated>2017-05-06T13:51:11.000Z</updated>
+    
+    <summary type="html">
+    
+    </summary>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>LeetCode 218 - The Skyline Problem</title>
+    <link href="https://crazyxy.github.io/2016/10/19/LeetCode-218-The-Skyline-Problem/"/>
+    <id>https://crazyxy.github.io/2016/10/19/LeetCode-218-The-Skyline-Problem/</id>
+    <published>2016-10-19T08:32:13.000Z</published>
+    <updated>2017-05-06T13:51:11.000Z</updated>
+    
+    <summary type="html">
+    
+    </summary>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>LeetCode 38 - Count and Say</title>
+    <link href="https://crazyxy.github.io/2016/10/19/LeetCode-38-Count-and-Say/"/>
+    <id>https://crazyxy.github.io/2016/10/19/LeetCode-38-Count-and-Say/</id>
+    <published>2016-10-19T05:32:09.000Z</published>
+    <updated>2017-05-06T13:51:11.000Z</updated>
+    
+    <summary type="html">
+    
+    </summary>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>LeetCode 56 - Merge Intervals</title>
+    <link href="https://crazyxy.github.io/2016/10/19/LeetCode-56-Merge-Intervals/"/>
+    <id>https://crazyxy.github.io/2016/10/19/LeetCode-56-Merge-Intervals/</id>
+    <published>2016-10-19T05:10:30.000Z</published>
+    <updated>2017-05-06T13:51:11.000Z</updated>
+    
+    <summary type="html">
+    
+    </summary>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>LeetCode 165 - Compare Version Numbers</title>
+    <link href="https://crazyxy.github.io/2016/10/19/LeetCode-165-Compare-Version-Numbers/"/>
+    <id>https://crazyxy.github.io/2016/10/19/LeetCode-165-Compare-Version-Numbers/</id>
+    <published>2016-10-19T04:49:37.000Z</published>
+    <updated>2017-05-06T13:51:11.000Z</updated>
+    
+    <summary type="html">
+    
+    </summary>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>LeetCode 258 - Add Digits</title>
+    <link href="https://crazyxy.github.io/2016/10/19/LeetCode-258-Add-Digits/"/>
+    <id>https://crazyxy.github.io/2016/10/19/LeetCode-258-Add-Digits/</id>
+    <published>2016-10-19T03:32:16.000Z</published>
+    <updated>2017-05-06T13:51:11.000Z</updated>
+    
+    <summary type="html">
+    
+    </summary>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>LeetCode 121 - Best Time to Buy and Sell Stock</title>
+    <link href="https://crazyxy.github.io/2016/10/19/LeetCode-121-Best-Time-to-Buy-and-Sell-Stock/"/>
+    <id>https://crazyxy.github.io/2016/10/19/LeetCode-121-Best-Time-to-Buy-and-Sell-Stock/</id>
+    <published>2016-10-19T03:27:18.000Z</published>
+    <updated>2017-05-06T13:51:11.000Z</updated>
+    
+    <summary type="html">
+    
+    </summary>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>LeetCode 168 - Excel Sheet Column Title</title>
+    <link href="https://crazyxy.github.io/2016/10/19/LeetCode-168-Excel-Sheet-Column-Title/"/>
+    <id>https://crazyxy.github.io/2016/10/19/LeetCode-168-Excel-Sheet-Column-Title/</id>
+    <published>2016-10-19T03:23:35.000Z</published>
+    <updated>2017-05-06T13:51:11.000Z</updated>
+    
+    <summary type="html">
+    
+    </summary>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>LeetCode 28 - Implement strStr()</title>
+    <link href="https://crazyxy.github.io/2016/10/19/LeetCode-28-Implement-strStr/"/>
+    <id>https://crazyxy.github.io/2016/10/19/LeetCode-28-Implement-strStr/</id>
+    <published>2016-10-19T03:03:58.000Z</published>
+    <updated>2017-05-06T13:51:11.000Z</updated>
+    
+    <summary type="html">
+    
+    </summary>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>LeetCode 215 - Kth Largest Element in an Array</title>
+    <link href="https://crazyxy.github.io/2016/10/19/LeetCode-215-Kth-Largest-Element-in-an-Array/"/>
+    <id>https://crazyxy.github.io/2016/10/19/LeetCode-215-Kth-Largest-Element-in-an-Array/</id>
+    <published>2016-10-19T02:47:34.000Z</published>
+    <updated>2017-05-06T13:51:11.000Z</updated>
+    
+    <summary type="html">
+    
+    </summary>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>LeetCode 413 - Arithmetic Slices</title>
+    <link href="https://crazyxy.github.io/2016/10/18/LeetCode-413-Arithmetic-Slices/"/>
+    <id>https://crazyxy.github.io/2016/10/18/LeetCode-413-Arithmetic-Slices/</id>
+    <published>2016-10-18T08:36:29.000Z</published>
+    <updated>2017-05-06T13:51:11.000Z</updated>
+    
+    <summary type="html">
+    
+    </summary>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>LeetCode 416 - Partition Equal Subset Sum</title>
+    <link href="https://crazyxy.github.io/2016/10/18/LeetCode-416-Partition-Equal-Subset-Sum/"/>
+    <id>https://crazyxy.github.io/2016/10/18/LeetCode-416-Partition-Equal-Subset-Sum/</id>
+    <published>2016-10-18T08:17:39.000Z</published>
+    <updated>2017-05-06T13:51:11.000Z</updated>
+    
+    <summary type="html">
+    
+    </summary>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>LeetCode 410 - Split Array Largest Sum</title>
+    <link href="https://crazyxy.github.io/2016/10/18/LeetCode-410-Split-Array-Largest-Sum/"/>
+    <id>https://crazyxy.github.io/2016/10/18/LeetCode-410-Split-Array-Largest-Sum/</id>
+    <published>2016-10-18T08:03:53.000Z</published>
+    <updated>2017-05-06T13:51:11.000Z</updated>
+    
+    <summary type="html">
+    
+    </summary>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>LeetCode 419 - Battleships in a Board</title>
+    <link href="https://crazyxy.github.io/2016/10/18/LeetCode-419-Battleships-in-a-Board/"/>
+    <id>https://crazyxy.github.io/2016/10/18/LeetCode-419-Battleships-in-a-Board/</id>
+    <published>2016-10-18T05:57:57.000Z</published>
+    <updated>2017-05-06T13:51:11.000Z</updated>
+    
+    <summary type="html">
+    
+    </summary>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>LeetCode 423 - Reconstruct Original Digits from English</title>
+    <link href="https://crazyxy.github.io/2016/10/18/LeetCode-423-Reconstruct-Original-Digits-from-English/"/>
+    <id>https://crazyxy.github.io/2016/10/18/LeetCode-423-Reconstruct-Original-Digits-from-English/</id>
+    <published>2016-10-18T05:27:22.000Z</published>
+    <updated>2017-05-06T13:51:11.000Z</updated>
+    
+    <summary type="html">
+    
+    </summary>
+    
+    
+  </entry>
+  
+</feed>
