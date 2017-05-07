@@ -43,20 +43,6 @@
   </entry>
   
   <entry>
-    <title>LeetCode 116 - Populating Next Right Pointers in Each Node</title>
-    <link href="https://crazyxy.github.io/2016/10/20/LeetCode-116-Populating-Next-Right-Pointers-in-Each-Node/"/>
-    <id>https://crazyxy.github.io/2016/10/20/LeetCode-116-Populating-Next-Right-Pointers-in-Each-Node/</id>
-    <published>2016-10-20T06:11:03.000Z</published>
-    <updated>2017-05-06T13:51:11.000Z</updated>
-    
-    <summary type="html">
-    
-    </summary>
-    
-    
-  </entry>
-  
-  <entry>
     <title>LeetCode 218 - The Skyline Problem</title>
     <link href="https://crazyxy.github.io/2016/10/19/LeetCode-218-The-Skyline-Problem/"/>
     <id>https://crazyxy.github.io/2016/10/19/LeetCode-218-The-Skyline-Problem/</id>
@@ -460,6 +446,32 @@
     
       &lt;h2 id=&quot;Solution&quot;&gt;&lt;a href=&quot;#Solution&quot; class=&quot;headerlink&quot; title=&quot;Solution&quot;&gt;&lt;/a&gt;Solution&lt;/h2&gt;&lt;p&gt;Implementation.&lt;/p&gt;
 &lt;h2 id=&quot;Code&quot;&gt;&lt;a href=&quot;#Co
+    
+    </summary>
+    
+    
+      <category term="LeetCode" scheme="https://crazyxy.github.io/tags/LeetCode/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>LeetCode 125 - Valid Palindrome</title>
+    <link href="https://crazyxy.github.io/2016/10/14/LeetCode-125-Valid-Palindrome/"/>
+    <id>https://crazyxy.github.io/2016/10/14/LeetCode-125-Valid-Palindrome/</id>
+    <published>2016-10-14T12:07:23.000Z</published>
+    <updated>2017-05-06T16:12:48.000Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="Solution"><a href="#Solution" class="headerlink" title="Solution"></a>Solution</h2><blockquote>
+<p>Just do it.</p>
+</blockquote>
+<h2 id="Code"><a href="#Code" class="headerlink" title="Code"></a>Code</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></div><div class="line"><span class="keyword">public</span>:</div><div class="line">    <span class="function"><span class="keyword">bool</span> <span class="title">isPalindrome</span><span class="params">(<span class="built_in">string</span> s)</span> </span>&#123;</div><div class="line">        <span class="keyword">int</span> left = <span class="number">0</span>, right = s.length() - <span class="number">1</span>;</div><div class="line">        <span class="keyword">while</span>(left &lt; right)&#123;</div><div class="line">            <span class="keyword">while</span>(left &lt;= right &amp;&amp; !<span class="built_in">isalnum</span>(s[left])) left ++;</div><div class="line">            <span class="keyword">while</span>(right &gt;= left &amp;&amp; !<span class="built_in">isalnum</span>(s[right])) right --;</div><div class="line">            <span class="keyword">if</span>(left &gt;= right) <span class="keyword">return</span> <span class="literal">true</span>;</div><div class="line">            <span class="keyword">if</span>(<span class="built_in">tolower</span>(s[left]) != <span class="built_in">tolower</span>(s[right])) <span class="keyword">return</span> <span class="literal">false</span>;</div><div class="line">            left ++;</div><div class="line">            right --;</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">return</span> <span class="literal">true</span>;</div><div class="line">    &#125;</div><div class="line">&#125;;</div></pre></td></tr></table></figure>]]></content>
+    
+    <summary type="html">
+    
+      &lt;h2 id=&quot;Solution&quot;&gt;&lt;a href=&quot;#Solution&quot; class=&quot;headerlink&quot; title=&quot;Solution&quot;&gt;&lt;/a&gt;Solution&lt;/h2&gt;&lt;blockquote&gt;
+&lt;p&gt;Just do it.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h2
     
     </summary>
     

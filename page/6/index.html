@@ -250,129 +250,6 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="https://crazyxy.github.io/2016/10/11/LeetCode-212-Word-Search-II/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Yan Xue">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Crazyxy is Coding">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2016/10/11/LeetCode-212-Word-Search-II/" itemprop="url">LeetCode 212 - Word Search II</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2016-10-11T15:29:43+08:00">
-                2016-10-11
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2016/10/11/LeetCode-212-Word-Search-II/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count"
-                        data-disqus-identifier="2016/10/11/LeetCode-212-Word-Search-II/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h2 id="Solution"><a href="#Solution" class="headerlink" title="Solution"></a>Solution</h2><p>DFS + Trie. Firstly build a trie with words; secondly, search in the tree and board simultaneously. </p>
-<h2 id="Code"><a href="#Code" class="headerlink" title="Code"></a>Code</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">struct</span> <span class="title">TrieNode</span>&#123;</span></div><div class="line">    TrieNode()&#123;</div><div class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">26</span>; i ++) next[i] = <span class="literal">NULL</span>;</div><div class="line">        term = <span class="literal">false</span>;</div><div class="line">    &#125;</div><div class="line">    TrieNode *next[<span class="number">26</span>];</div><div class="line">    <span class="keyword">bool</span> term;</div><div class="line">&#125;;</div><div class="line"></div><div class="line"><span class="class"><span class="keyword">struct</span> <span class="title">Trie</span>&#123;</span></div><div class="line">    TrieNode *root;</div><div class="line">    Trie()&#123;root = <span class="keyword">new</span> TrieNode();&#125;</div><div class="line">    <span class="function"><span class="keyword">void</span> <span class="title">insert</span><span class="params">(<span class="built_in">string</span> str)</span></span>&#123;</div><div class="line">        <span class="keyword">int</span> n = str.length();</div><div class="line">        <span class="keyword">auto</span> u = root;</div><div class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; n; i ++)&#123;</div><div class="line">            <span class="keyword">int</span> k = str[i] - <span class="string">'a'</span>;</div><div class="line">            <span class="keyword">if</span>(!u-&gt;next[k]) u-&gt;next[k] = <span class="keyword">new</span> TrieNode();</div><div class="line">            u = u-&gt;next[k];</div><div class="line">        &#125;</div><div class="line">        u-&gt;term = <span class="literal">true</span>;</div><div class="line">    &#125;</div><div class="line">&#125;;</div><div class="line"></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></div><div class="line"><span class="keyword">public</span>:</div><div class="line">    <span class="built_in">vector</span>&lt;<span class="built_in">vector</span>&lt;<span class="keyword">char</span>&gt;&gt; board;</div><div class="line">    <span class="built_in">vector</span>&lt;<span class="built_in">vector</span>&lt;<span class="keyword">bool</span>&gt;&gt; vis;</div><div class="line">    <span class="keyword">int</span> m, n;</div><div class="line">    Trie trie;</div><div class="line">    <span class="built_in">vector</span>&lt;<span class="built_in">string</span>&gt; res;</div><div class="line">    <span class="keyword">const</span> <span class="keyword">int</span> dir[<span class="number">4</span>][<span class="number">2</span>] = &#123;&#123;<span class="number">0</span>, <span class="number">-1</span>&#125;, &#123;<span class="number">-1</span>, <span class="number">0</span>&#125;, &#123;<span class="number">0</span>, <span class="number">1</span>&#125;, &#123;<span class="number">1</span>, <span class="number">0</span>&#125;&#125;;</div><div class="line">    </div><div class="line">    <span class="function"><span class="keyword">void</span> <span class="title">solve</span><span class="params">(<span class="keyword">int</span> r, <span class="keyword">int</span> c, TrieNode *u, <span class="built_in">string</span> str)</span></span>&#123;</div><div class="line">        <span class="keyword">if</span>(!u) <span class="keyword">return</span>;</div><div class="line">        </div><div class="line">        vis[r][c] = <span class="literal">true</span>;</div><div class="line">        <span class="keyword">if</span>(u-&gt;term)&#123;</div><div class="line">            res.push_back(str);</div><div class="line">            u-&gt;term = <span class="literal">false</span>;</div><div class="line">        &#125;</div><div class="line">        </div><div class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">4</span>; i ++)&#123;</div><div class="line">            <span class="keyword">int</span> rr = r + dir[i][<span class="number">0</span>];</div><div class="line">            <span class="keyword">int</span> cc = c + dir[i][<span class="number">1</span>];</div><div class="line">            </div><div class="line">            <span class="keyword">if</span>(rr &gt;= <span class="number">0</span> &amp;&amp; rr &lt; m &amp;&amp; cc &gt;= <span class="number">0</span> &amp;&amp; cc &lt; n &amp;&amp; !vis[rr][cc] &amp;&amp; u-&gt;next[board[rr][cc]-<span class="string">'a'</span>])&#123;</div><div class="line">                solve(rr, cc, u-&gt;next[board[rr][cc]-<span class="string">'a'</span>], str+board[rr][cc]);</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">        vis[r][c] = <span class="literal">false</span>;</div><div class="line">    &#125;</div><div class="line">    </div><div class="line">    <span class="built_in">vector</span>&lt;<span class="built_in">string</span>&gt; findWords(<span class="built_in">vector</span>&lt;<span class="built_in">vector</span>&lt;<span class="keyword">char</span>&gt;&gt;&amp; board, <span class="built_in">vector</span>&lt;<span class="built_in">string</span>&gt;&amp; words) &#123;</div><div class="line">        <span class="keyword">for</span>(<span class="keyword">auto</span> w : words) trie.insert(w);</div><div class="line">        <span class="keyword">this</span>-&gt;board = board;</div><div class="line">        m = board.size();</div><div class="line">        <span class="keyword">if</span>(m == <span class="number">0</span>) <span class="keyword">return</span> &#123;&#125;;</div><div class="line">        n = board[<span class="number">0</span>].size();</div><div class="line">        </div><div class="line">        vis.assign(m, <span class="built_in">vector</span>&lt;<span class="keyword">bool</span>&gt;(n, <span class="literal">false</span>));</div><div class="line">        </div><div class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; m; i ++)&#123;</div><div class="line">            <span class="keyword">for</span>(<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; n; j ++)&#123;</div><div class="line">                <span class="keyword">if</span>(trie.root-&gt;next[board[i][j]-<span class="string">'a'</span>])&#123;</div><div class="line">                    <span class="built_in">string</span> str;</div><div class="line">                    solve(i, j, trie.root-&gt;next[board[i][j]-<span class="string">'a'</span>], str+board[i][j]);</div><div class="line">                &#125;</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">        </div><div class="line">        <span class="keyword">return</span> res;</div><div class="line">    &#125;</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
     <link itemprop="mainEntityOfPage" href="https://crazyxy.github.io/2016/10/11/LeetCode-79-Word-Search/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1463,6 +1340,139 @@
 <li>AVL树的高度<br>  设\(f(h)\)为高度为\(h\)的AVL树的最少节点个数。根据AVL树的性质有\(f(h)\ge f(h-1)+f(h-2)+1\)。令\(F(h)=f(h)+1\)，则\(F(h)=F(h-1)+F(h-2)\)，\(F(0)=1, F(1)=2\)。\(F(h)\)的通项公式为$$(F(h)=\frac{1}{\sqrt{5}}\left[\left(\frac{1+\sqrt{5}}{2}\right)^{h+2}-\left(\frac{1-\sqrt{5}}{2}\right)^{h+2}\right]$$<br>高度为\(h\)的节点数\(n\ge f(h)=F(h)-1\)。令\(\phi=\frac{1+\sqrt{5}}{2}\)。\(F(h)\approx\frac{\phi^{h+2}}{\sqrt{5}}\)，因为\(\phi^n*(1-\phi)^n=1, \phi^n&gt;1\Rightarrow \frac{(1-\phi)^{h+2}}{\sqrt{5}}&lt;\frac{1}{\sqrt{5}}\)。从而有\(n\ge\frac{\phi^{h+2}}{\sqrt{5}}-1\Rightarrow h\le log_{\phi}(\sqrt{5}(n+1))-2\)。为方便跟红黑树比较，将底换为2，从而\(h\le log_\phi(\sqrt{5}(n+1))-2=log_2\frac{\sqrt{5}(n+1)}{log_2\phi}-2\approx1.4404log_2(n+1)-0.3277\)</li>
 </ul>
 <h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>综上，AVL树的高度理论上在系数上是小于红黑树的。二者的查找的时间复杂度都是\(O(logn)\)。二分查找的时间复杂度是\(\Theta(logn)\)，理论上要快一点。</p>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="https://crazyxy.github.io/2016/09/16/LeetCode-398-Random-Pick-Index/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Yan Xue">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Crazyxy is Coding">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2016/09/16/LeetCode-398-Random-Pick-Index/" itemprop="url">LeetCode 398 - Random Pick Index</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2016-09-16T11:16:27+08:00">
+                2016-09-16
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2016/09/16/LeetCode-398-Random-Pick-Index/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="2016/09/16/LeetCode-398-Random-Pick-Index/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="Solution"><a href="#Solution" class="headerlink" title="Solution"></a>Solution</h2><p>概率题。每次<code>pick</code>时遍历数组，记录已经访问到的<code>target</code>的个数<code>cnt</code>（包括当前的元素）。如果当前访问的数等于<code>target</code>，则该下标有<code>1/cnt</code>的概率被选中，证明如下：</p>
+<ul>
+<li>归纳法。<ul>
+<li>数组中只有一个元素，被选中的概率是1；</li>
+<li>数组中有两个元素，第一个元素被选中的概率是1，访问到第二个元素的时候，该元素被选中的概率是1/2，而第一个元素被选中的概率是1*1/2；</li>
+<li>假设当数组中有<code>k</code>个元素，被选中的元素的概率是<code>1/k</code>；</li>
+<li>当遇到第<code>k+1</code>个元素时，第<code>k+1</code>个元素被选中的概率为<code>1/(k+1)</code>，而之前每个元素被选中的概率都是<code>(1-1/(k+1))*1/k=1/(k+1)</code>;</li>
+</ul>
+</li>
+</ul>
+<h2 id="Code"><a href="#Code" class="headerlink" title="Code"></a>Code</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></div><div class="line"><span class="keyword">public</span>:</div><div class="line">    <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; nums;</div><div class="line">    Solution(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; nums) &#123;</div><div class="line">        <span class="keyword">this</span>-&gt;nums = nums;</div><div class="line">    &#125;</div><div class="line">    </div><div class="line">    <span class="function"><span class="keyword">int</span> <span class="title">pick</span><span class="params">(<span class="keyword">int</span> target)</span> </span>&#123;</div><div class="line">        <span class="keyword">int</span> n = nums.size(), cnt = <span class="number">0</span>, id = <span class="number">0</span>;</div><div class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; n; i ++)&#123;</div><div class="line">            <span class="keyword">if</span>(target == nums[i])&#123;</div><div class="line">                cnt ++;</div><div class="line">                <span class="keyword">if</span>(rand() % cnt == <span class="number">0</span>)&#123;</div><div class="line">                    id = i;</div><div class="line">                &#125;</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">return</span> id;</div><div class="line">    &#125;</div><div class="line">&#125;;</div><div class="line"></div><div class="line"><span class="comment">/**</span></div><div class="line"> * Your Solution object will be instantiated and called as such:</div><div class="line"> * Solution obj = new Solution(nums);</div><div class="line"> * int param_1 = obj.pick(target);</div><div class="line"> */</div></pre></td></tr></table></figure>
 
           
         
