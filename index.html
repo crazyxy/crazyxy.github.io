@@ -268,6 +268,143 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="https://crazyxy.github.io/2017/05/07/leveldb-0/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Yan Xue">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Crazyxy is Coding">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2017/05/07/leveldb-0/" itemprop="url">LevelDB I</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-05-07T00:00:00+08:00">
+                2017-05-07
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2017/05/07/leveldb-0/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="2017/05/07/leveldb-0/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="1-LevelDB"><a href="#1-LevelDB" class="headerlink" title="1. LevelDB"></a>1. LevelDB</h2><blockquote>
+<p>LevelDB is a fast key-value storage library written at Google that provides an ordered mapping from string keys to string values.</p>
+</blockquote>
+<p>LevelDB provides many features, such as</p>
+<blockquote>
+<ul>
+<li>Keys and values are arbitrary byte arrays. </li>
+<li>Data is stored sorted by key.</li>
+<li>Callers can provide a custom comparison function to override the sort order.<br>…</li>
+</ul>
+</blockquote>
+<p>The following few blogs are trying to explain readers the code of LevelDB, which contains the design principals of k-v store.</p>
+<h2 id="2-Level-Structure"><a href="#2-Level-Structure" class="headerlink" title="2. Level Structure"></a>2. Level Structure</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">| - db </div><div class="line">| - helps</div><div class="line">|     | - memenv</div><div class="line">| - include</div><div class="line">|     | - leveldb</div><div class="line">| - port</div><div class="line">| - table</div><div class="line">| - util</div><div class="line">| ...</div></pre></td></tr></table></figure>
+<p>The structure lists the main components of LevelDB. <code>db</code> folder contains db implementations. <code>memenv</code> folder contains the environment related implementations. <code>include</code> is the folder of header files. <code>port</code> contains interfaces and implementations that isolate the rest of the package from platform details. <code>table</code> contains lower level implementations. <code>util</code> contains utilities for other classes. </p>
+<p><code>util</code> is much easier than other modules and doesn’t need any knowledge of kv store, so we will learn <code>util</code> firstly.</p>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
     <link itemprop="mainEntityOfPage" href="https://crazyxy.github.io/2017/05/07/LevelDB-1/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -350,143 +487,6 @@
             <h2 id="1-Util-Structure"><a href="#1-Util-Structure" class="headerlink" title="1. Util Structure"></a>1. <code>Util</code> Structure</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line">| - arena.&#123;h,cc&#125;</div><div class="line">| - bloom.cc</div><div class="line">| - cache.cc</div><div class="line">| - coding.&#123;h,cc&#125;</div><div class="line">| - comparator.h</div><div class="line">| - crc32c.&#123;h,cc&#125;</div><div class="line">| - env.cc</div><div class="line">| - env_posix.cc</div><div class="line">| - filter_policy.cc</div><div class="line">| - hash.&#123;h,cc&#125;</div><div class="line">| - histogram.&#123;h,cc&#125;</div><div class="line">| - logging.&#123;h,cc&#125;</div><div class="line">| - mutexlock.h</div><div class="line">| - options.cc</div><div class="line">| - posix_logger.h</div><div class="line">| - random.h</div><div class="line">| - status.cc</div><div class="line">| ...</div></pre></td></tr></table></figure>
 <p>Main files in <code>util</code> are listed. Each of following sections correspond to a entry in the structure. </p>
 <h2 id="2-Arena"><a href="#2-Arena" class="headerlink" title="2. Arena"></a>2. <code>Arena</code></h2><p><code>Arena</code> appeared in many open source project. It’s used for memory allocation and deallocation.</p>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="https://crazyxy.github.io/2017/05/07/leveldb-0/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Yan Xue">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Crazyxy is Coding">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2017/05/07/leveldb-0/" itemprop="url">leveldb I</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-05-07T00:00:00+08:00">
-                2017-05-07
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2017/05/07/leveldb-0/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count"
-                        data-disqus-identifier="2017/05/07/leveldb-0/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h2 id="1-LevelDB"><a href="#1-LevelDB" class="headerlink" title="1. LevelDB"></a>1. LevelDB</h2><blockquote>
-<p>LevelDB is a fast key-value storage library written at Google that provides an ordered mapping from string keys to string values.</p>
-</blockquote>
-<p>LevelDB provides many features, such as</p>
-<blockquote>
-<ul>
-<li>Keys and values are arbitrary byte arrays. </li>
-<li>Data is stored sorted by key.</li>
-<li>Callers can provide a custom comparison function to override the sort order.<br>…</li>
-</ul>
-</blockquote>
-<p>The following few blogs are trying to explain readers the code of LevelDB, which contains the design principals of k-v store.</p>
-<h2 id="2-Level-Structure"><a href="#2-Level-Structure" class="headerlink" title="2. Level Structure"></a>2. Level Structure</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">| - db </div><div class="line">| - helps</div><div class="line">|     | - memenv</div><div class="line">| - include</div><div class="line">|     | - leveldb</div><div class="line">| - port</div><div class="line">| - table</div><div class="line">| - util</div><div class="line">| ...</div></pre></td></tr></table></figure>
-<p>The structure lists the main components of LevelDB. <code>db</code> folder contains db implementations. <code>memenv</code> folder contains the environment related implementations. <code>include</code> is the folder of header files. <code>port</code> contains interfaces and implementations that isolate the rest of the package from platform details. <code>table</code> contains lower level implementations. <code>util</code> contains utilities for other classes. </p>
-<p><code>util</code> is much easier than other modules and doesn’t need any knowledge of kv store, so we will learn <code>util</code> firstly.</p>
 
           
         

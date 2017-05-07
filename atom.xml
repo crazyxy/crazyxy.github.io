@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://crazyxy.github.io/"/>
-  <updated>2017-05-07T13:06:44.000Z</updated>
+  <updated>2017-05-07T13:19:19.000Z</updated>
   <id>https://crazyxy.github.io/</id>
   
   <author>
@@ -16,34 +16,11 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
-    <title>LevelDB II</title>
-    <link href="https://crazyxy.github.io/2017/05/07/LevelDB-1/"/>
-    <id>https://crazyxy.github.io/2017/05/07/LevelDB-1/</id>
-    <published>2017-05-06T16:00:00.000Z</published>
-    <updated>2017-05-07T13:06:44.000Z</updated>
-    
-    <content type="html"><![CDATA[<h2 id="1-Util-Structure"><a href="#1-Util-Structure" class="headerlink" title="1. Util Structure"></a>1. <code>Util</code> Structure</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line">| - arena.&#123;h,cc&#125;</div><div class="line">| - bloom.cc</div><div class="line">| - cache.cc</div><div class="line">| - coding.&#123;h,cc&#125;</div><div class="line">| - comparator.h</div><div class="line">| - crc32c.&#123;h,cc&#125;</div><div class="line">| - env.cc</div><div class="line">| - env_posix.cc</div><div class="line">| - filter_policy.cc</div><div class="line">| - hash.&#123;h,cc&#125;</div><div class="line">| - histogram.&#123;h,cc&#125;</div><div class="line">| - logging.&#123;h,cc&#125;</div><div class="line">| - mutexlock.h</div><div class="line">| - options.cc</div><div class="line">| - posix_logger.h</div><div class="line">| - random.h</div><div class="line">| - status.cc</div><div class="line">| ...</div></pre></td></tr></table></figure>
-<p>Main files in <code>util</code> are listed. Each of following sections correspond to a entry in the structure. </p>
-<h2 id="2-Arena"><a href="#2-Arena" class="headerlink" title="2. Arena"></a>2. <code>Arena</code></h2><p><code>Arena</code> appeared in many open source project. It’s used for memory allocation and deallocation.</p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;h2 id=&quot;1-Util-Structure&quot;&gt;&lt;a href=&quot;#1-Util-Structure&quot; class=&quot;headerlink&quot; title=&quot;1. Util Structure&quot;&gt;&lt;/a&gt;1. &lt;code&gt;Util&lt;/code&gt; Structure&lt;/h2&gt;&lt;f
-    
-    </summary>
-    
-    
-      <category term="LevelDB" scheme="https://crazyxy.github.io/tags/LevelDB/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>leveldb I</title>
+    <title>LevelDB I</title>
     <link href="https://crazyxy.github.io/2017/05/07/leveldb-0/"/>
     <id>https://crazyxy.github.io/2017/05/07/leveldb-0/</id>
     <published>2017-05-06T16:00:00.000Z</published>
-    <updated>2017-05-07T12:57:10.000Z</updated>
+    <updated>2017-05-07T13:19:19.000Z</updated>
     
     <content type="html"><![CDATA[<h2 id="1-LevelDB"><a href="#1-LevelDB" class="headerlink" title="1. LevelDB"></a>1. LevelDB</h2><blockquote>
 <p>LevelDB is a fast key-value storage library written at Google that provides an ordered mapping from string keys to string values.</p>
@@ -66,6 +43,29 @@
     
       &lt;h2 id=&quot;1-LevelDB&quot;&gt;&lt;a href=&quot;#1-LevelDB&quot; class=&quot;headerlink&quot; title=&quot;1. LevelDB&quot;&gt;&lt;/a&gt;1. LevelDB&lt;/h2&gt;&lt;blockquote&gt;
 &lt;p&gt;LevelDB is a fast key-value
+    
+    </summary>
+    
+    
+      <category term="LevelDB" scheme="https://crazyxy.github.io/tags/LevelDB/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>LevelDB II</title>
+    <link href="https://crazyxy.github.io/2017/05/07/LevelDB-1/"/>
+    <id>https://crazyxy.github.io/2017/05/07/LevelDB-1/</id>
+    <published>2017-05-06T16:00:00.000Z</published>
+    <updated>2017-05-07T13:06:44.000Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="1-Util-Structure"><a href="#1-Util-Structure" class="headerlink" title="1. Util Structure"></a>1. <code>Util</code> Structure</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line">| - arena.&#123;h,cc&#125;</div><div class="line">| - bloom.cc</div><div class="line">| - cache.cc</div><div class="line">| - coding.&#123;h,cc&#125;</div><div class="line">| - comparator.h</div><div class="line">| - crc32c.&#123;h,cc&#125;</div><div class="line">| - env.cc</div><div class="line">| - env_posix.cc</div><div class="line">| - filter_policy.cc</div><div class="line">| - hash.&#123;h,cc&#125;</div><div class="line">| - histogram.&#123;h,cc&#125;</div><div class="line">| - logging.&#123;h,cc&#125;</div><div class="line">| - mutexlock.h</div><div class="line">| - options.cc</div><div class="line">| - posix_logger.h</div><div class="line">| - random.h</div><div class="line">| - status.cc</div><div class="line">| ...</div></pre></td></tr></table></figure>
+<p>Main files in <code>util</code> are listed. Each of following sections correspond to a entry in the structure. </p>
+<h2 id="2-Arena"><a href="#2-Arena" class="headerlink" title="2. Arena"></a>2. <code>Arena</code></h2><p><code>Arena</code> appeared in many open source project. It’s used for memory allocation and deallocation.</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h2 id=&quot;1-Util-Structure&quot;&gt;&lt;a href=&quot;#1-Util-Structure&quot; class=&quot;headerlink&quot; title=&quot;1. Util Structure&quot;&gt;&lt;/a&gt;1. &lt;code&gt;Util&lt;/code&gt; Structure&lt;/h2&gt;&lt;f
     
     </summary>
     
