@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://crazyxy.github.io/"/>
-  <updated>2017-05-07T06:46:23.000Z</updated>
+  <updated>2017-05-07T12:57:10.000Z</updated>
   <id>https://crazyxy.github.io/</id>
   
   <author>
@@ -16,24 +16,33 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
-    <title>leveldb (0)</title>
+    <title>leveldb I</title>
     <link href="https://crazyxy.github.io/2017/05/07/leveldb-0/"/>
     <id>https://crazyxy.github.io/2017/05/07/leveldb-0/</id>
     <published>2017-05-06T16:00:00.000Z</published>
-    <updated>2017-05-07T06:46:23.000Z</updated>
+    <updated>2017-05-07T12:57:10.000Z</updated>
     
-    <content type="html"><![CDATA[<p>[toc]</p>
-<h1 id="LevelDB"><a href="#LevelDB" class="headerlink" title="LevelDB"></a>LevelDB</h1><blockquote>
-<p>LevelDB is a light-weight, single-purpose library for persistence with bindings to many platforms.</p>
+    <content type="html"><![CDATA[<h2 id="1-LevelDB"><a href="#1-LevelDB" class="headerlink" title="1. LevelDB"></a>1. LevelDB</h2><blockquote>
+<p>LevelDB is a fast key-value storage library written at Google that provides an ordered mapping from string keys to string values.</p>
 </blockquote>
-<p>LevelDB is a nosql db and developed by Google. </p>
+<p>LevelDB provides many features, such as</p>
+<blockquote>
+<ul>
+<li>Keys and values are arbitrary byte arrays. </li>
+<li>Data is stored sorted by key.</li>
+<li>Callers can provide a custom comparison function to override the sort order.<br>…</li>
+</ul>
+</blockquote>
+<p>The following few blogs are trying to explain readers the code of LevelDB, which contains the design principals of k-v store.</p>
+<h2 id="2-Level-Structure"><a href="#2-Level-Structure" class="headerlink" title="2. Level Structure"></a>2. Level Structure</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">| - db </div><div class="line">| - helps</div><div class="line">|     | - memenv</div><div class="line">| - include</div><div class="line">|     | - leveldb</div><div class="line">| - port</div><div class="line">| - table</div><div class="line">| - util</div><div class="line">| ...</div></pre></td></tr></table></figure>
+<p>The structure lists the main components of LevelDB. <code>db</code> folder contains db implementations. <code>memenv</code> folder contains the environment related implementations. <code>include</code> is the folder of header files. <code>port</code> contains interfaces and implementations that isolate the rest of the package from platform details. <code>table</code> contains lower level implementations. <code>util</code> contains utilities for other classes. </p>
+<p><code>util</code> is much easier than other modules and doesn’t need any knowledge of kv store, so we will learn <code>util</code> firstly.</p>
 ]]></content>
     
     <summary type="html">
     
-      &lt;p&gt;[toc]&lt;/p&gt;
-&lt;h1 id=&quot;LevelDB&quot;&gt;&lt;a href=&quot;#LevelDB&quot; class=&quot;headerlink&quot; title=&quot;LevelDB&quot;&gt;&lt;/a&gt;LevelDB&lt;/h1&gt;&lt;blockquote&gt;
-&lt;p&gt;LevelDB is a light-weigh
+      &lt;h2 id=&quot;1-LevelDB&quot;&gt;&lt;a href=&quot;#1-LevelDB&quot; class=&quot;headerlink&quot; title=&quot;1. LevelDB&quot;&gt;&lt;/a&gt;1. LevelDB&lt;/h2&gt;&lt;blockquote&gt;
+&lt;p&gt;LevelDB is a fast key-value
     
     </summary>
     
