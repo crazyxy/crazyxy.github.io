@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://crazyxy.github.io/"/>
-  <updated>2017-05-07T12:57:10.000Z</updated>
+  <updated>2017-05-07T13:06:44.000Z</updated>
   <id>https://crazyxy.github.io/</id>
   
   <author>
@@ -14,6 +14,29 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>LevelDB II</title>
+    <link href="https://crazyxy.github.io/2017/05/07/LevelDB-1/"/>
+    <id>https://crazyxy.github.io/2017/05/07/LevelDB-1/</id>
+    <published>2017-05-06T16:00:00.000Z</published>
+    <updated>2017-05-07T13:06:44.000Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="1-Util-Structure"><a href="#1-Util-Structure" class="headerlink" title="1. Util Structure"></a>1. <code>Util</code> Structure</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line">| - arena.&#123;h,cc&#125;</div><div class="line">| - bloom.cc</div><div class="line">| - cache.cc</div><div class="line">| - coding.&#123;h,cc&#125;</div><div class="line">| - comparator.h</div><div class="line">| - crc32c.&#123;h,cc&#125;</div><div class="line">| - env.cc</div><div class="line">| - env_posix.cc</div><div class="line">| - filter_policy.cc</div><div class="line">| - hash.&#123;h,cc&#125;</div><div class="line">| - histogram.&#123;h,cc&#125;</div><div class="line">| - logging.&#123;h,cc&#125;</div><div class="line">| - mutexlock.h</div><div class="line">| - options.cc</div><div class="line">| - posix_logger.h</div><div class="line">| - random.h</div><div class="line">| - status.cc</div><div class="line">| ...</div></pre></td></tr></table></figure>
+<p>Main files in <code>util</code> are listed. Each of following sections correspond to a entry in the structure. </p>
+<h2 id="2-Arena"><a href="#2-Arena" class="headerlink" title="2. Arena"></a>2. <code>Arena</code></h2><p><code>Arena</code> appeared in many open source project. It’s used for memory allocation and deallocation.</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h2 id=&quot;1-Util-Structure&quot;&gt;&lt;a href=&quot;#1-Util-Structure&quot; class=&quot;headerlink&quot; title=&quot;1. Util Structure&quot;&gt;&lt;/a&gt;1. &lt;code&gt;Util&lt;/code&gt; Structure&lt;/h2&gt;&lt;f
+    
+    </summary>
+    
+    
+      <category term="LevelDB" scheme="https://crazyxy.github.io/tags/LevelDB/"/>
+    
+  </entry>
   
   <entry>
     <title>leveldb I</title>
@@ -455,32 +478,6 @@
     
       &lt;h2 id=&quot;Solution&quot;&gt;&lt;a href=&quot;#Solution&quot; class=&quot;headerlink&quot; title=&quot;Solution&quot;&gt;&lt;/a&gt;Solution&lt;/h2&gt;&lt;p&gt;Implementation.&lt;/p&gt;
 &lt;h2 id=&quot;Code&quot;&gt;&lt;a href=&quot;#Co
-    
-    </summary>
-    
-    
-      <category term="LeetCode" scheme="https://crazyxy.github.io/tags/LeetCode/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>LeetCode 125 - Valid Palindrome</title>
-    <link href="https://crazyxy.github.io/2016/10/14/LeetCode-125-Valid-Palindrome/"/>
-    <id>https://crazyxy.github.io/2016/10/14/LeetCode-125-Valid-Palindrome/</id>
-    <published>2016-10-14T12:07:23.000Z</published>
-    <updated>2017-05-06T16:12:48.000Z</updated>
-    
-    <content type="html"><![CDATA[<h2 id="Solution"><a href="#Solution" class="headerlink" title="Solution"></a>Solution</h2><blockquote>
-<p>Just do it.</p>
-</blockquote>
-<h2 id="Code"><a href="#Code" class="headerlink" title="Code"></a>Code</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></div><div class="line"><span class="keyword">public</span>:</div><div class="line">    <span class="function"><span class="keyword">bool</span> <span class="title">isPalindrome</span><span class="params">(<span class="built_in">string</span> s)</span> </span>&#123;</div><div class="line">        <span class="keyword">int</span> left = <span class="number">0</span>, right = s.length() - <span class="number">1</span>;</div><div class="line">        <span class="keyword">while</span>(left &lt; right)&#123;</div><div class="line">            <span class="keyword">while</span>(left &lt;= right &amp;&amp; !<span class="built_in">isalnum</span>(s[left])) left ++;</div><div class="line">            <span class="keyword">while</span>(right &gt;= left &amp;&amp; !<span class="built_in">isalnum</span>(s[right])) right --;</div><div class="line">            <span class="keyword">if</span>(left &gt;= right) <span class="keyword">return</span> <span class="literal">true</span>;</div><div class="line">            <span class="keyword">if</span>(<span class="built_in">tolower</span>(s[left]) != <span class="built_in">tolower</span>(s[right])) <span class="keyword">return</span> <span class="literal">false</span>;</div><div class="line">            left ++;</div><div class="line">            right --;</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">return</span> <span class="literal">true</span>;</div><div class="line">    &#125;</div><div class="line">&#125;;</div></pre></td></tr></table></figure>]]></content>
-    
-    <summary type="html">
-    
-      &lt;h2 id=&quot;Solution&quot;&gt;&lt;a href=&quot;#Solution&quot; class=&quot;headerlink&quot; title=&quot;Solution&quot;&gt;&lt;/a&gt;Solution&lt;/h2&gt;&lt;blockquote&gt;
-&lt;p&gt;Just do it.&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;h2
     
     </summary>
     

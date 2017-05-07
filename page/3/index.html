@@ -51,17 +51,35 @@
   
 
   
+    
+      
+    
 
-  
-
+    
   
 
   
 
   
     
+      
     
-    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Monda:300,300italic,400,400italic,700,700italic|Roboto Slab:300,300italic,400,400italic,700,700italic|Lobster Two:300,300italic,400,400italic,700,700italic|PT Mono:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
   
 
 
@@ -240,6 +258,131 @@
           <div id="content" class="content">
             
   <section id="posts" class="posts-expand">
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="https://crazyxy.github.io/2016/10/14/LeetCode-125-Valid-Palindrome/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Yan Xue">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Crazyxy is Coding">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2016/10/14/LeetCode-125-Valid-Palindrome/" itemprop="url">LeetCode 125 - Valid Palindrome</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2016-10-14T20:07:23+08:00">
+                2016-10-14
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2016/10/14/LeetCode-125-Valid-Palindrome/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="2016/10/14/LeetCode-125-Valid-Palindrome/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="Solution"><a href="#Solution" class="headerlink" title="Solution"></a>Solution</h2><blockquote>
+<p>Just do it.</p>
+</blockquote>
+<h2 id="Code"><a href="#Code" class="headerlink" title="Code"></a>Code</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></div><div class="line"><span class="keyword">public</span>:</div><div class="line">    <span class="function"><span class="keyword">bool</span> <span class="title">isPalindrome</span><span class="params">(<span class="built_in">string</span> s)</span> </span>&#123;</div><div class="line">        <span class="keyword">int</span> left = <span class="number">0</span>, right = s.length() - <span class="number">1</span>;</div><div class="line">        <span class="keyword">while</span>(left &lt; right)&#123;</div><div class="line">            <span class="keyword">while</span>(left &lt;= right &amp;&amp; !<span class="built_in">isalnum</span>(s[left])) left ++;</div><div class="line">            <span class="keyword">while</span>(right &gt;= left &amp;&amp; !<span class="built_in">isalnum</span>(s[right])) right --;</div><div class="line">            <span class="keyword">if</span>(left &gt;= right) <span class="keyword">return</span> <span class="literal">true</span>;</div><div class="line">            <span class="keyword">if</span>(<span class="built_in">tolower</span>(s[left]) != <span class="built_in">tolower</span>(s[right])) <span class="keyword">return</span> <span class="literal">false</span>;</div><div class="line">            left ++;</div><div class="line">            right --;</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">return</span> <span class="literal">true</span>;</div><div class="line">    &#125;</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
     
       
 
@@ -1319,131 +1462,6 @@
           
             <h2 id="Solution"><a href="#Solution" class="headerlink" title="Solution"></a>Solution</h2><p>Using two stacks. Push element to one stack and retrieve the element from another stack.</p>
 <h2 id="Code"><a href="#Code" class="headerlink" title="Code"></a>Code</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Queue</span> &#123;</span></div><div class="line"><span class="keyword">public</span>:</div><div class="line">    <span class="built_in">stack</span>&lt;<span class="keyword">int</span>&gt; a, b;</div><div class="line">    <span class="comment">// Push element x to the back of queue.</span></div><div class="line">    <span class="function"><span class="keyword">void</span> <span class="title">push</span><span class="params">(<span class="keyword">int</span> x)</span> </span>&#123;</div><div class="line">        a.push(x);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="comment">// Removes the element from in front of queue.</span></div><div class="line">    <span class="function"><span class="keyword">void</span> <span class="title">pop</span><span class="params">(<span class="keyword">void</span>)</span> </span>&#123;</div><div class="line">        <span class="keyword">if</span>(b.empty())&#123;</div><div class="line">            <span class="keyword">while</span>(!a.empty())&#123;</div><div class="line">                b.push(a.top());</div><div class="line">                a.pop();</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">        b.pop();</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="comment">// Get the front element.</span></div><div class="line">    <span class="function"><span class="keyword">int</span> <span class="title">peek</span><span class="params">(<span class="keyword">void</span>)</span> </span>&#123;</div><div class="line">        <span class="keyword">if</span>(b.empty())&#123;</div><div class="line">            <span class="keyword">while</span>(!a.empty())&#123;</div><div class="line">                b.push(a.top());</div><div class="line">                a.pop();</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">return</span> b.top();</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="comment">// Return whether the queue is empty.</span></div><div class="line">    <span class="function"><span class="keyword">bool</span> <span class="title">empty</span><span class="params">(<span class="keyword">void</span>)</span> </span>&#123;</div><div class="line">        <span class="keyword">return</span> a.empty() &amp;&amp; b.empty();</div><div class="line">    &#125;</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="https://crazyxy.github.io/2016/10/13/LeetCode-208-Implement-Trie-Prefix-Tree/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Yan Xue">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Crazyxy is Coding">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2016/10/13/LeetCode-208-Implement-Trie-Prefix-Tree/" itemprop="url">LeetCode 208 - Implement Trie (Prefix Tree)</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2016-10-13T16:53:53+08:00">
-                2016-10-13
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2016/10/13/LeetCode-208-Implement-Trie-Prefix-Tree/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count"
-                        data-disqus-identifier="2016/10/13/LeetCode-208-Implement-Trie-Prefix-Tree/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h2 id="Solution"><a href="#Solution" class="headerlink" title="Solution"></a>Solution</h2><blockquote>
-<p>Just do it.</p>
-</blockquote>
-<h2 id="Code"><a href="#Code" class="headerlink" title="Code"></a>Code</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">TrieNode</span> &#123;</span></div><div class="line"><span class="keyword">public</span>:</div><div class="line">    <span class="comment">// Initialize your data structure here.</span></div><div class="line">    TrieNode() &#123;</div><div class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">26</span>; i ++) next[i] = <span class="literal">NULL</span>;</div><div class="line">        term = <span class="literal">false</span>;</div><div class="line">    &#125;</div><div class="line">    TrieNode *next[<span class="number">26</span>];</div><div class="line">    <span class="keyword">bool</span> term;</div><div class="line">&#125;;</div><div class="line"></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Trie</span> &#123;</span></div><div class="line"><span class="keyword">public</span>:</div><div class="line">    Trie() &#123;</div><div class="line">        root = <span class="keyword">new</span> TrieNode();</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="comment">// Inserts a word into the trie.</span></div><div class="line">    <span class="function"><span class="keyword">void</span> <span class="title">insert</span><span class="params">(<span class="built_in">string</span> word)</span> </span>&#123;</div><div class="line">        <span class="keyword">int</span> n = word.length();</div><div class="line">        <span class="keyword">auto</span> u = root;</div><div class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; n; i ++)&#123;</div><div class="line">            <span class="keyword">int</span> k = word[i] - <span class="string">'a'</span>;</div><div class="line">            <span class="keyword">if</span>(!u-&gt;next[k]) u-&gt;next[k] = <span class="keyword">new</span> TrieNode();</div><div class="line">            u = u-&gt;next[k];</div><div class="line">        &#125;</div><div class="line">        u-&gt;term = <span class="literal">true</span>;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="comment">// Returns if the word is in the trie.</span></div><div class="line">    <span class="function"><span class="keyword">bool</span> <span class="title">search</span><span class="params">(<span class="built_in">string</span> word)</span> </span>&#123;</div><div class="line">        <span class="keyword">int</span> n = word.length();</div><div class="line">        <span class="keyword">auto</span> u = root;</div><div class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; n; i ++)&#123;</div><div class="line">            <span class="keyword">int</span> k = word[i] - <span class="string">'a'</span>;</div><div class="line">            <span class="keyword">if</span>(!u-&gt;next[k]) <span class="keyword">return</span> <span class="literal">false</span>;</div><div class="line">            u = u-&gt;next[k];</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">return</span> u-&gt;term;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="comment">// Returns if there is any word in the trie</span></div><div class="line">    <span class="comment">// that starts with the given prefix.</span></div><div class="line">    <span class="function"><span class="keyword">bool</span> <span class="title">startsWith</span><span class="params">(<span class="built_in">string</span> prefix)</span> </span>&#123;</div><div class="line">        <span class="keyword">int</span> n = prefix.length();</div><div class="line">        <span class="keyword">auto</span> u = root;</div><div class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; n; i ++)&#123;</div><div class="line">            <span class="keyword">int</span> k = prefix[i] - <span class="string">'a'</span>;</div><div class="line">            <span class="keyword">if</span>(!u-&gt;next[k]) <span class="keyword">return</span> <span class="literal">false</span>;</div><div class="line">            u = u-&gt;next[k];</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">return</span> <span class="literal">true</span>;</div><div class="line">    &#125;</div><div class="line"></div><div class="line"><span class="keyword">private</span>:</div><div class="line">    TrieNode* root;</div><div class="line">&#125;;</div><div class="line"></div><div class="line"><span class="comment">// Your Trie object will be instantiated and called as such:</span></div><div class="line"><span class="comment">// Trie trie;</span></div><div class="line"><span class="comment">// trie.insert("somestring");</span></div><div class="line"><span class="comment">// trie.search("key");</span></div></pre></td></tr></table></figure>
           
         
       
