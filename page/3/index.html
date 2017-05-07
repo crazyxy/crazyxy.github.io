@@ -250,622 +250,6 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="https://crazyxy.github.io/2016/10/18/LeetCode-423-Reconstruct-Original-Digits-from-English/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Yan Xue">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Crazyxy is Coding">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2016/10/18/LeetCode-423-Reconstruct-Original-Digits-from-English/" itemprop="url">LeetCode 423 - Reconstruct Original Digits from English</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2016-10-18T13:27:22+08:00">
-                2016-10-18
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2016/10/18/LeetCode-423-Reconstruct-Original-Digits-from-English/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count"
-                        data-disqus-identifier="2016/10/18/LeetCode-423-Reconstruct-Original-Digits-from-English/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h2 id="Solution"><a href="#Solution" class="headerlink" title="Solution"></a>Solution</h2><p>Extract feature character of each string. For example, <code>z</code> for <code>one</code>.</p>
-<h2 id="Code"><a href="#Code" class="headerlink" title="Code"></a>Code</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></div><div class="line"><span class="keyword">public</span>:</div><div class="line">    <span class="function"><span class="built_in">string</span> <span class="title">originalDigits</span><span class="params">(<span class="built_in">string</span> s)</span> </span>&#123;</div><div class="line">        <span class="built_in">string</span> str[] = &#123;<span class="string">"zero"</span>, <span class="string">"one"</span>, <span class="string">"two"</span>, <span class="string">"three"</span>, <span class="string">"four"</span>, <span class="string">"five"</span>, <span class="string">"six"</span>, <span class="string">"seven"</span>, <span class="string">"eight"</span>, <span class="string">"nine"</span>&#125;;</div><div class="line">        <span class="keyword">int</span> cnt[<span class="number">26</span>] = &#123;<span class="number">0</span>&#125;, x[<span class="number">10</span>] = &#123;<span class="number">0</span>&#125;;</div><div class="line">        <span class="keyword">for</span>(<span class="keyword">auto</span> ch : s) cnt[ch-<span class="string">'a'</span>] ++;</div><div class="line">        </div><div class="line">        <span class="built_in">vector</span>&lt;pair&lt;<span class="keyword">int</span>, <span class="keyword">char</span>&gt;&gt; vec &#123;&#123;<span class="number">0</span>, <span class="string">'z'</span>&#125;, &#123;<span class="number">2</span>, <span class="string">'w'</span>&#125;, &#123;<span class="number">4</span>, <span class="string">'u'</span>&#125;, &#123;<span class="number">6</span>, <span class="string">'x'</span>&#125;, &#123;<span class="number">8</span>, <span class="string">'g'</span>&#125;, &#123;<span class="number">1</span>, <span class="string">'o'</span>&#125;, &#123;<span class="number">3</span>, <span class="string">'r'</span>&#125;, &#123;<span class="number">5</span>, <span class="string">'f'</span>&#125;, &#123;<span class="number">7</span>, <span class="string">'v'</span>&#125;, &#123;<span class="number">9</span>, <span class="string">'i'</span>&#125;&#125;;</div><div class="line">        </div><div class="line">        <span class="keyword">for</span>(<span class="keyword">auto</span> p : vec)&#123;</div><div class="line">            x[p.first] += cnt[p.second-<span class="string">'a'</span>];</div><div class="line">            <span class="keyword">for</span>(<span class="keyword">auto</span> ch : str[p.first]) cnt[ch-<span class="string">'a'</span>] -= x[p.first];</div><div class="line">        &#125;</div><div class="line">        </div><div class="line">        <span class="built_in">string</span> res;</div><div class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">10</span>; i ++)&#123;</div><div class="line">            res += <span class="built_in">string</span>(x[i], <span class="string">'0'</span>+i);</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">return</span> res;</div><div class="line">    &#125;</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="https://crazyxy.github.io/2016/10/18/LeetCode-424-Longest-Repeating-Character-Replacement/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Yan Xue">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Crazyxy is Coding">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2016/10/18/LeetCode-424-Longest-Repeating-Character-Replacement/" itemprop="url">LeetCode 424 - Longest Repeating Character Replacement</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2016-10-18T11:08:25+08:00">
-                2016-10-18
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2016/10/18/LeetCode-424-Longest-Repeating-Character-Replacement/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count"
-                        data-disqus-identifier="2016/10/18/LeetCode-424-Longest-Repeating-Character-Replacement/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h2 id="Solution"><a href="#Solution" class="headerlink" title="Solution"></a>Solution</h2><p>Two pointers. For each slide window with length <code>n</code>, if <code>n-maxcnt &lt;= k</code>, the string in the window can be transformed into wanted string. In this case, we move the right pointer to probe larger window size; otherwise, we reduce the window size by moving the left pointer.</p>
-<h2 id="Code"><a href="#Code" class="headerlink" title="Code"></a>Code</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></div><div class="line"><span class="keyword">public</span>:</div><div class="line">    <span class="function"><span class="keyword">int</span> <span class="title">characterReplacement</span><span class="params">(<span class="built_in">string</span> s, <span class="keyword">int</span> k)</span> </span>&#123;</div><div class="line">        <span class="keyword">int</span> n = s.length(), cnt[<span class="number">26</span>] = &#123;<span class="number">0</span>&#125;, i = <span class="number">0</span>, j = <span class="number">0</span>, res = <span class="number">0</span>;</div><div class="line">        <span class="keyword">bool</span> move = <span class="literal">true</span>;</div><div class="line">        </div><div class="line">        <span class="keyword">while</span>(i &lt; n)&#123;</div><div class="line">            <span class="keyword">if</span>(move) cnt[s[i]-<span class="string">'A'</span>] ++;    </div><div class="line">            move = <span class="literal">false</span>;</div><div class="line">            </div><div class="line">            <span class="keyword">int</span> maxcnt = <span class="number">0</span>;</div><div class="line">            <span class="keyword">for</span>(<span class="keyword">int</span> x = <span class="number">0</span>; x &lt; <span class="number">26</span>; x ++) maxcnt = max(maxcnt, cnt[x]);</div><div class="line">            </div><div class="line">            <span class="keyword">if</span>(maxcnt &gt;= i - j + <span class="number">1</span> - k)&#123;</div><div class="line">                res = max(res, i - j + <span class="number">1</span>);</div><div class="line">                i ++;</div><div class="line">                move = <span class="literal">true</span>;</div><div class="line">            &#125;<span class="keyword">else</span>&#123;</div><div class="line">                cnt[s[j++]-<span class="string">'A'</span>]--;</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">return</span> res;</div><div class="line">    &#125;</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="https://crazyxy.github.io/2016/10/17/LeetCode-421-Maximum-XOR-of-Two-Numbers-in-an-Array/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Yan Xue">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Crazyxy is Coding">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2016/10/17/LeetCode-421-Maximum-XOR-of-Two-Numbers-in-an-Array/" itemprop="url">LeetCode 421 - Maximum XOR of Two Numbers in an Array</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2016-10-17T22:01:11+08:00">
-                2016-10-17
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2016/10/17/LeetCode-421-Maximum-XOR-of-Two-Numbers-in-an-Array/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count"
-                        data-disqus-identifier="2016/10/17/LeetCode-421-Maximum-XOR-of-Two-Numbers-in-an-Array/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h2 id="Solution"><a href="#Solution" class="headerlink" title="Solution"></a>Solution</h2><p>Trie. Build trie for the numbers in the array. For each number <code>x</code> in the array, find the number <code>y</code> which make <code>x ^ y</code> maximum. The time complexity is <code>O(n log L)</code> where <code>L</code> is the maximum number.</p>
-<h2 id="Code"><a href="#Code" class="headerlink" title="Code"></a>Code</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; toBits(<span class="keyword">int</span> val)&#123;</div><div class="line">    <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; bits(<span class="number">32</span>, <span class="number">0</span>);</div><div class="line">    <span class="keyword">int</span> id = <span class="number">31</span>;</div><div class="line">    <span class="keyword">while</span>(val)&#123;</div><div class="line">        bits[id--] = val &amp; <span class="number">1</span>;</div><div class="line">        val &gt;&gt;= <span class="number">1</span>;</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">return</span> bits;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="class"><span class="keyword">struct</span> <span class="title">TrieNode</span>&#123;</span></div><div class="line">    TrieNode()&#123;</div><div class="line">        next[<span class="number">0</span>] = next[<span class="number">1</span>] = <span class="literal">NULL</span>;</div><div class="line">    &#125;</div><div class="line">    TrieNode *next[<span class="number">2</span>];</div><div class="line">&#125;;</div><div class="line"></div><div class="line"><span class="class"><span class="keyword">struct</span> <span class="title">Trie</span>&#123;</span></div><div class="line">    TrieNode *root;</div><div class="line">    Trie()&#123;root = <span class="keyword">new</span> TrieNode();&#125;</div><div class="line">    </div><div class="line">    <span class="function"><span class="keyword">void</span> <span class="title">insert</span><span class="params">(<span class="keyword">int</span> val)</span></span>&#123;</div><div class="line">        <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; bits = toBits(val);</div><div class="line">        <span class="keyword">auto</span> u = root;</div><div class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">32</span>; i ++)&#123;</div><div class="line">            <span class="keyword">if</span>(!u-&gt;next[bits[i]]) u-&gt;next[bits[i]] = <span class="keyword">new</span> TrieNode();</div><div class="line">            u = u-&gt;next[bits[i]];</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125;;</div><div class="line"></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></div><div class="line"><span class="keyword">public</span>:</div><div class="line">    <span class="function"><span class="keyword">int</span> <span class="title">findMaximumXOR</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; nums)</span> </span>&#123;</div><div class="line">        <span class="keyword">int</span> n = nums.size(), res = <span class="number">0</span>;</div><div class="line">        Trie tree;</div><div class="line">        <span class="keyword">for</span>(<span class="keyword">auto</span> num : nums) tree.insert(num);</div><div class="line">        </div><div class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; n; i ++)&#123;</div><div class="line">            <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; bits = toBits(nums[i]);</div><div class="line">            </div><div class="line">            <span class="keyword">auto</span> a = tree.root, b = a;</div><div class="line">            <span class="keyword">int</span> x = <span class="number">0</span>;</div><div class="line">            <span class="keyword">for</span>(<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; <span class="number">32</span>; j ++)&#123;</div><div class="line">                a = a-&gt;next[bits[j]];</div><div class="line">                <span class="keyword">if</span>(b-&gt;next[(bits[j]+<span class="number">1</span>)%<span class="number">2</span>])&#123;</div><div class="line">                    b = b-&gt;next[(bits[j]+<span class="number">1</span>)%<span class="number">2</span>];</div><div class="line">                    x = x * <span class="number">2</span> + ((bits[j]+<span class="number">1</span>)%<span class="number">2</span>);</div><div class="line">                &#125;</div><div class="line">                <span class="keyword">else</span>&#123;</div><div class="line">                    b = b-&gt;next[bits[j]];</div><div class="line">                    x = x * <span class="number">2</span> + bits[j];</div><div class="line">                &#125;</div><div class="line">            &#125;</div><div class="line">            res = max(x ^ nums[i], res);</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">return</span> res;</div><div class="line">    &#125;</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="https://crazyxy.github.io/2016/10/14/LeetCode-189-Rotate-Array/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Yan Xue">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Crazyxy is Coding">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2016/10/14/LeetCode-189-Rotate-Array/" itemprop="url">LeetCode 189 - Rotate Array</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2016-10-14T22:21:22+08:00">
-                2016-10-14
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2016/10/14/LeetCode-189-Rotate-Array/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count"
-                        data-disqus-identifier="2016/10/14/LeetCode-189-Rotate-Array/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h2 id="Solution"><a href="#Solution" class="headerlink" title="Solution"></a>Solution</h2><p>Reverse the first <code>n-k</code> numbers and then reverser the last <code>k</code> numbers, at last reverse the array.</p>
-<h2 id="Code"><a href="#Code" class="headerlink" title="Code"></a>Code</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></div><div class="line"><span class="keyword">public</span>:</div><div class="line">    <span class="function"><span class="keyword">void</span> <span class="title">rotate</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; nums, <span class="keyword">int</span> k)</span> </span>&#123;</div><div class="line">        k %= nums.size();</div><div class="line">        k = nums.size() - k;</div><div class="line">        reverse(nums.begin(), nums.begin()+k);</div><div class="line">        reverse(nums.begin()+k, nums.end());</div><div class="line">        reverse(nums.begin(), nums.end());</div><div class="line">    &#125;</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="https://crazyxy.github.io/2016/10/14/LeetCode-8-String-to-Integer-atoi/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Yan Xue">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Crazyxy is Coding">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2016/10/14/LeetCode-8-String-to-Integer-atoi/" itemprop="url">LeetCode 8 - String to Integer (atoi)</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2016-10-14T22:19:13+08:00">
-                2016-10-14
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2016/10/14/LeetCode-8-String-to-Integer-atoi/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count"
-                        data-disqus-identifier="2016/10/14/LeetCode-8-String-to-Integer-atoi/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h2 id="Solution"><a href="#Solution" class="headerlink" title="Solution"></a>Solution</h2><p>Implementation.</p>
-<h2 id="Code"><a href="#Code" class="headerlink" title="Code"></a>Code</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></div><div class="line"><span class="keyword">public</span>:</div><div class="line">    <span class="function"><span class="keyword">int</span> <span class="title">myAtoi</span><span class="params">(<span class="built_in">string</span> str)</span> </span>&#123;</div><div class="line">        <span class="keyword">int</span> n = str.length(), i = <span class="number">0</span>, s = <span class="number">0</span>, pos = <span class="number">1</span>;</div><div class="line">        <span class="keyword">while</span>(i &lt; n &amp;&amp; str[i] == <span class="string">' '</span>) i ++;</div><div class="line">        <span class="keyword">if</span>(str[i] != <span class="string">'-'</span> &amp;&amp; str[i] != <span class="string">'+'</span> &amp;&amp; !<span class="built_in">isdigit</span>(str[i])) <span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">        <span class="keyword">if</span>(str[i] == <span class="string">'-'</span>)&#123;</div><div class="line">            pos = <span class="number">-1</span>;</div><div class="line">            i ++;</div><div class="line">        &#125;<span class="keyword">else</span> <span class="keyword">if</span>(str[i] == <span class="string">'+'</span>) i ++;</div><div class="line">        </div><div class="line">        s = i;</div><div class="line">        <span class="keyword">while</span>(i &lt; n &amp;&amp; <span class="built_in">isdigit</span>(str[i])) i ++;</div><div class="line">        str = str.substr(s, i - s);</div><div class="line">        </div><div class="line">        n = str.length();</div><div class="line">        i = <span class="number">0</span>;</div><div class="line">        <span class="keyword">long</span> <span class="keyword">long</span> res = <span class="number">0</span>;</div><div class="line">        <span class="keyword">while</span>(i &lt; n)&#123;</div><div class="line">            res = res * <span class="number">10</span> + str[i] - <span class="string">'0'</span>;</div><div class="line">            <span class="keyword">if</span>(pos == <span class="number">1</span> &amp;&amp; res &gt; INT_MAX) <span class="keyword">return</span> INT_MAX;</div><div class="line">            <span class="keyword">if</span>(pos == <span class="number">-1</span> &amp;&amp; res * <span class="number">-1</span> &lt; INT_MIN) <span class="keyword">return</span> INT_MIN;</div><div class="line">            i ++;</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">return</span> res * pos;</div><div class="line">    &#125;</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
     <link itemprop="mainEntityOfPage" href="https://crazyxy.github.io/2016/10/14/LeetCode-125-Valid-Palindrome/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1476,11 +860,628 @@
 
 
     
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="https://crazyxy.github.io/2016/10/13/LeetCode-300-Longest-Increasing-Subsequence/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Yan Xue">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Crazyxy is Coding">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2016/10/13/LeetCode-300-Longest-Increasing-Subsequence/" itemprop="url">LeetCode 300 - Longest Increasing Subsequence</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2016-10-13T20:57:21+08:00">
+                2016-10-13
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2016/10/13/LeetCode-300-Longest-Increasing-Subsequence/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="2016/10/13/LeetCode-300-Longest-Increasing-Subsequence/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="Solution"><a href="#Solution" class="headerlink" title="Solution"></a>Solution</h2><p>Dynamic programming. Naive method is <code>O(n*n)</code>. The algorithm can be optimized to <code>O(n log n)</code> using extra space.</p>
+<h2 id="Code"><a href="#Code" class="headerlink" title="Code"></a>Code</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></div><div class="line"><span class="keyword">public</span>:</div><div class="line">    <span class="function"><span class="keyword">int</span> <span class="title">lengthOfLIS</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; nums)</span> </span>&#123;</div><div class="line">        <span class="keyword">int</span> n = nums.size();</div><div class="line">        <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; last;</div><div class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; n; i ++)&#123;</div><div class="line">            <span class="keyword">if</span>(last.empty() || nums[i] &gt; last.back()) last.push_back(nums[i]);</div><div class="line">            <span class="keyword">else</span>&#123;</div><div class="line">                <span class="keyword">int</span> mid, left = <span class="number">0</span>, right = last.size() - <span class="number">1</span>;</div><div class="line">                <span class="keyword">while</span>(left &lt;= right)&#123;</div><div class="line">                    mid = (left + right) &gt;&gt; <span class="number">1</span>;</div><div class="line">                    <span class="keyword">if</span>(last[mid] == nums[i]) <span class="keyword">break</span>;</div><div class="line">                    <span class="keyword">else</span> <span class="keyword">if</span>(last[mid] &lt; nums[i]) left = mid + <span class="number">1</span>;</div><div class="line">                    <span class="keyword">else</span> right = mid - <span class="number">1</span>;</div><div class="line">                &#125;</div><div class="line">                <span class="keyword">if</span>(last[mid] != nums[i]) last[left] = nums[i];</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">return</span> last.size();</div><div class="line">    &#125;</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="https://crazyxy.github.io/2016/10/13/LeetCode-5-Longest-Palindromic-Substring/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Yan Xue">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Crazyxy is Coding">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2016/10/13/LeetCode-5-Longest-Palindromic-Substring/" itemprop="url">LeetCode 5 - Longest Palindromic Substring</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2016-10-13T20:13:08+08:00">
+                2016-10-13
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2016/10/13/LeetCode-5-Longest-Palindromic-Substring/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="2016/10/13/LeetCode-5-Longest-Palindromic-Substring/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="Solution-1"><a href="#Solution-1" class="headerlink" title="Solution 1"></a>Solution 1</h2><p>Manacher Algorithm. Time complexity <code>O(n)</code>.</p>
+<h2 id="Code-1"><a href="#Code-1" class="headerlink" title="Code 1"></a>Code 1</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></div><div class="line"><span class="keyword">public</span>:</div><div class="line">	<span class="function"><span class="built_in">string</span> <span class="title">longestPalindrome</span><span class="params">(<span class="built_in">string</span> s)</span> </span>&#123;</div><div class="line">		<span class="built_in">string</span> tmp = s;</div><div class="line">		s = <span class="string">"#"</span>;</div><div class="line">		<span class="keyword">for</span> (<span class="keyword">auto</span> ch : tmp) s = s + ch + <span class="string">"#"</span>;</div><div class="line">		<span class="keyword">int</span> n = s.length(), center = <span class="number">0</span>, bound = <span class="number">0</span>, maxid = <span class="number">0</span>;</div><div class="line"></div><div class="line">		<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; dp(n, <span class="number">0</span>);</div><div class="line">		<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; n; i++)&#123;</div><div class="line">			<span class="keyword">if</span> (i &lt; center + bound)&#123;</div><div class="line">				<span class="keyword">int</span> j = <span class="number">2</span> * center - i;</div><div class="line"></div><div class="line">				<span class="keyword">if</span> (dp[j] + i &lt; center + bound)&#123;</div><div class="line">					dp[i] = dp[j];</div><div class="line">				&#125;</div><div class="line">				<span class="keyword">else</span>&#123;</div><div class="line">					bound = min(dp[j], center + bound - i);</div><div class="line">					center = i;</div><div class="line">					</div><div class="line">					<span class="keyword">while</span> (i - bound &gt;= <span class="number">0</span> &amp;&amp; i + bound &lt; n &amp;&amp; s[i - bound] == s[i + bound]) bound++;</div><div class="line">					dp[i] = --bound;</div><div class="line">				&#125;</div><div class="line">			&#125;</div><div class="line">			<span class="keyword">else</span>&#123;</div><div class="line">				bound = <span class="number">0</span>;</div><div class="line">				<span class="keyword">while</span> (i - bound &gt;= <span class="number">0</span> &amp;&amp; i + bound &lt; n &amp;&amp; s[i - bound] == s[i + bound]) bound++;</div><div class="line">				center = i;</div><div class="line">				dp[i] = --bound;</div><div class="line">			&#125;</div><div class="line">			<span class="keyword">if</span>(dp[i] &gt; dp[maxid]) maxid = i;</div><div class="line">		&#125;</div><div class="line"></div><div class="line"></div><div class="line">		<span class="keyword">return</span> tmp.substr(maxid / <span class="number">2</span> - dp[maxid] / <span class="number">2</span>, dp[maxid]);</div><div class="line">	&#125;</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
+<h2 id="Solution-2"><a href="#Solution-2" class="headerlink" title="Solution 2"></a>Solution 2</h2><p>Dynamic Programming. Time complexity <code>O(n*n)</code>.</p>
+<h2 id="Code-2"><a href="#Code-2" class="headerlink" title="Code 2"></a>Code 2</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></div><div class="line"><span class="keyword">public</span>:</div><div class="line">    <span class="function"><span class="built_in">string</span> <span class="title">longestPalindrome</span><span class="params">(<span class="built_in">string</span> s)</span> </span>&#123;</div><div class="line">        <span class="keyword">int</span> n = s.length();</div><div class="line">        <span class="keyword">int</span> dp[<span class="number">1010</span>][<span class="number">1010</span>] = &#123;<span class="number">0</span>&#125;;</div><div class="line">        </div><div class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n; i ++)&#123;</div><div class="line">            dp[i][i] = <span class="number">1</span>;</div><div class="line">            <span class="keyword">if</span>(i &lt; n &amp;&amp; s[i<span class="number">-1</span>] == s[i]) </div><div class="line">                dp[i][i+<span class="number">1</span>] = <span class="number">1</span>;</div><div class="line">        &#125;</div><div class="line">        </div><div class="line">        <span class="keyword">int</span> maxid, maxlen = <span class="number">0</span>;</div><div class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = n; i &gt;= <span class="number">1</span>; i --)&#123;</div><div class="line">            <span class="keyword">for</span>(<span class="keyword">int</span> j = i + <span class="number">2</span>; j &lt;= n; j ++)&#123;</div><div class="line">                dp[i][j] = dp[i+<span class="number">1</span>][j<span class="number">-1</span>] &amp;&amp; s[i<span class="number">-1</span>] == s[j<span class="number">-1</span>];</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">        </div><div class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n; i ++)&#123;</div><div class="line">            <span class="keyword">for</span>(<span class="keyword">int</span> j = i; j &lt;= n; j ++)&#123;</div><div class="line">                <span class="keyword">if</span>(dp[i][j] &amp;&amp; j - i + <span class="number">1</span> &gt; maxlen)&#123;</div><div class="line">                    maxlen = j - i + <span class="number">1</span>;</div><div class="line">                    maxid = i;</div><div class="line">                &#125;</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">return</span> s.substr(maxid - <span class="number">1</span>, maxlen);</div><div class="line">    &#125;</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="https://crazyxy.github.io/2016/10/13/LeetCode-55-Jump-Game/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Yan Xue">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Crazyxy is Coding">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2016/10/13/LeetCode-55-Jump-Game/" itemprop="url">LeetCode 55 - Jump Game</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2016-10-13T19:13:08+08:00">
+                2016-10-13
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2016/10/13/LeetCode-55-Jump-Game/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="2016/10/13/LeetCode-55-Jump-Game/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="Solution"><a href="#Solution" class="headerlink" title="Solution"></a>Solution</h2><p>Greedy. </p>
+<h2 id="Code"><a href="#Code" class="headerlink" title="Code"></a>Code</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></div><div class="line"><span class="keyword">public</span>:</div><div class="line">    <span class="function"><span class="keyword">bool</span> <span class="title">canJump</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; nums)</span> </span>&#123;</div><div class="line">        <span class="keyword">int</span> n = nums.size(), right = nums[<span class="number">0</span>];</div><div class="line">        </div><div class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>; i &lt; n; i ++)&#123;</div><div class="line">            <span class="keyword">if</span>(i &gt; right) <span class="keyword">return</span> <span class="literal">false</span>;</div><div class="line">            <span class="keyword">else</span>&#123;</div><div class="line">                right = max(right, i + nums[i]);</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">return</span> <span class="literal">true</span>;</div><div class="line">    &#125;</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="https://crazyxy.github.io/2016/10/13/LeetCode-71-Simplify-Path/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Yan Xue">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Crazyxy is Coding">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2016/10/13/LeetCode-71-Simplify-Path/" itemprop="url">LeetCode 71 - Simplify Path</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2016-10-13T18:34:02+08:00">
+                2016-10-13
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2016/10/13/LeetCode-71-Simplify-Path/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="2016/10/13/LeetCode-71-Simplify-Path/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="Solution"><a href="#Solution" class="headerlink" title="Solution"></a>Solution</h2><p>Stack. </p>
+<h2 id="Code"><a href="#Code" class="headerlink" title="Code"></a>Code</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></div><div class="line"><span class="keyword">public</span>:</div><div class="line">    <span class="function"><span class="built_in">string</span> <span class="title">simplifyPath</span><span class="params">(<span class="built_in">string</span> path)</span> </span>&#123;</div><div class="line">        <span class="keyword">int</span> n = path.length(), i = <span class="number">1</span>;</div><div class="line">        <span class="built_in">stack</span>&lt;<span class="built_in">string</span>&gt; stk;</div><div class="line">        stk.push(<span class="string">"/"</span>);</div><div class="line">        <span class="keyword">while</span>(i &lt; n)&#123;</div><div class="line">            <span class="keyword">while</span>(i &lt; n &amp;&amp; path[i] == <span class="string">'/'</span>) i ++;</div><div class="line">            <span class="keyword">if</span>(i == n) <span class="keyword">break</span>;</div><div class="line">            <span class="keyword">int</span> j = i;</div><div class="line">            <span class="keyword">while</span>(j &lt; n &amp;&amp; path[j] != <span class="string">'/'</span>) j ++;</div><div class="line">            <span class="built_in">string</span> dir = path.substr(i, j - i);</div><div class="line">            <span class="keyword">if</span>(dir == <span class="string">".."</span>) &#123;</div><div class="line">                <span class="keyword">if</span>(stk.size() &gt; <span class="number">1</span>)</div><div class="line">                    stk.pop();</div><div class="line">            &#125;<span class="keyword">else</span> <span class="keyword">if</span>(dir != <span class="string">"."</span>) stk.push(dir);</div><div class="line">            i = j;</div><div class="line">        &#125;</div><div class="line">        <span class="built_in">string</span> res;</div><div class="line">        <span class="keyword">while</span>(!stk.empty())&#123;</div><div class="line">            <span class="built_in">string</span> dir = stk.top();</div><div class="line">            stk.pop();</div><div class="line">            <span class="keyword">if</span>(!stk.empty() &amp;&amp; !res.empty())</div><div class="line">                res = dir + <span class="string">"/"</span> + res;</div><div class="line">            <span class="keyword">else</span></div><div class="line">                res = dir + res;</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">return</span> res;</div><div class="line">    &#125;</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="https://crazyxy.github.io/2016/10/13/LeetCode-232-Implement-Queue-using-Stacks/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Yan Xue">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Crazyxy is Coding">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2016/10/13/LeetCode-232-Implement-Queue-using-Stacks/" itemprop="url">LeetCode 232 - Implement Queue using Stacks</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2016-10-13T16:59:24+08:00">
+                2016-10-13
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2016/10/13/LeetCode-232-Implement-Queue-using-Stacks/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="2016/10/13/LeetCode-232-Implement-Queue-using-Stacks/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="Solution"><a href="#Solution" class="headerlink" title="Solution"></a>Solution</h2><p>Using two stacks. Push element to one stack and retrieve the element from another stack.</p>
+<h2 id="Code"><a href="#Code" class="headerlink" title="Code"></a>Code</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Queue</span> &#123;</span></div><div class="line"><span class="keyword">public</span>:</div><div class="line">    <span class="built_in">stack</span>&lt;<span class="keyword">int</span>&gt; a, b;</div><div class="line">    <span class="comment">// Push element x to the back of queue.</span></div><div class="line">    <span class="function"><span class="keyword">void</span> <span class="title">push</span><span class="params">(<span class="keyword">int</span> x)</span> </span>&#123;</div><div class="line">        a.push(x);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="comment">// Removes the element from in front of queue.</span></div><div class="line">    <span class="function"><span class="keyword">void</span> <span class="title">pop</span><span class="params">(<span class="keyword">void</span>)</span> </span>&#123;</div><div class="line">        <span class="keyword">if</span>(b.empty())&#123;</div><div class="line">            <span class="keyword">while</span>(!a.empty())&#123;</div><div class="line">                b.push(a.top());</div><div class="line">                a.pop();</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">        b.pop();</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="comment">// Get the front element.</span></div><div class="line">    <span class="function"><span class="keyword">int</span> <span class="title">peek</span><span class="params">(<span class="keyword">void</span>)</span> </span>&#123;</div><div class="line">        <span class="keyword">if</span>(b.empty())&#123;</div><div class="line">            <span class="keyword">while</span>(!a.empty())&#123;</div><div class="line">                b.push(a.top());</div><div class="line">                a.pop();</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">return</span> b.top();</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="comment">// Return whether the queue is empty.</span></div><div class="line">    <span class="function"><span class="keyword">bool</span> <span class="title">empty</span><span class="params">(<span class="keyword">void</span>)</span> </span>&#123;</div><div class="line">        <span class="keyword">return</span> a.empty() &amp;&amp; b.empty();</div><div class="line">    &#125;</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
   </section>
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/2/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span><a class="page-number" href="/page/4/">4</a><span class="space">&hellip;</span><a class="page-number" href="/page/8/">8</a><a class="extend next" rel="next" href="/page/4/"><i class="fa fa-angle-right"></i></a>
+    <a class="extend prev" rel="prev" href="/page/2/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span><a class="page-number" href="/page/4/">4</a><span class="space">&hellip;</span><a class="page-number" href="/page/7/">7</a><a class="extend next" rel="next" href="/page/4/"><i class="fa fa-angle-right"></i></a>
   </nav>
 
 

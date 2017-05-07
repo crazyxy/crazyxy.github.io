@@ -43,80 +43,10 @@
   </entry>
   
   <entry>
-    <title>LeetCode 223 - Rectangle Area</title>
-    <link href="https://crazyxy.github.io/2016/10/20/LeetCode-223-Rectangle-Area/"/>
-    <id>https://crazyxy.github.io/2016/10/20/LeetCode-223-Rectangle-Area/</id>
-    <published>2016-10-20T09:45:42.000Z</published>
-    <updated>2017-05-06T13:51:11.000Z</updated>
-    
-    <summary type="html">
-    
-    </summary>
-    
-    
-  </entry>
-  
-  <entry>
     <title>LeetCode 116 - Populating Next Right Pointers in Each Node</title>
     <link href="https://crazyxy.github.io/2016/10/20/LeetCode-116-Populating-Next-Right-Pointers-in-Each-Node/"/>
     <id>https://crazyxy.github.io/2016/10/20/LeetCode-116-Populating-Next-Right-Pointers-in-Each-Node/</id>
     <published>2016-10-20T06:11:03.000Z</published>
-    <updated>2017-05-06T13:51:11.000Z</updated>
-    
-    <summary type="html">
-    
-    </summary>
-    
-    
-  </entry>
-  
-  <entry>
-    <title>LeetCode 88 - Merge Sorted Array</title>
-    <link href="https://crazyxy.github.io/2016/10/20/LeetCode-88-Merge-Sorted-Array/"/>
-    <id>https://crazyxy.github.io/2016/10/20/LeetCode-88-Merge-Sorted-Array/</id>
-    <published>2016-10-20T05:59:59.000Z</published>
-    <updated>2017-05-06T13:51:11.000Z</updated>
-    
-    <summary type="html">
-    
-    </summary>
-    
-    
-  </entry>
-  
-  <entry>
-    <title>LeetCode 9 - Palindrome Number</title>
-    <link href="https://crazyxy.github.io/2016/10/20/LeetCode-9-Palindrome-Number/"/>
-    <id>https://crazyxy.github.io/2016/10/20/LeetCode-9-Palindrome-Number/</id>
-    <published>2016-10-20T05:49:03.000Z</published>
-    <updated>2017-05-06T13:51:11.000Z</updated>
-    
-    <summary type="html">
-    
-    </summary>
-    
-    
-  </entry>
-  
-  <entry>
-    <title>LeetCode 236 - Lowest Common Ancestor of a Binary Tree</title>
-    <link href="https://crazyxy.github.io/2016/10/20/LeetCode-236-Lowest-Common-Ancestor-of-a-Binary-Tree/"/>
-    <id>https://crazyxy.github.io/2016/10/20/LeetCode-236-Lowest-Common-Ancestor-of-a-Binary-Tree/</id>
-    <published>2016-10-20T04:00:36.000Z</published>
-    <updated>2017-05-06T13:51:11.000Z</updated>
-    
-    <summary type="html">
-    
-    </summary>
-    
-    
-  </entry>
-  
-  <entry>
-    <title> LeetCode 235 - Lowest Common Ancestor of a Binary Search Tree</title>
-    <link href="https://crazyxy.github.io/2016/10/20/LeetCode-235-Lowest-Common-Ancestor-of-a-Binary-Search-Tree/"/>
-    <id>https://crazyxy.github.io/2016/10/20/LeetCode-235-Lowest-Common-Ancestor-of-a-Binary-Search-Tree/</id>
-    <published>2016-10-20T03:56:17.000Z</published>
     <updated>2017-05-06T13:51:11.000Z</updated>
     
     <summary type="html">
@@ -423,6 +353,113 @@
     
       &lt;h2 id=&quot;Solution&quot;&gt;&lt;a href=&quot;#Solution&quot; class=&quot;headerlink&quot; title=&quot;Solution&quot;&gt;&lt;/a&gt;Solution&lt;/h2&gt;&lt;p&gt;DFS or Union Set.&lt;/p&gt;
 &lt;h2 id=&quot;Code&quot;&gt;&lt;a href=&quot;#
+    
+    </summary>
+    
+    
+      <category term="LeetCode" scheme="https://crazyxy.github.io/tags/LeetCode/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>LeetCode 423 - Reconstruct Original Digits from English</title>
+    <link href="https://crazyxy.github.io/2016/10/18/LeetCode-423-Reconstruct-Original-Digits-from-English/"/>
+    <id>https://crazyxy.github.io/2016/10/18/LeetCode-423-Reconstruct-Original-Digits-from-English/</id>
+    <published>2016-10-18T05:27:22.000Z</published>
+    <updated>2017-05-06T16:12:48.000Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="Solution"><a href="#Solution" class="headerlink" title="Solution"></a>Solution</h2><p>Extract feature character of each string. For example, <code>z</code> for <code>one</code>.</p>
+<h2 id="Code"><a href="#Code" class="headerlink" title="Code"></a>Code</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></div><div class="line"><span class="keyword">public</span>:</div><div class="line">    <span class="function"><span class="built_in">string</span> <span class="title">originalDigits</span><span class="params">(<span class="built_in">string</span> s)</span> </span>&#123;</div><div class="line">        <span class="built_in">string</span> str[] = &#123;<span class="string">"zero"</span>, <span class="string">"one"</span>, <span class="string">"two"</span>, <span class="string">"three"</span>, <span class="string">"four"</span>, <span class="string">"five"</span>, <span class="string">"six"</span>, <span class="string">"seven"</span>, <span class="string">"eight"</span>, <span class="string">"nine"</span>&#125;;</div><div class="line">        <span class="keyword">int</span> cnt[<span class="number">26</span>] = &#123;<span class="number">0</span>&#125;, x[<span class="number">10</span>] = &#123;<span class="number">0</span>&#125;;</div><div class="line">        <span class="keyword">for</span>(<span class="keyword">auto</span> ch : s) cnt[ch-<span class="string">'a'</span>] ++;</div><div class="line">        </div><div class="line">        <span class="built_in">vector</span>&lt;pair&lt;<span class="keyword">int</span>, <span class="keyword">char</span>&gt;&gt; vec &#123;&#123;<span class="number">0</span>, <span class="string">'z'</span>&#125;, &#123;<span class="number">2</span>, <span class="string">'w'</span>&#125;, &#123;<span class="number">4</span>, <span class="string">'u'</span>&#125;, &#123;<span class="number">6</span>, <span class="string">'x'</span>&#125;, &#123;<span class="number">8</span>, <span class="string">'g'</span>&#125;, &#123;<span class="number">1</span>, <span class="string">'o'</span>&#125;, &#123;<span class="number">3</span>, <span class="string">'r'</span>&#125;, &#123;<span class="number">5</span>, <span class="string">'f'</span>&#125;, &#123;<span class="number">7</span>, <span class="string">'v'</span>&#125;, &#123;<span class="number">9</span>, <span class="string">'i'</span>&#125;&#125;;</div><div class="line">        </div><div class="line">        <span class="keyword">for</span>(<span class="keyword">auto</span> p : vec)&#123;</div><div class="line">            x[p.first] += cnt[p.second-<span class="string">'a'</span>];</div><div class="line">            <span class="keyword">for</span>(<span class="keyword">auto</span> ch : str[p.first]) cnt[ch-<span class="string">'a'</span>] -= x[p.first];</div><div class="line">        &#125;</div><div class="line">        </div><div class="line">        <span class="built_in">string</span> res;</div><div class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">10</span>; i ++)&#123;</div><div class="line">            res += <span class="built_in">string</span>(x[i], <span class="string">'0'</span>+i);</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">return</span> res;</div><div class="line">    &#125;</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h2 id=&quot;Solution&quot;&gt;&lt;a href=&quot;#Solution&quot; class=&quot;headerlink&quot; title=&quot;Solution&quot;&gt;&lt;/a&gt;Solution&lt;/h2&gt;&lt;p&gt;Extract feature character of each string. For 
+    
+    </summary>
+    
+    
+      <category term="LeetCode" scheme="https://crazyxy.github.io/tags/LeetCode/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>LeetCode 424 - Longest Repeating Character Replacement</title>
+    <link href="https://crazyxy.github.io/2016/10/18/LeetCode-424-Longest-Repeating-Character-Replacement/"/>
+    <id>https://crazyxy.github.io/2016/10/18/LeetCode-424-Longest-Repeating-Character-Replacement/</id>
+    <published>2016-10-18T03:08:25.000Z</published>
+    <updated>2017-05-06T16:12:48.000Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="Solution"><a href="#Solution" class="headerlink" title="Solution"></a>Solution</h2><p>Two pointers. For each slide window with length <code>n</code>, if <code>n-maxcnt &lt;= k</code>, the string in the window can be transformed into wanted string. In this case, we move the right pointer to probe larger window size; otherwise, we reduce the window size by moving the left pointer.</p>
+<h2 id="Code"><a href="#Code" class="headerlink" title="Code"></a>Code</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></div><div class="line"><span class="keyword">public</span>:</div><div class="line">    <span class="function"><span class="keyword">int</span> <span class="title">characterReplacement</span><span class="params">(<span class="built_in">string</span> s, <span class="keyword">int</span> k)</span> </span>&#123;</div><div class="line">        <span class="keyword">int</span> n = s.length(), cnt[<span class="number">26</span>] = &#123;<span class="number">0</span>&#125;, i = <span class="number">0</span>, j = <span class="number">0</span>, res = <span class="number">0</span>;</div><div class="line">        <span class="keyword">bool</span> move = <span class="literal">true</span>;</div><div class="line">        </div><div class="line">        <span class="keyword">while</span>(i &lt; n)&#123;</div><div class="line">            <span class="keyword">if</span>(move) cnt[s[i]-<span class="string">'A'</span>] ++;    </div><div class="line">            move = <span class="literal">false</span>;</div><div class="line">            </div><div class="line">            <span class="keyword">int</span> maxcnt = <span class="number">0</span>;</div><div class="line">            <span class="keyword">for</span>(<span class="keyword">int</span> x = <span class="number">0</span>; x &lt; <span class="number">26</span>; x ++) maxcnt = max(maxcnt, cnt[x]);</div><div class="line">            </div><div class="line">            <span class="keyword">if</span>(maxcnt &gt;= i - j + <span class="number">1</span> - k)&#123;</div><div class="line">                res = max(res, i - j + <span class="number">1</span>);</div><div class="line">                i ++;</div><div class="line">                move = <span class="literal">true</span>;</div><div class="line">            &#125;<span class="keyword">else</span>&#123;</div><div class="line">                cnt[s[j++]-<span class="string">'A'</span>]--;</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">return</span> res;</div><div class="line">    &#125;</div><div class="line">&#125;;</div></pre></td></tr></table></figure>]]></content>
+    
+    <summary type="html">
+    
+      &lt;h2 id=&quot;Solution&quot;&gt;&lt;a href=&quot;#Solution&quot; class=&quot;headerlink&quot; title=&quot;Solution&quot;&gt;&lt;/a&gt;Solution&lt;/h2&gt;&lt;p&gt;Two pointers. For each slide window with lengt
+    
+    </summary>
+    
+    
+      <category term="LeetCode" scheme="https://crazyxy.github.io/tags/LeetCode/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>LeetCode 421 - Maximum XOR of Two Numbers in an Array</title>
+    <link href="https://crazyxy.github.io/2016/10/17/LeetCode-421-Maximum-XOR-of-Two-Numbers-in-an-Array/"/>
+    <id>https://crazyxy.github.io/2016/10/17/LeetCode-421-Maximum-XOR-of-Two-Numbers-in-an-Array/</id>
+    <published>2016-10-17T14:01:11.000Z</published>
+    <updated>2017-05-06T16:12:48.000Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="Solution"><a href="#Solution" class="headerlink" title="Solution"></a>Solution</h2><p>Trie. Build trie for the numbers in the array. For each number <code>x</code> in the array, find the number <code>y</code> which make <code>x ^ y</code> maximum. The time complexity is <code>O(n log L)</code> where <code>L</code> is the maximum number.</p>
+<h2 id="Code"><a href="#Code" class="headerlink" title="Code"></a>Code</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; toBits(<span class="keyword">int</span> val)&#123;</div><div class="line">    <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; bits(<span class="number">32</span>, <span class="number">0</span>);</div><div class="line">    <span class="keyword">int</span> id = <span class="number">31</span>;</div><div class="line">    <span class="keyword">while</span>(val)&#123;</div><div class="line">        bits[id--] = val &amp; <span class="number">1</span>;</div><div class="line">        val &gt;&gt;= <span class="number">1</span>;</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">return</span> bits;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="class"><span class="keyword">struct</span> <span class="title">TrieNode</span>&#123;</span></div><div class="line">    TrieNode()&#123;</div><div class="line">        next[<span class="number">0</span>] = next[<span class="number">1</span>] = <span class="literal">NULL</span>;</div><div class="line">    &#125;</div><div class="line">    TrieNode *next[<span class="number">2</span>];</div><div class="line">&#125;;</div><div class="line"></div><div class="line"><span class="class"><span class="keyword">struct</span> <span class="title">Trie</span>&#123;</span></div><div class="line">    TrieNode *root;</div><div class="line">    Trie()&#123;root = <span class="keyword">new</span> TrieNode();&#125;</div><div class="line">    </div><div class="line">    <span class="function"><span class="keyword">void</span> <span class="title">insert</span><span class="params">(<span class="keyword">int</span> val)</span></span>&#123;</div><div class="line">        <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; bits = toBits(val);</div><div class="line">        <span class="keyword">auto</span> u = root;</div><div class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">32</span>; i ++)&#123;</div><div class="line">            <span class="keyword">if</span>(!u-&gt;next[bits[i]]) u-&gt;next[bits[i]] = <span class="keyword">new</span> TrieNode();</div><div class="line">            u = u-&gt;next[bits[i]];</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125;;</div><div class="line"></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></div><div class="line"><span class="keyword">public</span>:</div><div class="line">    <span class="function"><span class="keyword">int</span> <span class="title">findMaximumXOR</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; nums)</span> </span>&#123;</div><div class="line">        <span class="keyword">int</span> n = nums.size(), res = <span class="number">0</span>;</div><div class="line">        Trie tree;</div><div class="line">        <span class="keyword">for</span>(<span class="keyword">auto</span> num : nums) tree.insert(num);</div><div class="line">        </div><div class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; n; i ++)&#123;</div><div class="line">            <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; bits = toBits(nums[i]);</div><div class="line">            </div><div class="line">            <span class="keyword">auto</span> a = tree.root, b = a;</div><div class="line">            <span class="keyword">int</span> x = <span class="number">0</span>;</div><div class="line">            <span class="keyword">for</span>(<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; <span class="number">32</span>; j ++)&#123;</div><div class="line">                a = a-&gt;next[bits[j]];</div><div class="line">                <span class="keyword">if</span>(b-&gt;next[(bits[j]+<span class="number">1</span>)%<span class="number">2</span>])&#123;</div><div class="line">                    b = b-&gt;next[(bits[j]+<span class="number">1</span>)%<span class="number">2</span>];</div><div class="line">                    x = x * <span class="number">2</span> + ((bits[j]+<span class="number">1</span>)%<span class="number">2</span>);</div><div class="line">                &#125;</div><div class="line">                <span class="keyword">else</span>&#123;</div><div class="line">                    b = b-&gt;next[bits[j]];</div><div class="line">                    x = x * <span class="number">2</span> + bits[j];</div><div class="line">                &#125;</div><div class="line">            &#125;</div><div class="line">            res = max(x ^ nums[i], res);</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">return</span> res;</div><div class="line">    &#125;</div><div class="line">&#125;;</div></pre></td></tr></table></figure>]]></content>
+    
+    <summary type="html">
+    
+      &lt;h2 id=&quot;Solution&quot;&gt;&lt;a href=&quot;#Solution&quot; class=&quot;headerlink&quot; title=&quot;Solution&quot;&gt;&lt;/a&gt;Solution&lt;/h2&gt;&lt;p&gt;Trie. Build trie for the numbers in the array.
+    
+    </summary>
+    
+    
+      <category term="LeetCode" scheme="https://crazyxy.github.io/tags/LeetCode/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>LeetCode 189 - Rotate Array</title>
+    <link href="https://crazyxy.github.io/2016/10/14/LeetCode-189-Rotate-Array/"/>
+    <id>https://crazyxy.github.io/2016/10/14/LeetCode-189-Rotate-Array/</id>
+    <published>2016-10-14T14:21:22.000Z</published>
+    <updated>2017-05-06T16:12:48.000Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="Solution"><a href="#Solution" class="headerlink" title="Solution"></a>Solution</h2><p>Reverse the first <code>n-k</code> numbers and then reverser the last <code>k</code> numbers, at last reverse the array.</p>
+<h2 id="Code"><a href="#Code" class="headerlink" title="Code"></a>Code</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></div><div class="line"><span class="keyword">public</span>:</div><div class="line">    <span class="function"><span class="keyword">void</span> <span class="title">rotate</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; nums, <span class="keyword">int</span> k)</span> </span>&#123;</div><div class="line">        k %= nums.size();</div><div class="line">        k = nums.size() - k;</div><div class="line">        reverse(nums.begin(), nums.begin()+k);</div><div class="line">        reverse(nums.begin()+k, nums.end());</div><div class="line">        reverse(nums.begin(), nums.end());</div><div class="line">    &#125;</div><div class="line">&#125;;</div></pre></td></tr></table></figure>]]></content>
+    
+    <summary type="html">
+    
+      &lt;h2 id=&quot;Solution&quot;&gt;&lt;a href=&quot;#Solution&quot; class=&quot;headerlink&quot; title=&quot;Solution&quot;&gt;&lt;/a&gt;Solution&lt;/h2&gt;&lt;p&gt;Reverse the first &lt;code&gt;n-k&lt;/code&gt; numbers and
+    
+    </summary>
+    
+    
+      <category term="LeetCode" scheme="https://crazyxy.github.io/tags/LeetCode/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>LeetCode 8 - String to Integer (atoi)</title>
+    <link href="https://crazyxy.github.io/2016/10/14/LeetCode-8-String-to-Integer-atoi/"/>
+    <id>https://crazyxy.github.io/2016/10/14/LeetCode-8-String-to-Integer-atoi/</id>
+    <published>2016-10-14T14:19:13.000Z</published>
+    <updated>2017-05-06T16:12:48.000Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="Solution"><a href="#Solution" class="headerlink" title="Solution"></a>Solution</h2><p>Implementation.</p>
+<h2 id="Code"><a href="#Code" class="headerlink" title="Code"></a>Code</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></div><div class="line"><span class="keyword">public</span>:</div><div class="line">    <span class="function"><span class="keyword">int</span> <span class="title">myAtoi</span><span class="params">(<span class="built_in">string</span> str)</span> </span>&#123;</div><div class="line">        <span class="keyword">int</span> n = str.length(), i = <span class="number">0</span>, s = <span class="number">0</span>, pos = <span class="number">1</span>;</div><div class="line">        <span class="keyword">while</span>(i &lt; n &amp;&amp; str[i] == <span class="string">' '</span>) i ++;</div><div class="line">        <span class="keyword">if</span>(str[i] != <span class="string">'-'</span> &amp;&amp; str[i] != <span class="string">'+'</span> &amp;&amp; !<span class="built_in">isdigit</span>(str[i])) <span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">        <span class="keyword">if</span>(str[i] == <span class="string">'-'</span>)&#123;</div><div class="line">            pos = <span class="number">-1</span>;</div><div class="line">            i ++;</div><div class="line">        &#125;<span class="keyword">else</span> <span class="keyword">if</span>(str[i] == <span class="string">'+'</span>) i ++;</div><div class="line">        </div><div class="line">        s = i;</div><div class="line">        <span class="keyword">while</span>(i &lt; n &amp;&amp; <span class="built_in">isdigit</span>(str[i])) i ++;</div><div class="line">        str = str.substr(s, i - s);</div><div class="line">        </div><div class="line">        n = str.length();</div><div class="line">        i = <span class="number">0</span>;</div><div class="line">        <span class="keyword">long</span> <span class="keyword">long</span> res = <span class="number">0</span>;</div><div class="line">        <span class="keyword">while</span>(i &lt; n)&#123;</div><div class="line">            res = res * <span class="number">10</span> + str[i] - <span class="string">'0'</span>;</div><div class="line">            <span class="keyword">if</span>(pos == <span class="number">1</span> &amp;&amp; res &gt; INT_MAX) <span class="keyword">return</span> INT_MAX;</div><div class="line">            <span class="keyword">if</span>(pos == <span class="number">-1</span> &amp;&amp; res * <span class="number">-1</span> &lt; INT_MIN) <span class="keyword">return</span> INT_MIN;</div><div class="line">            i ++;</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">return</span> res * pos;</div><div class="line">    &#125;</div><div class="line">&#125;;</div></pre></td></tr></table></figure>]]></content>
+    
+    <summary type="html">
+    
+      &lt;h2 id=&quot;Solution&quot;&gt;&lt;a href=&quot;#Solution&quot; class=&quot;headerlink&quot; title=&quot;Solution&quot;&gt;&lt;/a&gt;Solution&lt;/h2&gt;&lt;p&gt;Implementation.&lt;/p&gt;
+&lt;h2 id=&quot;Code&quot;&gt;&lt;a href=&quot;#Co
     
     </summary>
     
