@@ -250,6 +250,129 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="https://crazyxy.github.io/2016/10/09/LeetCode-341-Flatten-Nested-List-Iterator/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Yan Xue">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Crazyxy is Coding">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2016/10/09/LeetCode-341-Flatten-Nested-List-Iterator/" itemprop="url">LeetCode 341 - Flatten Nested List Iterator</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2016-10-09T16:56:40+08:00">
+                2016-10-09
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2016/10/09/LeetCode-341-Flatten-Nested-List-Iterator/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="2016/10/09/LeetCode-341-Flatten-Nested-List-Iterator/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="Solution"><a href="#Solution" class="headerlink" title="Solution"></a>Solution</h2><p>利用栈实现嵌套。每次发现栈顶不是一个整数就对栈顶的链表展开。</p>
+<h2 id="Code"><a href="#Code" class="headerlink" title="Code"></a>Code</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/**</span></div><div class="line"> * // This is the interface that allows for creating nested lists.</div><div class="line"> * // You should not implement it, or speculate about its implementation</div><div class="line"> * class NestedInteger &#123;</div><div class="line"> *   public:</div><div class="line"> *     // Return true if this NestedInteger holds a single integer, rather than a nested list.</div><div class="line"> *     bool isInteger() const;</div><div class="line"> *</div><div class="line"> *     // Return the single integer that this NestedInteger holds, if it holds a single integer</div><div class="line"> *     // The result is undefined if this NestedInteger holds a nested list</div><div class="line"> *     int getInteger() const;</div><div class="line"> *</div><div class="line"> *     // Return the nested list that this NestedInteger holds, if it holds a nested list</div><div class="line"> *     // The result is undefined if this NestedInteger holds a single integer</div><div class="line"> *     const vector&lt;NestedInteger&gt; &amp;getList() const;</div><div class="line"> * &#125;;</div><div class="line"> */</div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">NestedIterator</span> &#123;</span></div><div class="line"><span class="keyword">public</span>:</div><div class="line">    <span class="built_in">stack</span>&lt;NestedInteger&gt; stk;</div><div class="line">    NestedIterator(<span class="built_in">vector</span>&lt;NestedInteger&gt; &amp;nestedList) &#123;</div><div class="line">        <span class="keyword">int</span> n = nestedList.size();</div><div class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = n - <span class="number">1</span>; i &gt;= <span class="number">0</span>; i --) stk.push(nestedList[i]);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">int</span> <span class="title">next</span><span class="params">()</span> </span>&#123;</div><div class="line">        <span class="keyword">auto</span> tmp = stk.top();</div><div class="line">        stk.pop();</div><div class="line">        <span class="keyword">return</span> tmp.getInteger();</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">bool</span> <span class="title">hasNext</span><span class="params">()</span> </span>&#123;</div><div class="line">        <span class="keyword">while</span>(!stk.empty() &amp;&amp; !stk.top().isInteger())&#123;</div><div class="line">            <span class="keyword">auto</span> tmp = stk.top();</div><div class="line">            stk.pop();</div><div class="line">            <span class="keyword">auto</span> <span class="built_in">list</span> = tmp.getList();</div><div class="line">            <span class="keyword">int</span> n = <span class="built_in">list</span>.size();</div><div class="line">            <span class="keyword">for</span>(<span class="keyword">int</span> i = n - <span class="number">1</span>; i &gt;= <span class="number">0</span>; i --) </div><div class="line">                stk.push(<span class="built_in">list</span>[i]);</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">return</span> !stk.empty();</div><div class="line">    &#125;</div><div class="line">&#125;;</div><div class="line"></div><div class="line"><span class="comment">/**</span></div><div class="line"> * Your NestedIterator object will be instantiated and called as such:</div><div class="line"> * NestedIterator i(nestedList);</div><div class="line"> * while (i.hasNext()) cout &lt;&lt; i.next();</div><div class="line"> */</div></pre></td></tr></table></figure>
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
     <link itemprop="mainEntityOfPage" href="https://crazyxy.github.io/2016/10/09/LeetCode-18-4Sum/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1354,129 +1477,6 @@
           
             <h2 id="Solution"><a href="#Solution" class="headerlink" title="Solution"></a>Solution</h2><p>实现题。为了方便Cache更新，用双向链表保存当前Cache中<code>{key, value}</code>。为了方便判断当前的<code>key</code>是否在Cache中，用<code>unordered_map</code>保存<code>key</code>和链表节点的映射关系。</p>
 <h2 id="Code"><a href="#Code" class="headerlink" title="Code"></a>Code</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div><div class="line">95</div><div class="line">96</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">LISTNode</span>&#123;</span></div><div class="line"><span class="keyword">public</span>:</div><div class="line">    <span class="keyword">int</span> key, val;</div><div class="line">    LISTNode *pre, *next;</div><div class="line">    LISTNode(<span class="keyword">int</span> key, <span class="keyword">int</span> val): key(key), val(val), pre(<span class="literal">NULL</span>), next(<span class="literal">NULL</span>)&#123;</div><div class="line">    &#125;</div><div class="line">&#125;;</div><div class="line"></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">List</span>&#123;</span></div><div class="line"><span class="keyword">public</span>:</div><div class="line">    LISTNode *head, *tail;</div><div class="line">    List() : head(<span class="literal">NULL</span>), tail(<span class="literal">NULL</span>)&#123;</div><div class="line">    &#125;</div><div class="line">    </div><div class="line">    <span class="function"><span class="keyword">void</span> <span class="title">insert</span><span class="params">(LISTNode *node)</span></span>&#123;</div><div class="line">        <span class="keyword">if</span>(!head) head = tail = node;</div><div class="line">        <span class="keyword">else</span>&#123;</div><div class="line">            node-&gt;next = head;</div><div class="line">            head-&gt;pre = node;</div><div class="line">            head = node;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">    </div><div class="line">    <span class="function"><span class="keyword">void</span> <span class="title">remove</span><span class="params">()</span></span>&#123;</div><div class="line">        <span class="keyword">if</span>(head == tail)&#123;</div><div class="line">            <span class="keyword">delete</span> head;</div><div class="line">            head = tail = <span class="literal">NULL</span>;</div><div class="line">        &#125;<span class="keyword">else</span>&#123;</div><div class="line">            <span class="keyword">auto</span> t = tail-&gt;pre;</div><div class="line">            <span class="keyword">delete</span> tail;</div><div class="line">            tail = t;</div><div class="line">            <span class="keyword">if</span>(tail) tail-&gt;next = <span class="literal">NULL</span>;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">    </div><div class="line">    <span class="function"><span class="keyword">void</span> <span class="title">erase</span><span class="params">(LISTNode *node)</span></span>&#123;</div><div class="line">        <span class="keyword">if</span>(head == tail)&#123;</div><div class="line">            assert(node == head);</div><div class="line">            head = tail = <span class="literal">NULL</span>;</div><div class="line">            <span class="keyword">return</span>;</div><div class="line">        &#125;</div><div class="line">        </div><div class="line">        <span class="keyword">if</span>(node == head)&#123;</div><div class="line">            head = node-&gt;next;</div><div class="line">            head-&gt;pre = node-&gt;next = <span class="literal">NULL</span>;</div><div class="line">        &#125;<span class="keyword">else</span> <span class="keyword">if</span>(node == tail)&#123;</div><div class="line">            tail = node-&gt;pre;</div><div class="line">            tail-&gt;next = node-&gt;pre = <span class="literal">NULL</span>;</div><div class="line">        &#125;<span class="keyword">else</span>&#123;</div><div class="line">            <span class="keyword">auto</span> u = node-&gt;pre, v = node-&gt;next;</div><div class="line">            u-&gt;next = v;</div><div class="line">            v-&gt;pre = u;</div><div class="line">            node-&gt;pre = node-&gt;next = <span class="literal">NULL</span>;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125;;</div><div class="line"></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">LRUCache</span>&#123;</span></div><div class="line"><span class="keyword">public</span>:</div><div class="line">    <span class="built_in">map</span>&lt;<span class="keyword">int</span>,LISTNode*&gt; m;</div><div class="line">    List <span class="built_in">list</span>;</div><div class="line">    <span class="keyword">int</span> cap, size;</div><div class="line">    LRUCache(<span class="keyword">int</span> capacity) &#123;</div><div class="line">        cap = capacity;</div><div class="line">        size = <span class="number">0</span>;</div><div class="line">    &#125;</div><div class="line">    </div><div class="line">    <span class="function"><span class="keyword">int</span> <span class="title">get</span><span class="params">(<span class="keyword">int</span> key)</span> </span>&#123;</div><div class="line">        <span class="keyword">if</span>(m.find(key) == m.end()) <span class="keyword">return</span> <span class="number">-1</span>;</div><div class="line">        <span class="keyword">int</span> ret = m[key]-&gt;val;</div><div class="line">        <span class="built_in">list</span>.erase(m[key]);</div><div class="line">        <span class="built_in">list</span>.insert(m[key]);</div><div class="line">        <span class="keyword">return</span> ret;</div><div class="line">    &#125;</div><div class="line">    </div><div class="line">    <span class="function"><span class="keyword">void</span> <span class="title">set</span><span class="params">(<span class="keyword">int</span> key, <span class="keyword">int</span> value)</span> </span>&#123;</div><div class="line">        <span class="keyword">if</span>(m.find(key) != m.end())&#123;</div><div class="line">            m[key]-&gt;val = value;</div><div class="line">            <span class="built_in">list</span>.erase(m[key]);</div><div class="line">            <span class="built_in">list</span>.insert(m[key]);</div><div class="line">        &#125;<span class="keyword">else</span>&#123;</div><div class="line">            <span class="keyword">if</span>(size &lt; cap)&#123;</div><div class="line">                size ++;</div><div class="line">            &#125;<span class="keyword">else</span>&#123;</div><div class="line">                <span class="keyword">int</span> x = <span class="built_in">list</span>.tail-&gt;key;</div><div class="line">                m.erase(x);</div><div class="line">                <span class="built_in">list</span>.remove();</div><div class="line">				</div><div class="line">            &#125;</div><div class="line">            </div><div class="line">            LISTNode *node = <span class="keyword">new</span> LISTNode(key, value);</div><div class="line">            m[key] = node;</div><div class="line">            <span class="built_in">list</span>.insert(node);</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="https://crazyxy.github.io/2016/09/14/LeetCode-391-Perfect-Rectangle/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Yan Xue">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Crazyxy is Coding">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2016/09/14/LeetCode-391-Perfect-Rectangle/" itemprop="url">LeetCode 391 - Perfect Rectangle</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2016-09-14T14:32:31+08:00">
-                2016-09-14
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2016/09/14/LeetCode-391-Perfect-Rectangle/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count"
-                        data-disqus-identifier="2016/09/14/LeetCode-391-Perfect-Rectangle/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h2 id="Solution"><a href="#Solution" class="headerlink" title="Solution"></a>Solution</h2><p>首先根据给出的数组算出最小和最大的<code>x</code>与<code>y</code>，分别计为<code>minx</code>，<code>maxx</code>，<code>miny</code>，<code>maxy</code>，恰好完全覆盖的必要条件之一就是小矩形的面积和等于<code>(maxx-minx)*(maxy-miny)</code>。其次满足了第一个条件并不一定是完全覆盖，可能有两个矩形有重合，因此还需要其他的条件。<br>通过对矩形顶点的分类辅助判断。一个完全覆盖的矩形内部的点有三种状态，分别是：只有一个矩形以之为顶角；两个矩形以之为顶角；四个矩形以之为顶角。所以利用<code>set</code>将出现超过一次的顶点都去除，剩下的就是四个顶点。</p>
-<h2 id="Code"><a href="#Code" class="headerlink" title="Code"></a>Code</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></div><div class="line"><span class="keyword">public</span>:</div><div class="line">    <span class="function"><span class="keyword">bool</span> <span class="title">isRectangleCover</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&gt;&amp; rect)</span> </span>&#123;</div><div class="line">        <span class="built_in">unordered_set</span>&lt;<span class="built_in">string</span>&gt; us;</div><div class="line">        </div><div class="line">        <span class="keyword">int</span> sum = <span class="number">0</span>;</div><div class="line">        <span class="keyword">int</span> minx, maxx, miny, maxy;</div><div class="line">        minx = miny = INT_MAX;</div><div class="line">        maxx = maxy = INT_MIN;</div><div class="line">        <span class="keyword">for</span>(<span class="keyword">auto</span> v : rect)&#123;</div><div class="line">            sum += (v[<span class="number">2</span>]-v[<span class="number">0</span>]) * (v[<span class="number">3</span>]-v[<span class="number">1</span>]);</div><div class="line">            minx = min(minx, v[<span class="number">0</span>]);</div><div class="line">            miny = min(miny, v[<span class="number">1</span>]);</div><div class="line">            maxx = max(maxx, v[<span class="number">2</span>]);</div><div class="line">            maxy = max(maxy, v[<span class="number">3</span>]);</div><div class="line">            </div><div class="line">            <span class="built_in">string</span> lt = to_string(v[<span class="number">0</span>]) + <span class="string">"_"</span> + to_string(v[<span class="number">3</span>]);</div><div class="line">            <span class="built_in">string</span> rt = to_string(v[<span class="number">2</span>]) + <span class="string">"_"</span> + to_string(v[<span class="number">3</span>]);</div><div class="line">            <span class="built_in">string</span> lb = to_string(v[<span class="number">0</span>]) + <span class="string">"_"</span> + to_string(v[<span class="number">1</span>]);</div><div class="line">            <span class="built_in">string</span> rb = to_string(v[<span class="number">2</span>]) + <span class="string">"_"</span> + to_string(v[<span class="number">1</span>]);</div><div class="line">            </div><div class="line">            <span class="keyword">if</span>(us.count(lt)) us.erase(lt);</div><div class="line">            <span class="keyword">else</span> us.insert(lt);</div><div class="line">            <span class="keyword">if</span>(us.count(rt)) us.erase(rt);</div><div class="line">            <span class="keyword">else</span> us.insert(rt);</div><div class="line">            <span class="keyword">if</span>(us.count(lb)) us.erase(lb);</div><div class="line">            <span class="keyword">else</span> us.insert(lb);</div><div class="line">            <span class="keyword">if</span>(us.count(rb)) us.erase(rb);</div><div class="line">            <span class="keyword">else</span> us.insert(rb);</div><div class="line">        &#125;</div><div class="line">        </div><div class="line">        <span class="built_in">string</span> lt = to_string(minx) + <span class="string">"_"</span> + to_string(maxy);</div><div class="line">        <span class="built_in">string</span> rt = to_string(maxx) + <span class="string">"_"</span> + to_string(maxy);</div><div class="line">        <span class="built_in">string</span> lb = to_string(minx) + <span class="string">"_"</span> + to_string(miny);</div><div class="line">        <span class="built_in">string</span> rb = to_string(maxx) + <span class="string">"_"</span> + to_string(miny);</div><div class="line">        <span class="keyword">return</span> sum == (maxx-minx) * (maxy-miny) &amp;&amp; us.count(lt) &amp;&amp; us.count(rt) &amp;&amp; us.count(lb) &amp;&amp; us.count(rb) &amp;&amp; us.size() == <span class="number">4</span>;</div><div class="line">    &#125;</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
           
         
       

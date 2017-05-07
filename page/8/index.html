@@ -250,6 +250,129 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="https://crazyxy.github.io/2016/09/14/LeetCode-391-Perfect-Rectangle/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Yan Xue">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Crazyxy is Coding">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2016/09/14/LeetCode-391-Perfect-Rectangle/" itemprop="url">LeetCode 391 - Perfect Rectangle</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2016-09-14T14:32:31+08:00">
+                2016-09-14
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2016/09/14/LeetCode-391-Perfect-Rectangle/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="2016/09/14/LeetCode-391-Perfect-Rectangle/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="Solution"><a href="#Solution" class="headerlink" title="Solution"></a>Solution</h2><p>首先根据给出的数组算出最小和最大的<code>x</code>与<code>y</code>，分别计为<code>minx</code>，<code>maxx</code>，<code>miny</code>，<code>maxy</code>，恰好完全覆盖的必要条件之一就是小矩形的面积和等于<code>(maxx-minx)*(maxy-miny)</code>。其次满足了第一个条件并不一定是完全覆盖，可能有两个矩形有重合，因此还需要其他的条件。<br>通过对矩形顶点的分类辅助判断。一个完全覆盖的矩形内部的点有三种状态，分别是：只有一个矩形以之为顶角；两个矩形以之为顶角；四个矩形以之为顶角。所以利用<code>set</code>将出现超过一次的顶点都去除，剩下的就是四个顶点。</p>
+<h2 id="Code"><a href="#Code" class="headerlink" title="Code"></a>Code</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></div><div class="line"><span class="keyword">public</span>:</div><div class="line">    <span class="function"><span class="keyword">bool</span> <span class="title">isRectangleCover</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&gt;&amp; rect)</span> </span>&#123;</div><div class="line">        <span class="built_in">unordered_set</span>&lt;<span class="built_in">string</span>&gt; us;</div><div class="line">        </div><div class="line">        <span class="keyword">int</span> sum = <span class="number">0</span>;</div><div class="line">        <span class="keyword">int</span> minx, maxx, miny, maxy;</div><div class="line">        minx = miny = INT_MAX;</div><div class="line">        maxx = maxy = INT_MIN;</div><div class="line">        <span class="keyword">for</span>(<span class="keyword">auto</span> v : rect)&#123;</div><div class="line">            sum += (v[<span class="number">2</span>]-v[<span class="number">0</span>]) * (v[<span class="number">3</span>]-v[<span class="number">1</span>]);</div><div class="line">            minx = min(minx, v[<span class="number">0</span>]);</div><div class="line">            miny = min(miny, v[<span class="number">1</span>]);</div><div class="line">            maxx = max(maxx, v[<span class="number">2</span>]);</div><div class="line">            maxy = max(maxy, v[<span class="number">3</span>]);</div><div class="line">            </div><div class="line">            <span class="built_in">string</span> lt = to_string(v[<span class="number">0</span>]) + <span class="string">"_"</span> + to_string(v[<span class="number">3</span>]);</div><div class="line">            <span class="built_in">string</span> rt = to_string(v[<span class="number">2</span>]) + <span class="string">"_"</span> + to_string(v[<span class="number">3</span>]);</div><div class="line">            <span class="built_in">string</span> lb = to_string(v[<span class="number">0</span>]) + <span class="string">"_"</span> + to_string(v[<span class="number">1</span>]);</div><div class="line">            <span class="built_in">string</span> rb = to_string(v[<span class="number">2</span>]) + <span class="string">"_"</span> + to_string(v[<span class="number">1</span>]);</div><div class="line">            </div><div class="line">            <span class="keyword">if</span>(us.count(lt)) us.erase(lt);</div><div class="line">            <span class="keyword">else</span> us.insert(lt);</div><div class="line">            <span class="keyword">if</span>(us.count(rt)) us.erase(rt);</div><div class="line">            <span class="keyword">else</span> us.insert(rt);</div><div class="line">            <span class="keyword">if</span>(us.count(lb)) us.erase(lb);</div><div class="line">            <span class="keyword">else</span> us.insert(lb);</div><div class="line">            <span class="keyword">if</span>(us.count(rb)) us.erase(rb);</div><div class="line">            <span class="keyword">else</span> us.insert(rb);</div><div class="line">        &#125;</div><div class="line">        </div><div class="line">        <span class="built_in">string</span> lt = to_string(minx) + <span class="string">"_"</span> + to_string(maxy);</div><div class="line">        <span class="built_in">string</span> rt = to_string(maxx) + <span class="string">"_"</span> + to_string(maxy);</div><div class="line">        <span class="built_in">string</span> lb = to_string(minx) + <span class="string">"_"</span> + to_string(miny);</div><div class="line">        <span class="built_in">string</span> rb = to_string(maxx) + <span class="string">"_"</span> + to_string(miny);</div><div class="line">        <span class="keyword">return</span> sum == (maxx-minx) * (maxy-miny) &amp;&amp; us.count(lt) &amp;&amp; us.count(rt) &amp;&amp; us.count(lb) &amp;&amp; us.count(rb) &amp;&amp; us.size() == <span class="number">4</span>;</div><div class="line">    &#125;</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
     <link itemprop="mainEntityOfPage" href="https://crazyxy.github.io/2016/09/13/LeetCode-44-Wildcard-Matching/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
