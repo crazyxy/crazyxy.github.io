@@ -268,6 +268,156 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="https://crazyxy.github.io/2017/05/07/LevelDB-2/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Yan Xue">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Crazyxy is Coding">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2017/05/07/LevelDB-2/" itemprop="url">LevelDB III</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-05-07T22:02:00+08:00">
+                2017-05-07
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2017/05/07/LevelDB-2/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="2017/05/07/LevelDB-2/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="1-Util-structure"><a href="#1-Util-structure" class="headerlink" title="1. Util structure"></a>1. <code>Util</code> structure</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line">| - arena.&#123;h,cc&#125;         ------ Done</div><div class="line">| - bloom.cc</div><div class="line">| - cache.cc</div><div class="line">| - coding.&#123;h,cc&#125;</div><div class="line">| - comparator.h</div><div class="line">| - crc32c.&#123;h,cc&#125;</div><div class="line">| - env.cc</div><div class="line">| - env_posix.cc</div><div class="line">| - filter_policy.cc</div><div class="line">| - hash.&#123;h,cc&#125;</div><div class="line">| - histogram.&#123;h,cc&#125;</div><div class="line">| - logging.&#123;h,cc&#125;</div><div class="line">| - mutexlock.h</div><div class="line">| - options.cc</div><div class="line">| - posix_logger.h</div><div class="line">| - random.h</div><div class="line">| - status.cc</div><div class="line">| ...</div></pre></td></tr></table></figure>
+<p>This post tries to explain <code>bloom filter</code> in LevelDB.</p>
+<h2 id="2-Bloom-Filter-introduction"><a href="#2-Bloom-Filter-introduction" class="headerlink" title="2. Bloom Filter introduction"></a>2. <code>Bloom Filter</code> introduction</h2><p><em>Bloom Filter</em> is used for checking whether an element is in the set. Bloom filter is based on a group of $k$ hash functions, which map an element to $k$ values in a bit array. False positive matches are possible, but false negtive are not - in other words, a query returns either “possibly in set” or “definitely not in set”.</p>
+<h2 id="3-bloom-cc-implementation"><a href="#3-bloom-cc-implementation" class="headerlink" title="3. bloom.cc implementation"></a>3. <code>bloom.cc</code> implementation</h2><h3 id="3-1-unnamed-namespace"><a href="#3-1-unnamed-namespace" class="headerlink" title="3.1 unnamed namespace"></a>3.1 unnamed namespace</h3><blockquote>
+<p>When definitions in a .cc file do not need to be referenced outside that file, place them in an unnamed namespace or declare them static. Do not use either of these constructs in .h files. — From Google C++ Style Guide</p>
+</blockquote>
+<p>More details about unnamed namespace is <a href="http://www.comeaucomputing.com/techtalk/#nostatic" target="_blank" rel="external">here</a>. </p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">namespace</span> &#123;</div><div class="line">    <span class="function"><span class="keyword">static</span> uint32_t <span class="title">BloomHash</span><span class="params">(<span class="keyword">const</span> Slice&amp; key)</span> </span>&#123;</div><div class="line">        <span class="keyword">return</span> Hash(key.data(), key.size(), <span class="number">0xbc9f1d34</span>);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>The unnamed namespace makes BloomHash local in file <code>bloom.cc</code>. <code>BloomHash</code> returns hash value of the <code>key</code> which is a <code>Slice</code> structure. <code>BloomHash</code> calls <code>Hash</code> in <code>hash.{h,cc}</code>. </p>
+<p>LevelDB uses the hash function similar to murmur hash (excerpt from comments) and it is too complex for me to understand why murmur is a good hash function. But I don’t think not knowing the detail of murmur hash can affect the understanding of LevelDB. We only need to remember that <em>LevelDB uses a highly efficient hash function</em>, you don’t even need to remember the name. Haha. </p>
+<h3 id="3-2-FilterPolicy-interface"><a href="#3-2-FilterPolicy-interface" class="headerlink" title="3.2 FilterPolicy interface"></a>3.2 <code>FilterPolicy</code> interface</h3><p><code>FilterPolicy</code> contains one virtual destructor and three pure virtual functions:</p>
+<ul>
+<li><code>virtual const char* Name() const = 0;</code></li>
+<li><code>virtual void CreateFilter(const Slice* keys, int n, std::string* dst) const = 0;</code></li>
+<li><code>virtual bool KeyMayMatch(const Slice&amp; key, const Slice&amp; filter) const = 0;</code></li>
+</ul>
+<p><code>Name()</code> returns the name of pllicy. <code>CreateFilter</code> appends a filter that summarizes keys[0,n-1] to *dst. <code>KeyMayMatch</code> is used for determine whether key is in the keys passed by <code>CreateFilter</code>.</p>
+<h3 id="3-3-BloomFilterPolicy-implementation"><a href="#3-3-BloomFilterPolicy-implementation" class="headerlink" title="3.3 BloomFilterPolicy implementation"></a>3.3 <code>BloomFilterPolicy</code> implementation</h3><p><code>CreateFilter</code> hashes $n$ <code>keys</code> into the a bit array which is appened to <code>dst</code>. The structure of <code>dst</code> is:<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">|-----------------------| <span class="number">0</span></div><div class="line">| Initial dst           |</div><div class="line">|-----------------------| init_size</div><div class="line">| filter <span class="number">1</span>              |</div><div class="line">| filter <span class="number">2</span>              |</div><div class="line">| ...                   |</div><div class="line">| filter n              |</div><div class="line">|-----------------------| init_size + bytes</div><div class="line">| k_, <span class="meta"># of probes       | init_size + bytes + 1</span></div><div class="line">|-----------------------|</div></pre></td></tr></table></figure></p>
+<p><code>bytes</code> is the size of filters. </p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">size_t</span> bits = n * bits_per_key_;</div><div class="line"><span class="keyword">if</span> (bits &lt; <span class="number">64</span>) bits = <span class="number">64</span>;</div><div class="line"><span class="keyword">size_t</span> bytes = (bits + <span class="number">7</span>) / <span class="number">8</span>;</div></pre></td></tr></table></figure>
+<p>Blool filter uses double-hashing to generate a sequence of hash values:<br>$$\mathcal{H}(x)=H_1(x)+iH_2(x)$$<br>where $H_1(x)=BloomHash(x)$ and $H_2(x)=((H_1(x)&gt;&gt;17) | (H_1(x)&lt;&lt;15))$</p>
+<p>The core of <code>CreateFilter</code> is:</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; n; i++) &#123;</div><div class="line">    <span class="keyword">uint32_t</span> h = BloomHash(keys[i]);</div><div class="line">    <span class="keyword">const</span> <span class="keyword">uint32_t</span> delta = (h &gt;&gt; <span class="number">17</span>) | (h &lt;&lt; <span class="number">15</span>);</div><div class="line">    <span class="keyword">for</span> (<span class="keyword">size_t</span> j = <span class="number">0</span>; j &lt; k_; j++) &#123;</div><div class="line">        <span class="keyword">const</span> <span class="keyword">uint32_t</span> bitpos = h % bits;</div><div class="line">        <span class="built_in">array</span>[bitpos/<span class="number">8</span>] |= (<span class="number">1</span> &lt;&lt; (bitpos % <span class="number">8</span>));</div><div class="line">        h += delta;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>The outer loop iterates all the keys and the inter loop does <code>k_</code> times probes for each key and uses double-hashing explained before. </p>
+<p>The <code>KeyMayMatch</code> does the opposite operation of <code>CreateFilter</code> and I ignore here.</p>
+<hr>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// Progress (===&gt;                                                        ?%):</span></div><div class="line"></div><div class="line">| - arena.&#123;h,cc&#125;         ------ Done</div><div class="line">| - bloom.cc             ------ Done</div><div class="line">| - cache.cc</div><div class="line">| - coding.&#123;h,cc&#125;</div><div class="line">| - comparator.h</div><div class="line">| - crc32c.&#123;h,cc&#125;</div><div class="line">| - env.cc</div><div class="line">| - env_posix.cc</div><div class="line">| - filter_policy.cc     ------ Done</div><div class="line">| - hash.&#123;h,cc&#125;          ------ Done</div><div class="line">| - histogram.&#123;h,cc&#125;</div><div class="line">| - logging.&#123;h,cc&#125;</div><div class="line">| - mutexlock.h</div><div class="line">| - options.cc</div><div class="line">| - posix_logger.h</div><div class="line">| - random.h</div><div class="line">| - status.cc</div><div class="line">| ...</div></pre></td></tr></table></figure>
+<hr>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
     <link itemprop="mainEntityOfPage" href="https://crazyxy.github.io/2017/05/07/LevelDB-1/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1375,129 +1525,6 @@
 <p>Just do it.</p>
 </blockquote>
 <h2 id="Code"><a href="#Code" class="headerlink" title="Code"></a>Code</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></div><div class="line"><span class="keyword">public</span>:</div><div class="line">    <span class="function"><span class="built_in">string</span> <span class="title">convertToTitle</span><span class="params">(<span class="keyword">int</span> n)</span> </span>&#123;</div><div class="line">        <span class="built_in">string</span> res;</div><div class="line">        <span class="keyword">while</span>(n)&#123;</div><div class="line">            n --;</div><div class="line">            <span class="keyword">int</span> x = n % <span class="number">26</span>;</div><div class="line">            n /= <span class="number">26</span>;</div><div class="line">            </div><div class="line">            res = <span class="keyword">char</span>(<span class="string">'A'</span>+x) + res;</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">return</span> res;</div><div class="line">    &#125;</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="https://crazyxy.github.io/2016/10/19/LeetCode-28-Implement-strStr/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Yan Xue">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Crazyxy is Coding">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2016/10/19/LeetCode-28-Implement-strStr/" itemprop="url">LeetCode 28 - Implement strStr()</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2016-10-19T11:03:58+08:00">
-                2016-10-19
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2016/10/19/LeetCode-28-Implement-strStr/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count"
-                        data-disqus-identifier="2016/10/19/LeetCode-28-Implement-strStr/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h2 id="Solution"><a href="#Solution" class="headerlink" title="Solution"></a>Solution</h2><p>KMP algorithm.</p>
-<h2 id="Code"><a href="#Code" class="headerlink" title="Code"></a>Code</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></div><div class="line"><span class="keyword">public</span>:</div><div class="line">    <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; getNext(<span class="built_in">string</span> pat)&#123;</div><div class="line">        <span class="keyword">int</span> n = pat.length();</div><div class="line">        <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; next(n, <span class="number">0</span>);</div><div class="line">        next[<span class="number">0</span>] = <span class="number">-1</span>;</div><div class="line">        next[<span class="number">1</span>] = <span class="number">0</span>;</div><div class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">2</span>; i &lt; n; i ++)&#123;</div><div class="line">            <span class="keyword">int</span> j = next[i - <span class="number">1</span>];</div><div class="line">            <span class="keyword">while</span>(j != <span class="number">-1</span> &amp;&amp; pat[j] != pat[i<span class="number">-1</span>]) j = next[j];</div><div class="line">            next[i] = j + <span class="number">1</span>;</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">return</span> next;</div><div class="line">    &#125;</div><div class="line">    </div><div class="line">    <span class="function"><span class="keyword">int</span> <span class="title">strStr</span><span class="params">(<span class="built_in">string</span> haystack, <span class="built_in">string</span> needle)</span> </span>&#123;</div><div class="line">        <span class="keyword">int</span> m = haystack.length(), n = needle.length(), i = <span class="number">0</span>, j = <span class="number">0</span>;</div><div class="line">        <span class="keyword">if</span>(n == <span class="number">0</span>) <span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">        <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; next = getNext(needle);</div><div class="line">        <span class="keyword">while</span>(i &lt; m &amp;&amp; j &lt; n)&#123;</div><div class="line">            <span class="keyword">if</span>(haystack[i] == needle[j])&#123;</div><div class="line">                i ++;</div><div class="line">                j ++;</div><div class="line">            &#125;<span class="keyword">else</span>&#123;</div><div class="line">                j = next[j];</div><div class="line">                <span class="keyword">if</span>(j == <span class="number">-1</span>)&#123;</div><div class="line">                    i ++;</div><div class="line">                    j ++;</div><div class="line">                &#125;</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">if</span>(j != n) <span class="keyword">return</span> <span class="number">-1</span>;</div><div class="line">        <span class="keyword">else</span> <span class="keyword">return</span> i - n;</div><div class="line">    &#125;</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
           
         
       

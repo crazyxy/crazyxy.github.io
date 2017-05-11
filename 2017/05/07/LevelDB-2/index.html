@@ -1,0 +1,649 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="en">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic|Lato:300,300italic,400,400italic,700,700italic|Lato:300,300italic,400,400italic,700,700italic|PT Mono:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="LevelDB," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.1" />
+
+
+
+
+
+
+<meta name="description" content="1. Util structure123456789101112131415161718| - arena.&amp;#123;h,cc&amp;#125;         ------ Done| - bloom.cc| - cache.cc| - coding.&amp;#123;h,cc&amp;#125;| - comparator.h| - crc32c.&amp;#123;h,cc&amp;#125;| - env.cc| - en">
+<meta name="keywords" content="LevelDB">
+<meta property="og:type" content="article">
+<meta property="og:title" content="LevelDB III">
+<meta property="og:url" content="https://crazyxy.github.io/2017/05/07/LevelDB-2/index.html">
+<meta property="og:site_name" content="Crazyxy is Coding">
+<meta property="og:description" content="1. Util structure123456789101112131415161718| - arena.&amp;#123;h,cc&amp;#125;         ------ Done| - bloom.cc| - cache.cc| - coding.&amp;#123;h,cc&amp;#125;| - comparator.h| - crc32c.&amp;#123;h,cc&amp;#125;| - env.cc| - en">
+<meta property="og:updated_time" content="2017-05-11T13:09:19.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="LevelDB III">
+<meta name="twitter:description" content="1. Util structure123456789101112131415161718| - arena.&amp;#123;h,cc&amp;#125;         ------ Done| - bloom.cc| - cache.cc| - coding.&amp;#123;h,cc&amp;#125;| - comparator.h| - crc32c.&amp;#123;h,cc&amp;#125;| - env.cc| - en">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    sidebar: {"position":"left","display":"remove","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://crazyxy.github.io/2017/05/07/LevelDB-2/"/>
+
+
+
+
+
+  <title>LevelDB III | Crazyxy is Coding</title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="en">
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Crazyxy is Coding</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            Archives
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            Tags
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="https://crazyxy.github.io/2017/05/07/LevelDB-2/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Yan Xue">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Crazyxy is Coding">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">LevelDB III</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-05-07T22:02:00+08:00">
+                2017-05-07
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2017/05/07/LevelDB-2/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="2017/05/07/LevelDB-2/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="1-Util-structure"><a href="#1-Util-structure" class="headerlink" title="1. Util structure"></a>1. <code>Util</code> structure</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line">| - arena.&#123;h,cc&#125;         ------ Done</div><div class="line">| - bloom.cc</div><div class="line">| - cache.cc</div><div class="line">| - coding.&#123;h,cc&#125;</div><div class="line">| - comparator.h</div><div class="line">| - crc32c.&#123;h,cc&#125;</div><div class="line">| - env.cc</div><div class="line">| - env_posix.cc</div><div class="line">| - filter_policy.cc</div><div class="line">| - hash.&#123;h,cc&#125;</div><div class="line">| - histogram.&#123;h,cc&#125;</div><div class="line">| - logging.&#123;h,cc&#125;</div><div class="line">| - mutexlock.h</div><div class="line">| - options.cc</div><div class="line">| - posix_logger.h</div><div class="line">| - random.h</div><div class="line">| - status.cc</div><div class="line">| ...</div></pre></td></tr></table></figure>
+<p>This post tries to explain <code>bloom filter</code> in LevelDB.</p>
+<h2 id="2-Bloom-Filter-introduction"><a href="#2-Bloom-Filter-introduction" class="headerlink" title="2. Bloom Filter introduction"></a>2. <code>Bloom Filter</code> introduction</h2><p><em>Bloom Filter</em> is used for checking whether an element is in the set. Bloom filter is based on a group of $k$ hash functions, which map an element to $k$ values in a bit array. False positive matches are possible, but false negtive are not - in other words, a query returns either “possibly in set” or “definitely not in set”.</p>
+<h2 id="3-bloom-cc-implementation"><a href="#3-bloom-cc-implementation" class="headerlink" title="3. bloom.cc implementation"></a>3. <code>bloom.cc</code> implementation</h2><h3 id="3-1-unnamed-namespace"><a href="#3-1-unnamed-namespace" class="headerlink" title="3.1 unnamed namespace"></a>3.1 unnamed namespace</h3><blockquote>
+<p>When definitions in a .cc file do not need to be referenced outside that file, place them in an unnamed namespace or declare them static. Do not use either of these constructs in .h files. — From Google C++ Style Guide</p>
+</blockquote>
+<p>More details about unnamed namespace is <a href="http://www.comeaucomputing.com/techtalk/#nostatic" target="_blank" rel="external">here</a>. </p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">namespace</span> &#123;</div><div class="line">    <span class="function"><span class="keyword">static</span> uint32_t <span class="title">BloomHash</span><span class="params">(<span class="keyword">const</span> Slice&amp; key)</span> </span>&#123;</div><div class="line">        <span class="keyword">return</span> Hash(key.data(), key.size(), <span class="number">0xbc9f1d34</span>);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>The unnamed namespace makes BloomHash local in file <code>bloom.cc</code>. <code>BloomHash</code> returns hash value of the <code>key</code> which is a <code>Slice</code> structure. <code>BloomHash</code> calls <code>Hash</code> in <code>hash.{h,cc}</code>. </p>
+<p>LevelDB uses the hash function similar to murmur hash (excerpt from comments) and it is too complex for me to understand why murmur is a good hash function. But I don’t think not knowing the detail of murmur hash can affect the understanding of LevelDB. We only need to remember that <em>LevelDB uses a highly efficient hash function</em>, you don’t even need to remember the name. Haha. </p>
+<h3 id="3-2-FilterPolicy-interface"><a href="#3-2-FilterPolicy-interface" class="headerlink" title="3.2 FilterPolicy interface"></a>3.2 <code>FilterPolicy</code> interface</h3><p><code>FilterPolicy</code> contains one virtual destructor and three pure virtual functions:</p>
+<ul>
+<li><code>virtual const char* Name() const = 0;</code></li>
+<li><code>virtual void CreateFilter(const Slice* keys, int n, std::string* dst) const = 0;</code></li>
+<li><code>virtual bool KeyMayMatch(const Slice&amp; key, const Slice&amp; filter) const = 0;</code></li>
+</ul>
+<p><code>Name()</code> returns the name of pllicy. <code>CreateFilter</code> appends a filter that summarizes keys[0,n-1] to *dst. <code>KeyMayMatch</code> is used for determine whether key is in the keys passed by <code>CreateFilter</code>.</p>
+<h3 id="3-3-BloomFilterPolicy-implementation"><a href="#3-3-BloomFilterPolicy-implementation" class="headerlink" title="3.3 BloomFilterPolicy implementation"></a>3.3 <code>BloomFilterPolicy</code> implementation</h3><p><code>CreateFilter</code> hashes $n$ <code>keys</code> into the a bit array which is appened to <code>dst</code>. The structure of <code>dst</code> is:<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">|-----------------------| <span class="number">0</span></div><div class="line">| Initial dst           |</div><div class="line">|-----------------------| init_size</div><div class="line">| filter <span class="number">1</span>              |</div><div class="line">| filter <span class="number">2</span>              |</div><div class="line">| ...                   |</div><div class="line">| filter n              |</div><div class="line">|-----------------------| init_size + bytes</div><div class="line">| k_, <span class="meta"># of probes       | init_size + bytes + 1</span></div><div class="line">|-----------------------|</div></pre></td></tr></table></figure></p>
+<p><code>bytes</code> is the size of filters. </p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">size_t</span> bits = n * bits_per_key_;</div><div class="line"><span class="keyword">if</span> (bits &lt; <span class="number">64</span>) bits = <span class="number">64</span>;</div><div class="line"><span class="keyword">size_t</span> bytes = (bits + <span class="number">7</span>) / <span class="number">8</span>;</div></pre></td></tr></table></figure>
+<p>Blool filter uses double-hashing to generate a sequence of hash values:<br>$$\mathcal{H}(x)=H_1(x)+iH_2(x)$$<br>where $H_1(x)=BloomHash(x)$ and $H_2(x)=((H_1(x)&gt;&gt;17) | (H_1(x)&lt;&lt;15))$</p>
+<p>The core of <code>CreateFilter</code> is:</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; n; i++) &#123;</div><div class="line">    <span class="keyword">uint32_t</span> h = BloomHash(keys[i]);</div><div class="line">    <span class="keyword">const</span> <span class="keyword">uint32_t</span> delta = (h &gt;&gt; <span class="number">17</span>) | (h &lt;&lt; <span class="number">15</span>);</div><div class="line">    <span class="keyword">for</span> (<span class="keyword">size_t</span> j = <span class="number">0</span>; j &lt; k_; j++) &#123;</div><div class="line">        <span class="keyword">const</span> <span class="keyword">uint32_t</span> bitpos = h % bits;</div><div class="line">        <span class="built_in">array</span>[bitpos/<span class="number">8</span>] |= (<span class="number">1</span> &lt;&lt; (bitpos % <span class="number">8</span>));</div><div class="line">        h += delta;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>The outer loop iterates all the keys and the inter loop does <code>k_</code> times probes for each key and uses double-hashing explained before. </p>
+<p>The <code>KeyMayMatch</code> does the opposite operation of <code>CreateFilter</code> and I ignore here.</p>
+<hr>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// Progress (===&gt;                                                        ?%):</span></div><div class="line"></div><div class="line">| - arena.&#123;h,cc&#125;         ------ Done</div><div class="line">| - bloom.cc             ------ Done</div><div class="line">| - cache.cc</div><div class="line">| - coding.&#123;h,cc&#125;</div><div class="line">| - comparator.h</div><div class="line">| - crc32c.&#123;h,cc&#125;</div><div class="line">| - env.cc</div><div class="line">| - env_posix.cc</div><div class="line">| - filter_policy.cc     ------ Done</div><div class="line">| - hash.&#123;h,cc&#125;          ------ Done</div><div class="line">| - histogram.&#123;h,cc&#125;</div><div class="line">| - logging.&#123;h,cc&#125;</div><div class="line">| - mutexlock.h</div><div class="line">| - options.cc</div><div class="line">| - posix_logger.h</div><div class="line">| - random.h</div><div class="line">| - status.cc</div><div class="line">| ...</div></pre></td></tr></table></figure>
+<hr>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/LevelDB/" rel="tag"># LevelDB</a>
+          
+        </div>
+      
+
+      
+        
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/05/07/LevelDB-1/" rel="next" title="LevelDB II">
+                <i class="fa fa-chevron-left"></i> LevelDB II
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-paypal"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Yan Xue</span>
+</div>
+
+
+<div class="powered-by">
+  Powered by <a class="theme-link" href="https://hexo.io">Hexo</a>
+</div>
+
+<div class="theme-info">
+  Theme -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.1"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  
+
+    
+      <script id="dsq-count-scr" src="https://crazyxy.disqus.com/count.js" async></script>
+    
+
+    
+      <script type="text/javascript">
+        var disqus_config = function () {
+          this.page.url = 'https://crazyxy.github.io/2017/05/07/LevelDB-2/';
+          this.page.identifier = '2017/05/07/LevelDB-2/';
+          this.page.title = 'LevelDB III';
+        };
+        var d = document, s = d.createElement('script');
+        s.src = 'https://crazyxy.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', '' + +new Date());
+        (d.head || d.body).appendChild(s);
+      </script>
+    
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+  
+
+
+  
+
+  
+
+</body>
+</html>
