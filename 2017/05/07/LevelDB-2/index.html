@@ -115,7 +115,7 @@
 <meta property="og:url" content="https://crazyxy.github.io/2017/05/07/LevelDB-2/index.html">
 <meta property="og:site_name" content="Crazyxy is Coding">
 <meta property="og:description" content="1. Util structure123456789101112131415161718| - arena.&amp;#123;h,cc&amp;#125;         ------ Done| - bloom.cc| - cache.cc| - coding.&amp;#123;h,cc&amp;#125;| - comparator.h| - crc32c.&amp;#123;h,cc&amp;#125;| - env.cc| - en">
-<meta property="og:updated_time" content="2017-05-11T13:09:19.000Z">
+<meta property="og:updated_time" content="2017-05-11T13:12:29.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="LevelDB III">
 <meta name="twitter:description" content="1. Util structure123456789101112131415161718| - arena.&amp;#123;h,cc&amp;#125;         ------ Done| - bloom.cc| - cache.cc| - coding.&amp;#123;h,cc&amp;#125;| - comparator.h| - crc32c.&amp;#123;h,cc&amp;#125;| - env.cc| - en">
@@ -347,7 +347,7 @@
 
       
         <h2 id="1-Util-structure"><a href="#1-Util-structure" class="headerlink" title="1. Util structure"></a>1. <code>Util</code> structure</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line">| - arena.&#123;h,cc&#125;         ------ Done</div><div class="line">| - bloom.cc</div><div class="line">| - cache.cc</div><div class="line">| - coding.&#123;h,cc&#125;</div><div class="line">| - comparator.h</div><div class="line">| - crc32c.&#123;h,cc&#125;</div><div class="line">| - env.cc</div><div class="line">| - env_posix.cc</div><div class="line">| - filter_policy.cc</div><div class="line">| - hash.&#123;h,cc&#125;</div><div class="line">| - histogram.&#123;h,cc&#125;</div><div class="line">| - logging.&#123;h,cc&#125;</div><div class="line">| - mutexlock.h</div><div class="line">| - options.cc</div><div class="line">| - posix_logger.h</div><div class="line">| - random.h</div><div class="line">| - status.cc</div><div class="line">| ...</div></pre></td></tr></table></figure>
-<p>This post tries to explain <code>bloom filter</code> in LevelDB.</p>
+<p>This post tries to explain <code>bloom filter</code> in LevelDB. The theory and proof about bloom filter can be found <a href="https://en.wikipedia.org/wiki/Bloom_filter" target="_blank" rel="external">here</a>.</p>
 <h2 id="2-Bloom-Filter-introduction"><a href="#2-Bloom-Filter-introduction" class="headerlink" title="2. Bloom Filter introduction"></a>2. <code>Bloom Filter</code> introduction</h2><p><em>Bloom Filter</em> is used for checking whether an element is in the set. Bloom filter is based on a group of $k$ hash functions, which map an element to $k$ values in a bit array. False positive matches are possible, but false negtive are not - in other words, a query returns either “possibly in set” or “definitely not in set”.</p>
 <h2 id="3-bloom-cc-implementation"><a href="#3-bloom-cc-implementation" class="headerlink" title="3. bloom.cc implementation"></a>3. <code>bloom.cc</code> implementation</h2><h3 id="3-1-unnamed-namespace"><a href="#3-1-unnamed-namespace" class="headerlink" title="3.1 unnamed namespace"></a>3.1 unnamed namespace</h3><blockquote>
 <p>When definitions in a .cc file do not need to be referenced outside that file, place them in an unnamed namespace or declare them static. Do not use either of these constructs in .h files. — From Google C++ Style Guide</p>
@@ -372,7 +372,7 @@
 <p>The outer loop iterates all the keys and the inter loop does <code>k_</code> times probes for each key and uses double-hashing explained before. </p>
 <p>The <code>KeyMayMatch</code> does the opposite operation of <code>CreateFilter</code> and I ignore here.</p>
 <hr>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// Progress (===&gt;                                                        ?%):</span></div><div class="line"></div><div class="line">| - arena.&#123;h,cc&#125;         ------ Done</div><div class="line">| - bloom.cc             ------ Done</div><div class="line">| - cache.cc</div><div class="line">| - coding.&#123;h,cc&#125;</div><div class="line">| - comparator.h</div><div class="line">| - crc32c.&#123;h,cc&#125;</div><div class="line">| - env.cc</div><div class="line">| - env_posix.cc</div><div class="line">| - filter_policy.cc     ------ Done</div><div class="line">| - hash.&#123;h,cc&#125;          ------ Done</div><div class="line">| - histogram.&#123;h,cc&#125;</div><div class="line">| - logging.&#123;h,cc&#125;</div><div class="line">| - mutexlock.h</div><div class="line">| - options.cc</div><div class="line">| - posix_logger.h</div><div class="line">| - random.h</div><div class="line">| - status.cc</div><div class="line">| ...</div></pre></td></tr></table></figure>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// Progress (======&gt;                                                     ?%):</span></div><div class="line"></div><div class="line">| - arena.&#123;h,cc&#125;         ------ Done</div><div class="line">| - bloom.cc             ------ Done</div><div class="line">| - cache.cc</div><div class="line">| - coding.&#123;h,cc&#125;</div><div class="line">| - comparator.h</div><div class="line">| - crc32c.&#123;h,cc&#125;</div><div class="line">| - env.cc</div><div class="line">| - env_posix.cc</div><div class="line">| - filter_policy.cc     ------ Done</div><div class="line">| - hash.&#123;h,cc&#125;          ------ Done</div><div class="line">| - histogram.&#123;h,cc&#125;</div><div class="line">| - logging.&#123;h,cc&#125;</div><div class="line">| - mutexlock.h</div><div class="line">| - options.cc</div><div class="line">| - posix_logger.h</div><div class="line">| - random.h</div><div class="line">| - status.cc</div><div class="line">| ...</div></pre></td></tr></table></figure>
 <hr>
 
       
@@ -416,8 +416,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2017/05/07/LevelDB-1/" rel="next" title="LevelDB II">
-                <i class="fa fa-chevron-left"></i> LevelDB II
+              <a href="/2017/05/07/leveldb-0/" rel="next" title="LevelDB I">
+                <i class="fa fa-chevron-left"></i> LevelDB I
               </a>
             
           </div>
@@ -425,6 +425,10 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/05/07/LevelDB-1/" rel="prev" title="LevelDB II">
+                LevelDB II <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
