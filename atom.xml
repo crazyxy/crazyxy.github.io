@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://crazyxy.github.io/"/>
-  <updated>2017-06-21T15:14:18.000Z</updated>
+  <updated>2017-06-21T15:16:21.000Z</updated>
   <id>https://crazyxy.github.io/</id>
   
   <author>
@@ -20,7 +20,7 @@
     <link href="https://crazyxy.github.io/2017/06/21/Codeforces-419%20Div%202/"/>
     <id>https://crazyxy.github.io/2017/06/21/Codeforces-419 Div 2/</id>
     <published>2017-06-21T14:41:47.000Z</published>
-    <updated>2017-06-21T15:14:18.000Z</updated>
+    <updated>2017-06-21T15:16:21.000Z</updated>
     
     <content type="html"><![CDATA[<p><a href="http://codeforces.com/contest/816" target="_blank" rel="external">题目链接</a></p>
 <ul>
@@ -44,7 +44,7 @@
 </li>
 <li><p>D. Karen and Test</p>
 <ul>
-<li>思路：假设初始状态第一行的个数为<code>n</code>，首先如果<code>n</code>小于等于3，直接暴力计算即可。如果<code>n</code>大于3，则需要另寻他法。通过多次观察可以发现，如果<code>n</code>为偶数，则最终的结果为奇数位与二项式系数的点积 <code>+ or -</code> 偶数位与二项式系数的点积。题目在计算组合数的时候，为了计算$C^m_n=\frac{n!}{m!(n-m)!}$，使用了费马小定理快速求逆。</li>
+<li>思路：假设初始状态第一行的个数为<code>n</code>，首先如果<code>n</code>小于等于3，直接暴力计算即可。如果<code>n</code>大于3，则需要另寻他法。通过多次观察可以发现，如果<code>n</code>为偶数，则最终的结果为奇数位与二项式系数的点积 <code>+ or -</code> 偶数位与二项式系数的点积。题目在计算组合数的时候，为了计算$$C^m_n=\frac{n!}{m!(n-m)!}$$，使用了费马小定理快速求逆。如果<code>n</code>是基数，则先将<code>n</code>转化成偶数，然后在计算。</li>
 <li>代码：<a href="http://codeforces.com/contest/816/submission/27941712" target="_blank" rel="external">http://codeforces.com/contest/816/submission/27941712</a></li>
 </ul>
 </li>
