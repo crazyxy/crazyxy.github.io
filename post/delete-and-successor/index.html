@@ -4,8 +4,8 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta content="" name="keywords">
-<meta content="Yan" property="og:title">
-<title>Yan</title>
+<meta content="Delete And Successor - Yan" property="og:title">
+<title>Delete And Successor | Yan</title>
 <link rel="stylesheet" href="https://crazyxy.github.io/css/style.css">
 <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
 
@@ -41,57 +41,70 @@
 
   <section class="section">
     <div class="container">
+      <h2 class="subtitle is-6">July 14, 2017</h2>
+      <h1 class="title">Delete And Successor</h1>
       
-      <article>
-        <h2 class="subtitle is-6">July 14, 2017</h2>
-        <h1 class="title"><a href="https://crazyxy.github.io/post/delete-and-successor/">Delete And Successor</a></h1>
+      <div class="content">
         
-        <div class="content">
-          Problem Given a sequence a number $S={1&hellip;n}$ and a sequence of operations which contain two types of operation: delete and query. delte(x) delete x from the sequence and query(x) return the successor of the $x$ in the sequence.
-Solution Union-Find. When delete(x), union the subtree where $x$ in and the subtree $x+1$ in. The operation can be viewed as a fold operation which fold the $x$ and $x+1$. When query(x), return the find(x+1).
-          
-          ...<a class="button is-link" href="https://crazyxy.github.io/post/delete-and-successor/" style="height:28px">
-            Read more
-            <span class="icon is-small">
-              <i class="fa fa-angle-double-right"></i>
-            </span>
-          </a>
-          
-        </div>
-      </article>
-      
+
+<h1 id="problem">Problem</h1>
+
+<p>Given a sequence a number $S={1&hellip;n}$ and a sequence of operations which contain two types of operation: delete and query. delte(x) delete x from the sequence and query(x) return the successor of the $x$ in the sequence.</p>
+
+<h1 id="solution">Solution</h1>
+
+<p>Union-Find. When delete(x), union the subtree where $x$ in and the subtree $x+1$ in. The operation can be viewed as a fold operation which fold the $x$ and $x+1$. When query(x), return the find(x+1). Suppose (x+1) was delete, find(x+1) actually returns find(x+2) and if $x+2$ is deleted, find(x+3) will be returned. Until some $y$ which has been deleted and $y$ is the successor of $x$.</p>
+
+<p><em>C++ Implementation</em></p>
+
+<pre><code class="language-c++">const int N = 10010;
+
+int id[N];
+
+void init(){
+    for(int i = 0; i &lt; N; i ++)
+        id[i] = i;
+}
+
+int Find(int x){
+    return id[x] = (x == id[x] ? x : Find(id[x]));
+}
+
+void Union(int x, int y){
+    int pid = Find(x);
+    int qid = Find(y);
+    if(pid == qid) return;
+    id[pid] = qid;
+}
+
+void Delete(int x){
+    Union(x, x+1);
+}
+
+int Query(int x){
+    return Find(x+1);
+}
+</code></pre>
+
+      </div>
     </div>
   </section>
-  <section class="section">
+  
+<section class="section">
   <div class="container">
-    <nav class="level is-mobile">
-      <div class="level-left">
-        <div class="level-item">
-          
-          <a class="button is-disabled">
-            <span class="icon is-small is-marginless">
-              <i class="fa fa-angle-left"></i>
-            </span>
-            Newer
-          </a>
-          
-        </div>
-      </div>
-      <div class="level-right is-marginless">
-        <div class="level-item">
-          
-          <a class="button is-disabled">
-            Older
-            <span class="icon is-small is-marginless">
-              <i class="fa fa-angle-right"></i>
-            </span>
-          </a>
-          
-        </div>
-      </div>
-    </nav>
+    <aside><div id="disqus_thread"></div></aside>
+    <script type="text/javascript">
+      var disqus_shortname = 'shortname';
+      (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+      })();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
   </div>
 </section>
+
 
   <section class="section">
   <div class="container has-text-centered">
@@ -108,4 +121,3 @@ Solution Union-Find. When delete(x), union the subtree where $x$ in and the subt
 
 
 </body>
-
