@@ -103,27 +103,27 @@ class (Functor f) =&gt; Applicative f where
 
 <h2 id="类型推导">类型推导</h2>
 
-<ol>
+<ul>
 <li>Step 1</li>
-</ol>
+</ul>
 
 <pre><code class="language-haskell">let a = (+) &lt;$&gt; (+3)
 </code></pre>
 
 <p><code>&lt;$&gt;</code>的类型是infix的<code>fmap</code>，因此<code>&lt;$&gt;</code>的两个参数类型分别为<code>(a-&gt;b)</code>和<code>f a</code>，结果为<code>f b</code>。在上面的表达式中第一个参数的类型为<code>Num a =&gt; a -&gt; a -&gt; a</code>，可以通过curry，将类型看成<code>Num a =&gt; a-&gt;(a-&gt;a)</code>。因此<code>a</code>的最终类型是<code>Num a =&gt; (-&gt;) a (a -&gt; a)</code>。</p>
 
-<ol>
+<ul>
 <li>Step 2</li>
-</ol>
+</ul>
 
 <pre><code class="language-haskell">let b = a &lt;*&gt; (*100)
 </code></pre>
 
 <p><code>&lt;*&gt;</code>的两边的参数类型分别是<code>f (a-&gt;b)</code>和<code>f a</code>。在<code>b</code>中，<code>&lt;*&gt;</code>左边表达式的类型是<code>Num a =&gt; (-&gt;) a (a-&gt;a)</code>，右边表达式的类型是<code>Num a =&gt; (-&gt;) a a</code>。因此<code>b</code>的类型为<code>Num a =&gt; (-&gt;) a a</code>。</p>
 
-<ol>
+<ul>
 <li>Step 3</li>
-</ol>
+</ul>
 
 <pre><code class="language-haskell">let c = b $ 5
 </code></pre>
