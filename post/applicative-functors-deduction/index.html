@@ -77,7 +77,6 @@ class (Functor f) =&gt; Applicative f where
 <p><code>(-&gt;)r</code>的<code>fmap</code>函数实际上相当于<code>.</code>，因为<code>fmap</code>的类型为：</p>
 
 <pre><code class="language-haskell">fmap :: (a -&gt; b) -&gt; (r -&gt; a) -&gt; (r -&gt; b)
-
 </code></pre>
 
 <p>因此对于<code>(-&gt;)r</code>Functor，<code>fmap = .</code>。<code>(-&gt;)r</code>的<code>pure</code>和<code>&lt;*&gt;</code>的实现为：</p>
