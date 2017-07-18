@@ -3,8 +3,19 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
+    <loc>https://crazyxy.github.io/post/applicative-functors-deduction/</loc>
+    <lastmod>2017-07-18T14:52:52+08:00</lastmod>
+  </url>
+  
+  <url>
     <loc>https://crazyxy.github.io/post/delete-and-successor/</loc>
     <lastmod>2017-07-14T17:30:59+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://crazyxy.github.io/tags/algorithm/</loc>
+    <lastmod>2017-07-14T17:30:59+08:00</lastmod>
+    <priority>0</priority>
   </url>
   
   <url>
@@ -13,19 +24,26 @@
   </url>
   
   <url>
+    <loc>https://crazyxy.github.io/tags/haskell/</loc>
+    <lastmod>2017-07-18T14:52:52+08:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
     <loc>https://crazyxy.github.io/post/</loc>
-    <lastmod>2017-07-14T17:30:59+08:00</lastmod>
+    <lastmod>2017-07-18T14:52:52+08:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
     <loc>https://crazyxy.github.io/tags/</loc>
+    <lastmod>2017-07-14T17:30:59+08:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
     <loc>https://crazyxy.github.io/</loc>
-    <lastmod>2017-07-14T17:30:59+08:00</lastmod>
+    <lastmod>2017-07-18T14:52:52+08:00</lastmod>
     <priority>0</priority>
   </url>
   

@@ -43,8 +43,43 @@
     <div class="container">
       
       <article>
+        <h2 class="subtitle is-6">July 18, 2017</h2>
+        <h1 class="title"><a href="https://crazyxy.github.io/post/applicative-functors-deduction/">Applicative Functors Deduction</a></h1>
+        
+        <div class="tags">
+    
+        <a class="button is-link" href="/tags/haskell">Haskell</a>
+    
+</div>
+
+        
+        <div class="content">
+          背景简介 在Haskell中，Functor和Applicative Functor的定义如下：
+class Functor f where fmap :: (a -&gt; b) -&gt; f a -&gt; f b class (Functor f) =&gt; Applicative f where pure :: a -&gt; f a &lt;*&gt; :: f (a -&gt; b) -&gt; f a -&gt; f b  从上面的定义中可以看出，Functor和Applicative的instance都是type constructor，因为它需要吃一个类型a。许多type constructor都是Functor和Applicative的instance。例如Maybe，[]和(-&gt;)r。
+在上面三个类型中(-&gt;)r最为怪异。它是一个function，并且一个吃了一个类型，只需要另外一个类型便可以construct一个新的类型。(-&gt;)r的fmap，pure和&lt;*&gt;的实现如下：
+instance Functor ((-&gt;)r) where fmap f g = \r -&gt; f (g r)  (-&gt;)r的fmap函数实际上相当于.，因为fmap的类型为：
+fmap :: (a -&gt; b) -&gt; (r -&gt; a) -&gt; (r -&gt; b)  因此对于(-&gt;)rFunctor，fmap = .
+          
+          ...<a class="button is-link" href="https://crazyxy.github.io/post/applicative-functors-deduction/" style="height:28px">
+            Read more
+            <span class="icon is-small">
+              <i class="fa fa-angle-double-right"></i>
+            </span>
+          </a>
+          
+        </div>
+      </article>
+      
+      <article>
         <h2 class="subtitle is-6">July 14, 2017</h2>
         <h1 class="title"><a href="https://crazyxy.github.io/post/delete-and-successor/">Delete And Successor</a></h1>
+        
+        <div class="tags">
+    
+        <a class="button is-link" href="/tags/algorithm">Algorithm</a>
+    
+</div>
+
         
         <div class="content">
           Problem Given a sequence a number $S=\{1&hellip;n\}$ and a sequence of operations which contain two types of operation: delete and query. delte(x) delete $x$ from the sequence and query(x) return the successor of the $x$ in the sequence.
@@ -110,7 +145,9 @@ MathJax.Hub.Config({
 
 <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/go.min.js"></script>
 
-<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/dockerfile.min.js"></script>
+<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/cpp.min.js"></script>
+
+<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/haskell.min.js"></script>
 
 <script>hljs.initHighlightingOnLoad();</script>
 

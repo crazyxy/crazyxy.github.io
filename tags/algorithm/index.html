@@ -4,8 +4,8 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta content="" name="keywords">
-<meta content="Yan" property="og:title">
-<title>Yan</title>
+<meta content="Algorithm - Yan" property="og:title">
+<title>Algorithm | Yan</title>
 <link rel="stylesheet" href="https://crazyxy.github.io/css/style.css">
 <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
 
@@ -41,34 +41,6 @@
 
   <section class="section">
     <div class="container">
-      
-      <article>
-        <h2 class="subtitle is-6">July 18, 2017</h2>
-        <h1 class="title"><a href="https://crazyxy.github.io/post/applicative-functors-deduction/">Applicative Functors Deduction</a></h1>
-        
-        <div class="tags">
-    
-        <a class="button is-link" href="/tags/haskell">Haskell</a>
-    
-</div>
-
-        
-        <div class="content">
-          背景简介 在Haskell中，Functor和Applicative Functor的定义如下：
-class Functor f where fmap :: (a -&gt; b) -&gt; f a -&gt; f b class (Functor f) =&gt; Applicative f where pure :: a -&gt; f a &lt;*&gt; :: f (a -&gt; b) -&gt; f a -&gt; f b  从上面的定义中可以看出，Functor和Applicative的instance都是type constructor，因为它需要吃一个类型a。许多type constructor都是Functor和Applicative的instance。例如Maybe，[]和(-&gt;)r。
-在上面三个类型中(-&gt;)r最为怪异。它是一个function，并且一个吃了一个类型，只需要另外一个类型便可以construct一个新的类型。(-&gt;)r的fmap，pure和&lt;*&gt;的实现如下：
-instance Functor ((-&gt;)r) where fmap f g = \r -&gt; f (g r)  (-&gt;)r的fmap函数实际上相当于.，因为fmap的类型为：
-fmap :: (a -&gt; b) -&gt; (r -&gt; a) -&gt; (r -&gt; b)  因此对于(-&gt;)rFunctor，fmap = .
-          
-          ...<a class="button is-link" href="https://crazyxy.github.io/post/applicative-functors-deduction/" style="height:28px">
-            Read more
-            <span class="icon is-small">
-              <i class="fa fa-angle-double-right"></i>
-            </span>
-          </a>
-          
-        </div>
-      </article>
       
       <article>
         <h2 class="subtitle is-6">July 14, 2017</h2>
@@ -153,4 +125,3 @@ MathJax.Hub.Config({
 
 
 </body>
-
