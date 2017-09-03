@@ -64,6 +64,36 @@ template&lt;typename T&gt; class DetectX { using Yes = char[2]; using No = char[
       </article>
       
       <article>
+        <h2 class="subtitle is-6">July 19, 2017</h2>
+        <h1 class="title"><a href="https://crazyxy.github.io/post/side-effect/">Haskell中Monad是如何解决side effect的？</a></h1>
+        
+        <div class="tags">
+    
+        <a class="button is-link" href="/tags/haskell">Haskell</a>
+    
+</div>
+
+        
+        <div class="content">
+          翻译自 Why are side-effects modeled as monads in Haskell?
+ 假设一个函数有side effects。如果将函数导致的side effect包在函数的输入和输出中，则函数又变成了pure的。
+所以对于一个impure的函数f'
+f' :: Int -&gt; Int  通过添加RealWorld来将impure函数变成pure的函数。
+f :: Int -&gt; RealWorld -&gt; (Int, RealWorld) -- 将RealWorld作为一个参数，并且将修改之后的RealWorld返回  这样的话，f现在就是一个pure的函数。为了方便，记IO a = RealWorld -&gt; (a, RealWorld)，f的类型就可以简写为
+f :: Int -&gt; IO Int  IO是对RealWorld的一种封装，避免了程序员直接操作RealWorld对象。对于程序员来说，直接操作RealWorld对象是很危险的一件事。例如，如果我们获取了一个RealWorld类型的值，我们可能拷贝这个值。从逻辑上讲，这种行为是不可能的。
+getLine :: IO String = RealWorld -&gt; (String, RealWorld) getContents:: String -&gt; IO String = String -&gt; RealWorld -&gt; (String, RealWorld) putStrLn :: String -&gt; IO () = String -&gt; RealWorld -&gt; ((), RealWorld)  假设现在我们想从console读一个文件名，然后读取文件，最后将文件内容输出。我们应该如何通过上述的pure函数实现呢？
+          
+          ...<a class="button is-link" href="https://crazyxy.github.io/post/side-effect/" style="height:28px">
+            Read more
+            <span class="icon is-small">
+              <i class="fa fa-angle-double-right"></i>
+            </span>
+          </a>
+          
+        </div>
+      </article>
+      
+      <article>
         <h2 class="subtitle is-6">July 18, 2017</h2>
         <h1 class="title"><a href="https://crazyxy.github.io/post/applicative-functors-deduction/">Applicative Functors Deduction</a></h1>
         

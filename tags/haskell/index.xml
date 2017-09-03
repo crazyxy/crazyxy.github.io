@@ -7,10 +7,25 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
     <copyright>&amp;copy; &lt;a href=&#34;https://github.com/crazyxy&#34;&gt;Yan Xue&lt;/a&gt; 2017</copyright>
-    <lastBuildDate>Tue, 18 Jul 2017 14:52:52 +0800</lastBuildDate>
+    <lastBuildDate>Wed, 19 Jul 2017 15:34:45 +0800</lastBuildDate>
     
 	<atom:link href="https://crazyxy.github.io/tags/haskell/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Haskell中Monad是如何解决side effect的？</title>
+      <link>https://crazyxy.github.io/post/side-effect/</link>
+      <pubDate>Wed, 19 Jul 2017 15:34:45 +0800</pubDate>
+      
+      <guid>https://crazyxy.github.io/post/side-effect/</guid>
+      <description>翻译自 Why are side-effects modeled as monads in Haskell?
+ 假设一个函数有side effects。如果将函数导致的side effect包在函数的输入和输出中，则函数又变成了pure的。
+所以对于一个impure的函数f&#39;
+f&#39; :: Int -&amp;gt; Int  通过添加RealWorld来将impure函数变成pure的函数。
+f :: Int -&amp;gt; RealWorld -&amp;gt; (Int, RealWorld) -- 将RealWorld作为一个参数，并且将修改之后的RealWorld返回  这样的话，f现在就是一个pure的函数。为了方便，记IO a = RealWorld -&amp;gt; (a, RealWorld)，f的类型就可以简写为
+f :: Int -&amp;gt; IO Int  IO是对RealWorld的一种封装，避免了程序员直接操作RealWorld对象。对于程序员来说，直接操作RealWorld对象是很危险的一件事。例如，如果我们获取了一个RealWorld类型的值，我们可能拷贝这个值。从逻辑上讲，这种行为是不可能的。
+getLine :: IO String = RealWorld -&amp;gt; (String, RealWorld) getContents:: String -&amp;gt; IO String = String -&amp;gt; RealWorld -&amp;gt; (String, RealWorld) putStrLn :: String -&amp;gt; IO () = String -&amp;gt; RealWorld -&amp;gt; ((), RealWorld)  假设现在我们想从console读一个文件名，然后读取文件，最后将文件内容输出。我们应该如何通过上述的pure函数实现呢？</description>
+    </item>
     
     <item>
       <title>Applicative Functors Deduction</title>
