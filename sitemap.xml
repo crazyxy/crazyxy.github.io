@@ -3,6 +3,11 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
+    <loc>https://crazyxy.github.io/post/is_callable-in-c&#43;&#43;/</loc>
+    <lastmod>2017-09-03T21:38:48+08:00</lastmod>
+  </url>
+  
+  <url>
     <loc>https://crazyxy.github.io/post/side-effect/</loc>
     <lastmod>2017-07-19T15:34:45+08:00</lastmod>
   </url>
@@ -29,6 +34,12 @@
   </url>
   
   <url>
+    <loc>https://crazyxy.github.io/tags/c&#43;&#43;/</loc>
+    <lastmod>2017-09-03T21:38:48+08:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
     <loc>https://crazyxy.github.io/categories/</loc>
     <priority>0</priority>
   </url>
@@ -47,7 +58,7 @@
   
   <url>
     <loc>https://crazyxy.github.io/post/</loc>
-    <lastmod>2017-07-19T15:34:45+08:00</lastmod>
+    <lastmod>2017-09-03T21:38:48+08:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -59,7 +70,7 @@
   
   <url>
     <loc>https://crazyxy.github.io/</loc>
-    <lastmod>2017-07-19T15:34:45+08:00</lastmod>
+    <lastmod>2017-09-03T21:38:48+08:00</lastmod>
     <priority>0</priority>
   </url>
   
